@@ -7,8 +7,8 @@ export LoadConfigTBL_weather_station_Bank0
 export LoadConfigTBL_weather_station_Ordered
 AREA lit(rom, rel)
 LoadConfigTBL_weather_station_Bank0:
-;  Instance name I2Cm_1, User Module I2Cm
-;  Instance name LCD_1, User Module LCD
+;  Instance name I2Cm, User Module I2Cm
+;  Instance name LCD, User Module LCD
 ;  Instance name PGA_rain, User Module PGA
 ;       Instance name PGA_rain, Block Name GAIN(ACB02)
 	db		79h, 0eh		;PGA_rain_GAIN_CR0(ACB02CR0)
@@ -45,6 +45,7 @@ LoadConfigTBL_weather_station_Bank0:
 	db		81h, 5fh		;SAR6_wind_CR1(ASC10CR1)
 	db		82h, 60h		;SAR6_wind_CR2(ASC10CR2)
 	db		83h, 00h		;SAR6_wind_CR3(ASC10CR3)
+;  Instance name SleepTimer, User Module SleepTimer
 ;  Global Register values Bank 0
 	db		60h, 29h		; AnalogColumnInputSelect register (AMX_IN)
 	db		66h, 00h		; AnalogComparatorControl1 register (CMP_CR1)
@@ -69,8 +70,8 @@ LoadConfigTBL_weather_station_Bank0:
 	db		beh, 00h		; Row_1_OutputDrive_1 register (RDI1SRO1)
 	db		ffh
 LoadConfigTBL_weather_station_Bank1:
-;  Instance name I2Cm_1, User Module I2Cm
-;  Instance name LCD_1, User Module LCD
+;  Instance name I2Cm, User Module I2Cm
+;  Instance name LCD, User Module LCD
 ;  Instance name PGA_rain, User Module PGA
 ;       Instance name PGA_rain, Block Name GAIN(ACB02)
 ;  Instance name PGA_sun, User Module PGA
@@ -83,10 +84,11 @@ LoadConfigTBL_weather_station_Bank1:
 ;       Instance name SAR6_sun, Block Name SA(ASD11)
 ;  Instance name SAR6_wind, User Module SAR6
 ;       Instance name SAR6_wind, Block Name SA(ASC10)
+;  Instance name SleepTimer, User Module SleepTimer
 ;  Global Register values Bank 1
 	db		61h, 00h		; AnalogClockSelect1 register (CLK_CR1)
 	db		69h, 00h		; AnalogClockSelect2 register (CLK_CR2)
-	db		60h, 00h		; AnalogColumnClockSelect register (CLK_CR0)
+	db		60h, 15h		; AnalogColumnClockSelect register (CLK_CR0)
 	db		62h, 00h		; AnalogIOControl_0 register (ABF_CR0)
 	db		67h, 33h		; AnalogLUTControl0 register (ALT_CR0)
 	db		68h, 33h		; AnalogLUTControl1 register (ALT_CR1)
@@ -109,9 +111,9 @@ LoadConfigTBL_weather_station_Ordered:
 	mov	reg[00h], 00h		; Port_0_Data register (PRT0DR)
 	M8C_SetBank1
 	mov	reg[00h], 03h		; Port_0_DriveMode_0 register (PRT0DM0)
-	mov	reg[01h], fch		; Port_0_DriveMode_1 register (PRT0DM1)
+	mov	reg[01h], f8h		; Port_0_DriveMode_1 register (PRT0DM1)
 	M8C_SetBank0
-	mov	reg[03h], fch		; Port_0_DriveMode_2 register (PRT0DM2)
+	mov	reg[03h], 38h		; Port_0_DriveMode_2 register (PRT0DM2)
 	mov	reg[02h], 00h		; Port_0_GlobalSelect register (PRT0GS)
 	M8C_SetBank1
 	mov	reg[02h], 00h		; Port_0_IntCtrl_0 register (PRT0IC0)
@@ -132,10 +134,10 @@ LoadConfigTBL_weather_station_Ordered:
 	mov	reg[05h], 00h		; Port_1_IntEn register (PRT1IE)
 	mov	reg[08h], 00h		; Port_2_Data register (PRT2DR)
 	M8C_SetBank1
-	mov	reg[08h], 00h		; Port_2_DriveMode_0 register (PRT2DM0)
-	mov	reg[09h], ffh		; Port_2_DriveMode_1 register (PRT2DM1)
+	mov	reg[08h], 7fh		; Port_2_DriveMode_0 register (PRT2DM0)
+	mov	reg[09h], 80h		; Port_2_DriveMode_1 register (PRT2DM1)
 	M8C_SetBank0
-	mov	reg[0bh], ffh		; Port_2_DriveMode_2 register (PRT2DM2)
+	mov	reg[0bh], 80h		; Port_2_DriveMode_2 register (PRT2DM2)
 	mov	reg[0ah], 00h		; Port_2_GlobalSelect register (PRT2GS)
 	M8C_SetBank1
 	mov	reg[0ah], 00h		; Port_2_IntCtrl_0 register (PRT2IC0)

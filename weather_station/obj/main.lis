@@ -3,34 +3,284 @@
  0000                   .dbfile ./main.c
  0000                   .dbfile C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\main.c
  0000                   .dbfunc e main _main fV
+ 0000           ;    displaymode -> X+30
+ 0000           ;  lcdSecondLine -> X+15
+ 0000           ;   lcdFirstLine -> X+0
  0000           _main::
  0000                   .dbline -1
- 0000                   .dbline 23
- 0000           ; //----------------------------------------------------------------------------
- 0000           ; // C main line
- 0000           ; // Ports:
- 0000           ; // P0_0 = MCLK
- 0000           ; // P0_1 = XCLR adc reset
- 0000           ; // P0_2 = Button SW
- 0000           ; // P0_3 = windspeed input
- 0000           ; // P0_4 = rainsensor input
- 0000           ; // P0_5 = sunlight (solar) input
- 0000           ; // P0_6 = I2C
- 0000           ; // P0_7 = I2C
- 0000           ; // P1_0 = Gray Code
- 0000           ; // P1_1 = Gray Code
- 0000           ; // P1_1 = Gray Code
- 0000           ; // P2 = LCD
- 0000           ; //----------------------------------------------------------------------------
- 0000           ; 
- 0000           ; #include <m8c.h>        // part specific constants and macros
- 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
- 0000           ; 
- 0000           ; 
- 0000           ; void main(void)
- 0000           ; {
- 0000                   .dbline -2
- 0000           L1:
- 0000                   .dbline 0 ; func end
- 0000 8FFF              jmp .
- 0002                   .dbend
+ 0000 10                push X
+ 0001 4F                mov X,SP
+ 0002 3821              add SP,33
+ 0004                   .dbline 32
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; // Ports:
+ 0004           ; // P0_0 = MCLK
+ 0004           ; // P0_1 = XCLR adc reset
+ 0004           ; // P0_2 = Button SW
+ 0004           ; // P0_3 = windspeed input
+ 0004           ; // P0_4 = rainsensor input
+ 0004           ; // P0_5 = sunlight (solar) input
+ 0004           ; // P0_6 = I2C SDA
+ 0004           ; // P0_7 = I2C SCL
+ 0004           ; // P1_0 = Gray Code
+ 0004           ; // P1_1 = Gray Code
+ 0004           ; // P1_1 = Gray Code
+ 0004           ; // P2 = LCD
+ 0004           ; //----------------------------------------------------------------------------
+ 0004           ; 
+ 0004           ; #define LCD_LENGTH 15 // 14 plus \0 termination?
+ 0004           ; 
+ 0004           ; #include <m8c.h>        // part specific constants and macros
+ 0004           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0004           ; #include <stdio.h>
+ 0004           ; 
+ 0004           ; typedef enum {
+ 0004           ;       overview = 0,
+ 0004           ;       temp = 1,
+ 0004           ;       humidity = 2,
+ 0004           ;       rain = 3,
+ 0004           ;       wind = 4,
+ 0004           ; } MODE;
+ 0004           ; 
+ 0004           ; void main(void)
+ 0004           ; {
+ 0004                   .dbline 35
+ 0004           ;       //Variables
+ 0004           ;       char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
+ 0004           ;       char displaymode = 0;
+ 0004 561E00            mov [X+30],0
+ 0007                   .dbline 40
+ 0007           ;       
+ 0007           ;       /** init **/
+ 0007           ;       
+ 0007           ;       // interrupt and SleepTimer init
+ 0007           ;       M8C_EnableGInt ;                            // Turn on interrupts
+ 0007 7101                      or  F, 01h
+ 0009           
+ 0009                   .dbline 41
+ 0009           ;       SleepTimer_Start();
+ 0009 10                push X
+ 000A 7C0000            xcall _SleepTimer_Start
+ 000D                   .dbline 42
+ 000D           ;     SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
+ 000D 5010              mov A,16
+ 000F 7C0000            xcall _SleepTimer_SetInterval
+ 0012                   .dbline 43
+ 0012           ;     SleepTimer_EnableInt();                     // 8 Hz rate
+ 0012 7C0000            xcall _SleepTimer_EnableInt
+ 0015                   .dbline 46
+ 0015           ; 
+ 0015           ;       // LCD init
+ 0015           ;       LCD_Init();
+ 0015 7C0000            xcall _LCD_Init
+ 0018 20                pop X
+ 0019                   .dbline 49
+ 0019           ;       
+ 0019           ;       // print welcome screen to LCD
+ 0019           ;       csprintf(lcdFirstLine,"  Welcome to  ");
+ 0019 502D              mov A,>L3
+ 001B 08                push A
+ 001C 502D              mov A,<L3
+ 001E 08                push A
+ 001F 5100              mov A,[__r0]
+ 0021 08                push A
+ 0022 10                push X
+ 0023 7C0000            xcall _csprintf
+ 0026                   .dbline 50
+ 0026           ;       csprintf(lcdSecondLine, "Weatherstation");
+ 0026 501E              mov A,>L4
+ 0028 08                push A
+ 0029 501E              mov A,<L4
+ 002B 08                push A
+ 002C 5A00              mov [__r1],X
+ 002E 06000F            add [__r1],15
+ 0031 5100              mov A,[__r0]
+ 0033 08                push A
+ 0034 5100              mov A,[__r1]
+ 0036 08                push A
+ 0037 7C0000            xcall _csprintf
+ 003A 38F8              add SP,-8
+ 003C                   .dbline 51
+ 003C           ;       LCD_Position(0,0);
+ 003C 10                push X
+ 003D 5000              mov A,0
+ 003F 5700              mov X,0
+ 0041 7C0000            xcall _LCD_Position
+ 0044 20                pop X
+ 0045                   .dbline 52
+ 0045           ;       LCD_PrString(lcdFirstLine);
+ 0045 10                push X
+ 0046 5100              mov A,[__r0]
+ 0048 7C0000            xcall _LCD_PrString
+ 004B                   .dbline 53
+ 004B           ;       LCD_Position(0,0);
+ 004B 5000              mov A,0
+ 004D 5700              mov X,0
+ 004F 7C0000            xcall _LCD_Position
+ 0052 20                pop X
+ 0053                   .dbline 54
+ 0053           ;       LCD_PrString(lcdSecondLine);
+ 0053 5A00              mov [__r1],X
+ 0055 06000F            add [__r1],15
+ 0058 10                push X
+ 0059 5100              mov A,[__r0]
+ 005B 08                push A
+ 005C 5100              mov A,[__r1]
+ 005E 5C                mov X,A
+ 005F 18                pop A
+ 0060 7C0000            xcall _LCD_PrString
+ 0063 20                pop X
+ 0064 8091              xjmp L6
+ 0066           L5:
+ 0066                   .dbline 56
+ 0066           ;       
+ 0066           ;       while(1) {
+ 0066                   .dbline 59
+ 0066           ;               // get temp and humidity here
+ 0066           ;               
+ 0066           ;               switch(displaymode) {
+ 0066 521E              mov A,[X+30]
+ 0068 5420              mov [X+32],A
+ 006A 561F00            mov [X+31],0
+ 006D 3D1F00            cmp [X+31],0
+ 0070 B006              jnz X1
+ 0072 3D2000            cmp [X+32],0
+ 0075 A051              jz L9
+ 0077           X1:
+ 0077 3D1F00            cmp [X+31],0
+ 007A B006              jnz X2
+ 007C 3D2001            cmp [X+32],1
+ 007F A047              jz L9
+ 0081           X2:
+ 0081 3D1F00            cmp [X+31],0
+ 0084 B006              jnz X3
+ 0086 3D2002            cmp [X+32],2
+ 0089 A03D              jz L9
+ 008B           X3:
+ 008B 3D1F00            cmp [X+31],0
+ 008E B006              jnz X4
+ 0090 3D2003            cmp [X+32],3
+ 0093 A033              jz L9
+ 0095           X4:
+ 0095 3D1F00            cmp [X+31],0
+ 0098 B006              jnz X5
+ 009A 3D2004            cmp [X+32],4
+ 009D A029              jz L9
+ 009F           X5:
+ 009F 8001              xjmp L8
+ 00A1           L8:
+ 00A1                   .dbline 81
+ 00A1           ;                       case overview:
+ 00A1           ;                               // overview();
+ 00A1           ;                               break;
+ 00A1           ;                               
+ 00A1           ;                       case temp:
+ 00A1           ;                               // temp();
+ 00A1           ;                               break;
+ 00A1           ;                               
+ 00A1           ;                       case humidity:
+ 00A1           ;                               // humidity();
+ 00A1           ;                               break;
+ 00A1           ;                               
+ 00A1           ;                       case rain:
+ 00A1           ;                               // rain();
+ 00A1           ;                               break;
+ 00A1           ;                               
+ 00A1           ;                       case wind:
+ 00A1           ;                               // wind();
+ 00A1           ;                               break;
+ 00A1           ;               
+ 00A1           ;                       default:
+ 00A1           ;                               displaymode = 0;
+ 00A1 561E00            mov [X+30],0
+ 00A4                   .dbline 82
+ 00A4           ;                               csprintf(lcdFirstLine,"    Error     ");
+ 00A4 500F              mov A,>L16
+ 00A6 08                push A
+ 00A7 500F              mov A,<L16
+ 00A9 08                push A
+ 00AA 5100              mov A,[__r0]
+ 00AC 08                push A
+ 00AD 10                push X
+ 00AE 7C0000            xcall _csprintf
+ 00B1                   .dbline 83
+ 00B1           ;                               csprintf(lcdSecondLine,"              ");
+ 00B1 5000              mov A,>L17
+ 00B3 08                push A
+ 00B4 5000              mov A,<L17
+ 00B6 08                push A
+ 00B7 5A00              mov [__r1],X
+ 00B9 06000F            add [__r1],15
+ 00BC 5100              mov A,[__r0]
+ 00BE 08                push A
+ 00BF 5100              mov A,[__r1]
+ 00C1 08                push A
+ 00C2 7C0000            xcall _csprintf
+ 00C5 38F8              add SP,-8
+ 00C7                   .dbline 84
+ 00C7           ;               }
+ 00C7           L9:
+ 00C7                   .dbline 87
+ 00C7           ;               
+ 00C7           ;               // lets see what we've got
+ 00C7           ;               LCD_Position(0,0);
+ 00C7 10                push X
+ 00C8 5000              mov A,0
+ 00CA 5700              mov X,0
+ 00CC 7C0000            xcall _LCD_Position
+ 00CF 20                pop X
+ 00D0                   .dbline 88
+ 00D0           ;               LCD_PrString(lcdFirstLine);
+ 00D0 10                push X
+ 00D1 5100              mov A,[__r0]
+ 00D3 7C0000            xcall _LCD_PrString
+ 00D6                   .dbline 89
+ 00D6           ;               LCD_Position(0,0);
+ 00D6 5000              mov A,0
+ 00D8 5700              mov X,0
+ 00DA 7C0000            xcall _LCD_Position
+ 00DD 20                pop X
+ 00DE                   .dbline 90
+ 00DE           ;               LCD_PrString(lcdSecondLine);
+ 00DE 5A00              mov [__r1],X
+ 00E0 06000F            add [__r1],15
+ 00E3 10                push X
+ 00E4 5100              mov A,[__r0]
+ 00E6 08                push A
+ 00E7 5100              mov A,[__r1]
+ 00E9 5C                mov X,A
+ 00EA 18                pop A
+ 00EB 7C0000            xcall _LCD_PrString
+ 00EE                   .dbline 93
+ 00EE           ;               
+ 00EE           ;               // lets sleep for a while
+ 00EE           ;               SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
+ 00EE 5700              mov X,0
+ 00F0 5008              mov A,8
+ 00F2 7C0000            xcall _SleepTimer_SyncWait
+ 00F5 20                pop X
+ 00F6                   .dbline 94
+ 00F6           ;       }
+ 00F6           L6:
+ 00F6                   .dbline 56
+ 00F6 8F6F              xjmp L5
+ 00F8           X0:
+ 00F8                   .dbline -2
+ 00F8           L2:
+ 00F8 38DF              add SP,-33
+ 00FA 20                pop X
+ 00FB                   .dbline 0 ; func end
+ 00FB 8FFF              jmp .
+ 00FD                   .dbsym l displaymode 30 c
+ 00FD                   .dbsym l lcdSecondLine 15 A[15:15]c
+ 00FD                   .dbsym l lcdFirstLine 0 A[15:15]c
+ 00FD                   .dbend
+                        .area lit(rom, con, rel, lit)
+ 0000           L17:
+ 0000 202020202020202020202020202000    .byte 32,32,32,32,32,32,32,32,32,32,32,32,32,32,0
+ 000F           L16:
+ 000F 202020204572726F72202020202000    .byte 32,32,32,32,'E,'r,'r,'o,'r,32,32,32,32,32,0
+ 001E           L4:
+ 001E 5765617468657273746174696F6E00    .byte 'W,'e,'a,'t,'h,'e,'r,'s,'t,'a,'t,'i,'o,'n,0
+ 002D           L3:
+ 002D 202057656C636F6D6520746F202000    .byte 32,32,'W,'e,'l,'c,'o,'m,'e,32,'t,'o,32,32,0

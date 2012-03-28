@@ -5,13 +5,14 @@
 #define __PSOCAPI_H
 
 #include "PSoCGPIOINT.h"
-#include "I2Cm_1.h"
-#include "LCD_1.h"
+#include "I2Cm.h"
+#include "LCD.h"
 #include "PGA_rain.h"
 #include "PGA_sun.h"
 #include "PGA_wind.h"
 #include "SAR6_rain.h"
 #include "SAR6_sun.h"
 #include "SAR6_wind.h"
+#include "SleepTimer.h"
 
 #endif

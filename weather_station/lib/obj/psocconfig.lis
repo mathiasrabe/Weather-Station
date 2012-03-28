@@ -965,8 +965,8 @@
  0000           ANALOG_IO_CONTROL:		equ 0h	;Analog IO Control register (ABF_CR)
  0000           PORT_0_GLOBAL_SELECT:	equ 0h	;Port 0 global select register (PRT0GS)
  0003           PORT_0_DRIVE_0:			equ 3h	;Port 0 drive mode 0 register (PRT0DM0)
- 00FC           PORT_0_DRIVE_1:			equ fch	;Port 0 drive mode 1 register (PRT0DM1)
- 00FC           PORT_0_DRIVE_2:			equ fch	;Port 0 drive mode 2 register (PRT0DM2)
+ 00F8           PORT_0_DRIVE_1:			equ f8h	;Port 0 drive mode 1 register (PRT0DM1)
+ 0038           PORT_0_DRIVE_2:			equ 38h	;Port 0 drive mode 2 register (PRT0DM2)
  0000           PORT_0_INTENABLE:		equ 0h	;Port 0 interrupt enable register (PRT0IE)
  0000           PORT_0_INTCTRL_0:		equ 0h	;Port 0 interrupt control 0 register (PRT0IC0)
  0000           PORT_0_INTCTRL_1:		equ 0h	;Port 0 interrupt control 1 register (PRT0IC1)
@@ -978,9 +978,9 @@
  0000           PORT_1_INTCTRL_0:		equ 0h	;Port 1 interrupt control 0 register (PRT1IC0)
  0000           PORT_1_INTCTRL_1:		equ 0h	;Port 1 interrupt control 1 register (PRT1IC1)
  0000           PORT_2_GLOBAL_SELECT:	equ 0h	;Port 2 global select register (PRT2GS)
- 0000           PORT_2_DRIVE_0:			equ 0h	;Port 2 drive mode 0 register (PRT2DM0)
- 00FF           PORT_2_DRIVE_1:			equ ffh	;Port 2 drive mode 1 register (PRT2DM1)
- 00FF           PORT_2_DRIVE_2:			equ ffh	;Port 2 drive mode 2 register (PRT2DM2)
+ 007F           PORT_2_DRIVE_0:			equ 7fh	;Port 2 drive mode 0 register (PRT2DM0)
+ 0080           PORT_2_DRIVE_1:			equ 80h	;Port 2 drive mode 1 register (PRT2DM1)
+ 0080           PORT_2_DRIVE_2:			equ 80h	;Port 2 drive mode 2 register (PRT2DM2)
  0000           PORT_2_INTENABLE:		equ 0h	;Port 2 interrupt enable register (PRT2IE)
  0000           PORT_2_INTCTRL_0:		equ 0h	;Port 2 interrupt control 0 register (PRT2IC0)
  0000           PORT_2_INTCTRL_1:		equ 0h	;Port 2 interrupt control 1 register (PRT2IC1)
@@ -1012,6 +1012,19 @@
                 export _LoadConfigInit
                 export LoadConfig_weather_station
                 export _LoadConfig_weather_station
+                export Port_0_Data_SHADE
+                export _Port_0_Data_SHADE
+                export Port_0_DriveMode_0_SHADE
+                export _Port_0_DriveMode_0_SHADE
+                export Port_0_DriveMode_1_SHADE
+                export _Port_0_DriveMode_1_SHADE
+                export Port_2_Data_SHADE
+                export _Port_2_Data_SHADE
+                export Port_2_DriveMode_0_SHADE
+                export _Port_2_DriveMode_0_SHADE
+                export Port_2_DriveMode_1_SHADE
+                export _Port_2_DriveMode_1_SHADE
+                
                 
                 export NO_SHADOW
                 export _NO_SHADOW
@@ -1066,10 +1079,17 @@
                    ENDIF ; RAM_USE_CLASS_4
                 
                     
- 0000 7C0007            lcall   LoadConfig_weather_station
- 0003 7C0000            lcall   LoadConfigTBL_weather_station_Ordered
- 0006           
- 0006           
+ 0000 550000            mov             [Port_0_Data_SHADE], 0h
+ 0003 550203            mov             [Port_0_DriveMode_0_SHADE], 3h
+ 0006 5503F8            mov             [Port_0_DriveMode_1_SHADE], f8h
+ 0009 550100            mov             [Port_2_Data_SHADE], 0h
+ 000C 55047F            mov             [Port_2_DriveMode_0_SHADE], 7fh
+ 000F 550580            mov             [Port_2_DriveMode_1_SHADE], 80h
+ 0012           
+ 0012 7C0019            lcall   LoadConfig_weather_station
+ 0015 7C0000            lcall   LoadConfigTBL_weather_station_Ordered
+ 0018           
+ 0018           
                    IF ( RAM_USE_CLASS_4 & RAM_USE_CLASS_1 )
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_1
@@ -1112,29 +1132,29 @@
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_4
                 
- 0006 7F            ret
- 0007           
- 0007           ;---------------------------------------------------------------------------
- 0007           ; Load Configuration weather_station
- 0007           ;
- 0007           ;    Load configuration registers for weather_station.
- 0007           ;    IO Bank 0 registers a loaded first,then those in IO Bank 1.
- 0007           ;
- 0007           ;       INPUTS: None.
- 0007           ;      RETURNS: Nothing.
- 0007           ; SIDE EFFECTS: Registers are volatile: the CPU A and X registers may be
- 0007           ;               modified as may the Page Pointer registers!
- 0007           ;               In the large memory model currently only the page
- 0007           ;               pointer registers listed below are modified.  This does
- 0007           ;               not guarantee that in future implementations of this
- 0007           ;               function other page pointer registers will not be
- 0007           ;               modified.
- 0007           ;          
- 0007           ;               Page Pointer Registers Modified: 
- 0007           ;               CUR_PP
- 0007           ;
- 0007           _LoadConfig_weather_station:
- 0007            LoadConfig_weather_station:
+ 0018 7F            ret
+ 0019           
+ 0019           ;---------------------------------------------------------------------------
+ 0019           ; Load Configuration weather_station
+ 0019           ;
+ 0019           ;    Load configuration registers for weather_station.
+ 0019           ;    IO Bank 0 registers a loaded first,then those in IO Bank 1.
+ 0019           ;
+ 0019           ;       INPUTS: None.
+ 0019           ;      RETURNS: Nothing.
+ 0019           ; SIDE EFFECTS: Registers are volatile: the CPU A and X registers may be
+ 0019           ;               modified as may the Page Pointer registers!
+ 0019           ;               In the large memory model currently only the page
+ 0019           ;               pointer registers listed below are modified.  This does
+ 0019           ;               not guarantee that in future implementations of this
+ 0019           ;               function other page pointer registers will not be
+ 0019           ;               modified.
+ 0019           ;          
+ 0019           ;               Page Pointer Registers Modified: 
+ 0019           ;               CUR_PP
+ 0019           ;
+ 0019           _LoadConfig_weather_station:
+ 0019            LoadConfig_weather_station:
                    IF ( RAM_USE_CLASS_4 & RAM_USE_CLASS_1 )
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_1
@@ -1160,25 +1180,25 @@
                    ENDIF ; RAM_USE_CLASS_4
                 
                 
- 0007 10                push    x
- 0008 70EF          and   F, ~FLAG_XIO_MASK
- 000A 5000          mov     a, 0                    ; Specify bank 0
- 000C 67            asr     a                       ; Store in carry flag
- 000D                                               ; Load bank 0 table:
- 000D 5000          mov     A, >LoadConfigTBL_weather_station_Bank0
- 000F 5700          mov     X, <LoadConfigTBL_weather_station_Bank0
- 0011 7C0022        lcall   LoadConfig              ; Load the bank 0 values
- 0014           
- 0014 5001          mov     a, 1                    ; Specify bank 1
- 0016 67            asr     a                       ; Store in carry flag
- 0017                                               ; Load bank 1 table:
- 0017 5000          mov     A, >LoadConfigTBL_weather_station_Bank1
- 0019 5700          mov     X, <LoadConfigTBL_weather_station_Bank1
- 001B 7C0022        lcall   LoadConfig              ; Load the bank 1 values
- 001E           
- 001E 70EF          and   F, ~FLAG_XIO_MASK
- 0020 20                pop             x
- 0021           
+ 0019 10                push    x
+ 001A 70EF          and   F, ~FLAG_XIO_MASK
+ 001C 5000          mov     a, 0                    ; Specify bank 0
+ 001E 67            asr     a                       ; Store in carry flag
+ 001F                                               ; Load bank 0 table:
+ 001F 5000          mov     A, >LoadConfigTBL_weather_station_Bank0
+ 0021 5700          mov     X, <LoadConfigTBL_weather_station_Bank0
+ 0023 7C0034        lcall   LoadConfig              ; Load the bank 0 values
+ 0026           
+ 0026 5001          mov     a, 1                    ; Specify bank 1
+ 0028 67            asr     a                       ; Store in carry flag
+ 0029                                               ; Load bank 1 table:
+ 0029 5000          mov     A, >LoadConfigTBL_weather_station_Bank1
+ 002B 5700          mov     X, <LoadConfigTBL_weather_station_Bank1
+ 002D 7C0034        lcall   LoadConfig              ; Load the bank 1 values
+ 0030           
+ 0030 70EF          and   F, ~FLAG_XIO_MASK
+ 0032 20                pop             x
+ 0033           
                    IF ( RAM_USE_CLASS_4 & RAM_USE_CLASS_1 )
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_1
@@ -1221,27 +1241,27 @@
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_4
                 
- 0021 7F            ret
- 0022           
- 0022           
- 0022           
- 0022           
- 0022           ;---------------------------------------------------------------------------
- 0022           ; LoadConfig - Set IO registers as specified in ROM table of (address,value)
- 0022           ;              pairs. Terminate on address=0xFF.
- 0022           ;
- 0022           ;  INPUTS:  [A,X] points to the table to be loaded
- 0022           ;           Flag Register Carry bit encodes the Register Bank
- 0022           ;           (Carry=0 => Bank 0; Carry=1 => Bank 1)
- 0022           ;
- 0022           ;  RETURNS: nothing.
- 0022           ;
- 0022           ;  STACK FRAME:  X-4 I/O Bank 0/1 indicator
- 0022           ;                X-3 Temporary store for register address
- 0022           ;                X-2 LSB of config table address
- 0022           ;                X-1 MSB of config table address
- 0022           ;
- 0022           LoadConfig:
+ 0033 7F            ret
+ 0034           
+ 0034           
+ 0034           
+ 0034           
+ 0034           ;---------------------------------------------------------------------------
+ 0034           ; LoadConfig - Set IO registers as specified in ROM table of (address,value)
+ 0034           ;              pairs. Terminate on address=0xFF.
+ 0034           ;
+ 0034           ;  INPUTS:  [A,X] points to the table to be loaded
+ 0034           ;           Flag Register Carry bit encodes the Register Bank
+ 0034           ;           (Carry=0 => Bank 0; Carry=1 => Bank 1)
+ 0034           ;
+ 0034           ;  RETURNS: nothing.
+ 0034           ;
+ 0034           ;  STACK FRAME:  X-4 I/O Bank 0/1 indicator
+ 0034           ;                X-3 Temporary store for register address
+ 0034           ;                X-2 LSB of config table address
+ 0034           ;                X-1 MSB of config table address
+ 0034           ;
+ 0034           LoadConfig:
                    IF ( RAM_USE_CLASS_2 & RAM_USE_CLASS_1 )
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_1
@@ -1266,48 +1286,48 @@
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_4
                 
- 0022 3802          add     SP, 2                   ; Set up local vars
- 0024 10            push    X                       ; Save config table address on stack
- 0025 08            push    A
- 0026 4F            mov     X, SP
- 0027 56FC00        mov     [X-4], 0                ; Set default Destination to Bank 0
- 002A D004          jnc     .BankSelectSaved        ; Carry says Bank 0 is OK
- 002C 56FC01        mov     [X-4], 1                ; No Carry: default to Bank 1
- 002F           .BankSelectSaved:
- 002F 18            pop     A
- 0030 20            pop     X
- 0031           
- 0031           LoadConfigLp:
- 0031 70EF          and   F, ~FLAG_XIO_MASK
- 0033 62E300        mov   reg[RES_WDT], 00h
- 0036 10            push    X                       ; Preserve the config table address
+ 0034 3802          add     SP, 2                   ; Set up local vars
+ 0036 10            push    X                       ; Save config table address on stack
  0037 08            push    A
- 0038 28            romx                            ; Load register address from table
- 0039 39FF          cmp     A, END_CONFIG_TABLE     ; End of table?
- 003B A01F          jz      EndLoadConfig           ;   Yes, go wrap it up
- 003D 4F            mov     X, SP                   ;
- 003E 48FC01        tst     [X-4], 1                ; Loading IO Bank 1?
- 0041 A003          jz      .IOBankNowSet           ;    No, Bank 0 is fine
- 0043 7110          or    F, FLAG_XIO_MASK
- 0045           .IOBankNowSet:
- 0045 54FD          mov     [X-3], A                ; Stash the register address
- 0047 18            pop     A                       ; Retrieve the table address
- 0048 20            pop     X
- 0049 75            inc     X                       ; Advance to the data byte
- 004A 0900          adc     A, 0
- 004C 10            push    X                       ; Save the config table address again
- 004D 08            push    A
- 004E 28            romx                            ; load config data from the table
- 004F 4F            mov     X, SP                   ; retrieve the register address
- 0050 59FD          mov     X, [X-3]
- 0052 6100          mov     reg[X], A               ; Configure the register
- 0054 18            pop     A                       ; retrieve the table address
- 0055 20            pop     X
- 0056 75            inc     X                       ; advance to next table entry
- 0057 0900          adc     A, 0
- 0059 8FD7          jmp     LoadConfigLp            ; loop to configure another register
- 005B           EndLoadConfig:
- 005B 38FC          add     SP, -4
+ 0038 4F            mov     X, SP
+ 0039 56FC00        mov     [X-4], 0                ; Set default Destination to Bank 0
+ 003C D004          jnc     .BankSelectSaved        ; Carry says Bank 0 is OK
+ 003E 56FC01        mov     [X-4], 1                ; No Carry: default to Bank 1
+ 0041           .BankSelectSaved:
+ 0041 18            pop     A
+ 0042 20            pop     X
+ 0043           
+ 0043           LoadConfigLp:
+ 0043 70EF          and   F, ~FLAG_XIO_MASK
+ 0045 62E300        mov   reg[RES_WDT], 00h
+ 0048 10            push    X                       ; Preserve the config table address
+ 0049 08            push    A
+ 004A 28            romx                            ; Load register address from table
+ 004B 39FF          cmp     A, END_CONFIG_TABLE     ; End of table?
+ 004D A01F          jz      EndLoadConfig           ;   Yes, go wrap it up
+ 004F 4F            mov     X, SP                   ;
+ 0050 48FC01        tst     [X-4], 1                ; Loading IO Bank 1?
+ 0053 A003          jz      .IOBankNowSet           ;    No, Bank 0 is fine
+ 0055 7110          or    F, FLAG_XIO_MASK
+ 0057           .IOBankNowSet:
+ 0057 54FD          mov     [X-3], A                ; Stash the register address
+ 0059 18            pop     A                       ; Retrieve the table address
+ 005A 20            pop     X
+ 005B 75            inc     X                       ; Advance to the data byte
+ 005C 0900          adc     A, 0
+ 005E 10            push    X                       ; Save the config table address again
+ 005F 08            push    A
+ 0060 28            romx                            ; load config data from the table
+ 0061 4F            mov     X, SP                   ; retrieve the register address
+ 0062 59FD          mov     X, [X-3]
+ 0064 6100          mov     reg[X], A               ; Configure the register
+ 0066 18            pop     A                       ; retrieve the table address
+ 0067 20            pop     X
+ 0068 75            inc     X                       ; advance to next table entry
+ 0069 0900          adc     A, 0
+ 006B 8FD7          jmp     LoadConfigLp            ; loop to configure another register
+ 006D           EndLoadConfig:
+ 006D 38FC          add     SP, -4
                    IF ( RAM_USE_CLASS_2 & RAM_USE_CLASS_1 )
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_1
@@ -1350,9 +1370,23 @@
                    ; Nothing to do
                    ENDIF ; RAM_USE_CLASS_4
                 
- 005D 7F            ret
- 005E           
+ 006F 7F            ret
+ 0070           
                 AREA InterruptRAM(ram, rel)
                 
  0000           NO_SHADOW:
  0000           _NO_SHADOW:
+ 0000           ; write only register shadows
+ 0000           _Port_0_Data_SHADE:
+ 0000           Port_0_Data_SHADE:      BLK     1
+ 0001           _Port_2_Data_SHADE:
+ 0001           Port_2_Data_SHADE:      BLK     1
+ 0002           _Port_0_DriveMode_0_SHADE:
+ 0002           Port_0_DriveMode_0_SHADE:       BLK     1
+ 0003           _Port_0_DriveMode_1_SHADE:
+ 0003           Port_0_DriveMode_1_SHADE:       BLK     1
+ 0004           _Port_2_DriveMode_0_SHADE:
+ 0004           Port_2_DriveMode_0_SHADE:       BLK     1
+ 0005           _Port_2_DriveMode_1_SHADE:
+ 0005           Port_2_DriveMode_1_SHADE:       BLK     1
+ 0006           

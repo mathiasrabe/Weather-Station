@@ -1,5 +1,4 @@
 //----------------------------------------------------------------------------
-// C main line
 // Ports:
 // P0_0 = MCLK
 // P0_1 = XCLR adc reset
@@ -15,13 +14,82 @@
 // P2 = LCD
 //----------------------------------------------------------------------------
 
+#define LCD_LENGTH 15 // 14 plus \0 termination?
+
 #include <m8c.h>        // part specific constants and macros
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+#include <stdio.h>
 
-// init
+typedef enum {
+	overview = 0,
+	temp = 1,
+	humidity = 2,
+	rain = 3,
+	wind = 4,
+} MODE;
 
 void main(void)
 {
-	// M8C_EnableGInt ; // Uncomment this line to enable Global Interrupts
-	// Insert your main routine code here.
+	//Variables
+	char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
+	char displaymode = 0;
+	
+	/** init **/
+	
+	// interrupt and SleepTimer init
+	M8C_EnableGInt ;                            // Turn on interrupts
+	SleepTimer_Start();
+    SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
+    SleepTimer_EnableInt();                     // 8 Hz rate
+
+	// LCD init
+	LCD_Init();
+	
+	// print welcome screen to LCD
+	csprintf(lcdFirstLine,"  Welcome to  ");
+	csprintf(lcdSecondLine, "Weatherstation");
+	LCD_Position(0,0);
+	LCD_PrString(lcdFirstLine);
+	LCD_Position(0,0);
+	LCD_PrString(lcdSecondLine);
+	
+	while(1) {
+		// get temp and humidity here
+		
+		switch(displaymode) {
+			case overview:
+				// overview();
+				break;
+				
+			case temp:
+				// temp();
+				break;
+				
+			case humidity:
+				// humidity();
+				break;
+				
+			case rain:
+				// rain();
+				break;
+				
+			case wind:
+				// wind();
+				break;
+		
+			default:
+				displaymode = 0;
+				csprintf(lcdFirstLine,"    Error     ");
+				csprintf(lcdSecondLine,"              ");
+		}
+		
+		// lets see what we've got
+		LCD_Position(0,0);
+		LCD_PrString(lcdFirstLine);
+		LCD_Position(0,0);
+		LCD_PrString(lcdSecondLine);
+		
+		// lets sleep for a while
+		SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
+	}
 }

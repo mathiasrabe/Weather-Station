@@ -1,11 +1,12 @@
 XH
-H B areas E global symbols
+H B areas F global symbols
 M boot.asm
 S _main Ref0000
 S __r0 Ref0000
 S LoadConfigInit Ref0000
 S __bss_end Ref0000
 S __ramareas_end Ref0000
+S _SleepTimer_ISR Ref0000
 S __data_end Ref0000
 A TOP size D7 flags C
 dbfile ./boot.asm
@@ -27,7 +28,8 @@ dbline AA 34
 dbline AE 38
 dbline B2 3C
 dbline B6 60
-dbline BA 64
+dbline B9 64
+dbline BA 67
 dbline 2 68
 dbline D3 6A
 dbline 2 6D
@@ -144,8 +146,8 @@ T 00 3C 7E
 R 00 00 00 00
 T 00 60 7E
 R 00 00 00 00
-T 00 64 7E
-R 00 00 00 00
+T 00 64 7D 00 00 7E
+R 00 00 00 00 02 03 00 05
 T 00 68 71 10 62 E3 87 70 EF 62 E3 38 41 FE FB 50
 R 00 00 00 00
 T 00 76 00 00 4E 62 E3 38 55 F8 00 55 F9 00 71 10
@@ -161,7 +163,7 @@ R 00 00 00 00 03 02 00 01 41 07 00 02 01 0A 00 02
 T 00 AD 00 00 00 00 3C 00 00
 R 00 00 00 00 03 02 00 01 01 04 00 07 03 07 00 01
 T 00 B1 00 00 A0 0B 08 28 3F 00 00 18 75 09 00 8F
-R 00 00 00 00 03 02 00 05 03 09 00 01
+R 00 00 00 00 03 02 00 06 03 09 00 01
 T 00 BD F2 71 10 70 EF 62 E0 00 71 10 62 E0 00 70
 R 00 00 00 00
 T 00 CB EF 62 E2 00 7C 00 00 8F FF 50 10 7F

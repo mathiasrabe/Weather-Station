@@ -1,5 +1,5 @@
 XH
-H 3 areas 9 global symbols
+H 3 areas 15 global symbols
 M psocconfig.asm
 S LoadConfigTBL_weather_station_Bank0 Ref0000
 S LoadConfigTBL_weather_station_Bank1 Ref0000
@@ -17,85 +17,107 @@ dbfile lib/psocconfig.asm
 dbfunc 0 ? 0 I
 dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
 dbfunc 0 ? 0 I
-A psoc_config size 5E flags 0
+A psoc_config size 70 flags 0
 dbfile lib/psocconfig.asm
 dbfunc 0 ? 0 I
-dbline 3A 0
-dbline 3B 3
-dbline 3F 6
-dbline 58 7
-dbline 2 8
-dbline 5A A
-dbline 5B C
-dbline 5D D
-dbline 5E F
-dbline 5F 11
-dbline 61 14
-dbline 62 16
-dbline 64 17
-dbline 65 19
-dbline 66 1B
-dbline 2 1E
-dbline 69 20
-dbline 6C 21
-dbline 82 22
-dbline 83 24
-dbline 84 25
-dbline 85 26
-dbline 86 27
-dbline 87 2A
-dbline 88 2C
-dbline 8A 2F
-dbline 8B 30
-dbline 2 31
-dbline 2 33
-dbline 90 36
-dbline 91 37
-dbline 92 38
-dbline 93 39
-dbline 94 3B
-dbline 95 3D
-dbline 96 3E
-dbline 97 41
+dbline 47 0
+dbline 48 3
+dbline 49 6
+dbline 4A 9
+dbline 4B C
+dbline 4C F
+dbline 4E 12
+dbline 4F 15
+dbline 53 18
+dbline 6C 19
+dbline 2 1A
+dbline 6E 1C
+dbline 6F 1E
+dbline 71 1F
+dbline 72 21
+dbline 73 23
+dbline 75 26
+dbline 76 28
+dbline 78 29
+dbline 79 2B
+dbline 7A 2D
+dbline 2 30
+dbline 7D 32
+dbline 80 33
+dbline 96 34
+dbline 97 36
+dbline 98 37
+dbline 99 38
+dbline 9A 39
+dbline 9B 3C
+dbline 9C 3E
+dbline 9E 41
+dbline 9F 42
 dbline 2 43
-dbline 9A 45
-dbline 9B 47
-dbline 9C 48
-dbline 9D 49
-dbline 9E 4A
-dbline 9F 4C
-dbline A0 4D
-dbline A1 4E
-dbline A2 4F
-dbline A3 50
-dbline A4 52
-dbline A5 54
-dbline A6 55
-dbline A7 56
-dbline A8 57
-dbline A9 59
-dbline AB 5B
-dbline AD 5D
+dbline 2 45
+dbline A4 48
+dbline A5 49
+dbline A6 4A
+dbline A7 4B
+dbline A8 4D
+dbline A9 4F
+dbline AA 50
+dbline AB 53
+dbline 2 55
+dbline AE 57
+dbline AF 59
+dbline B0 5A
+dbline B1 5B
+dbline B2 5C
+dbline B3 5E
+dbline B4 5F
+dbline B5 60
+dbline B6 61
+dbline B7 62
+dbline B8 64
+dbline B9 66
+dbline BA 67
+dbline BB 68
+dbline BC 69
+dbline BD 6B
+dbline BF 6D
+dbline C1 6F
 S LoadConfigInit Def0000
-S LoadConfig_weather_station Def0007
+S LoadConfig_weather_station Def0019
 S _LoadConfigInit Def0000
-S _LoadConfig_weather_station Def0007
-A InterruptRAM size 0 flags 20
+S _LoadConfig_weather_station Def0019
+A InterruptRAM size 6 flags 20
 S _NO_SHADOW Def0000
+S _Port_0_Data_SHADE Def0000
+S _Port_2_Data_SHADE Def0001
+S Port_0_DriveMode_0_SHADE Def0002
+S Port_0_DriveMode_1_SHADE Def0003
+S Port_2_DriveMode_0_SHADE Def0004
+S Port_2_DriveMode_1_SHADE Def0005
 S NO_SHADOW Def0000
-T 00 00 7C 00 07 7C 00 00 7F 10 70 EF 50 00 67 50
-R 00 00 00 01 00 03 00 01 02 06 00 02
-T 00 0E 00 00 57 00 00 7C 00 22 50 01 67 50
+S _Port_0_DriveMode_0_SHADE Def0002
+S _Port_0_DriveMode_1_SHADE Def0003
+S _Port_2_DriveMode_0_SHADE Def0004
+S _Port_2_DriveMode_1_SHADE Def0005
+S Port_0_Data_SHADE Def0000
+S Port_2_Data_SHADE Def0001
+T 00 00 55 00 00 00 55 00 02 03 55 00 03 F8 55
+R 00 00 00 01 01 03 00 02 01 07 00 02 01 0B 00 02
+T 00 0A 00 01 00 55 00 04 7F 55 00 05 80 7C
+R 00 00 00 01 01 02 00 02 01 06 00 02 01 0A 00 02
+T 00 13 00 19 7C 00 00 7F 10 70 EF 50 00 67 50
+R 00 00 00 01 00 02 00 01 02 05 00 02
+T 00 20 00 00 57 00 00 7C 00 34 50 01 67 50
 R 00 00 00 01 43 02 00 00 03 05 00 00 00 08 00 01
-T 00 18 00 00 57 00 00 7C 00 22 70 EF 20 7F 38 02
+T 00 2A 00 00 57 00 00 7C 00 34 70 EF 20 7F 38 02
 R 00 00 00 01 43 02 00 01 03 05 00 01 00 08 00 01
-T 00 24 10 08 4F 56 FC 00 D0 04 56 FC 01 18 20 70
+T 00 36 10 08 4F 56 FC 00 D0 04 56 FC 01 18 20 70
 R 00 00 00 01
-T 00 32 EF 62 E3 00 10 08 28 39 FF A0 1F 4F 48 FC
+T 00 44 EF 62 E3 00 10 08 28 39 FF A0 1F 4F 48 FC
 R 00 00 00 01
-T 00 40 01 A0 03 71 10 54 FD 18 20 75 09 00 10 08
+T 00 52 01 A0 03 71 10 54 FD 18 20 75 09 00 10 08
 R 00 00 00 01
-T 00 4E 28 4F 59 FD 61 00 18 20 75 09 00 8F D7 38
+T 00 60 28 4F 59 FD 61 00 18 20 75 09 00 8F D7 38
 R 00 00 00 01
-T 00 5C FC 7F
+T 00 6E FC 7F
 R 00 00 00 01

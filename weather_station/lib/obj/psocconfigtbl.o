@@ -13,80 +13,80 @@ A psoc_config size C5 flags 0
 dbfile lib/psocconfigtbl.asm
 dbfunc 0 ? 0 I
 dbline 2 0
-dbline 6D 2
+dbline 6F 2
 dbline 2 5
-dbline 6F 7
-dbline 70 A
+dbline 71 7
+dbline 72 A
 dbline 2 D
-dbline 72 F
-dbline 73 12
+dbline 74 F
+dbline 75 12
 dbline 2 15
-dbline 75 17
-dbline 76 1A
+dbline 77 17
+dbline 78 1A
 dbline 2 1D
-dbline 78 1F
-dbline 79 22
+dbline 7A 1F
+dbline 7B 22
 dbline 2 25
-dbline 7B 27
-dbline 7C 2A
+dbline 7D 27
+dbline 7E 2A
 dbline 2 2D
-dbline 7E 2F
-dbline 7F 32
+dbline 80 2F
+dbline 81 32
 dbline 2 35
-dbline 81 37
-dbline 82 3A
+dbline 83 37
+dbline 84 3A
 dbline 2 3D
-dbline 84 3F
-dbline 85 42
+dbline 86 3F
+dbline 87 42
 dbline 2 45
-dbline 87 47
-dbline 88 4A
+dbline 89 47
+dbline 8A 4A
 dbline 2 4D
-dbline 8A 4F
-dbline 8B 52
+dbline 8C 4F
+dbline 8D 52
 dbline 2 55
-dbline 8D 57
-dbline 8E 5A
+dbline 8F 57
+dbline 90 5A
 dbline 2 5D
-dbline 90 5F
-dbline 91 62
+dbline 92 5F
+dbline 93 62
 dbline 2 65
-dbline 93 67
-dbline 94 6A
+dbline 95 67
+dbline 96 6A
 dbline 2 6D
-dbline 96 6F
-dbline 97 72
+dbline 98 6F
+dbline 99 72
 dbline 2 75
-dbline 99 77
-dbline 9A 7A
+dbline 9B 77
+dbline 9C 7A
 dbline 2 7D
-dbline 9C 7F
-dbline 9D 82
+dbline 9E 7F
+dbline 9F 82
 dbline 2 85
-dbline 9F 87
-dbline A0 8A
+dbline A1 87
+dbline A2 8A
 dbline 2 8D
-dbline A2 8F
-dbline A3 92
+dbline A4 8F
+dbline A5 92
 dbline 2 95
-dbline A5 97
-dbline A6 9A
+dbline A7 97
+dbline A8 9A
 dbline 2 9D
-dbline A8 9F
-dbline A9 A2
+dbline AA 9F
+dbline AB A2
 dbline 2 A5
-dbline AB A7
-dbline AC AA
+dbline AD A7
+dbline AE AA
 dbline 2 AD
-dbline AE AF
-dbline AF B2
+dbline B0 AF
+dbline B1 B2
 dbline 2 B5
-dbline B1 B7
-dbline B2 BA
+dbline B3 B7
+dbline B4 BA
 dbline 2 BD
-dbline B4 BF
+dbline B6 BF
 dbline 2 C2
-dbline B6 C4
+dbline B8 C4
 S LoadConfigTBL_weather_station_Ordered Def0000
 T 00 00 79 0E 7A 21 7B 20 78 00 75 0E 76 21 77 20
 R 00 00 00 01
@@ -100,15 +100,15 @@ T 00 38 E6 00 E7 00 D6 00 B0 00 B1 00 B2 00 B3 33
 R 00 00 00 01
 T 00 46 B4 33 B5 00 B6 00 B8 55 B9 00 BA 10 BB 33
 R 00 00 00 01
-T 00 54 BC 33 BD 00 BE 00 FF 61 00 69 00 60 00 62
+T 00 54 BC 33 BD 00 BE 00 FF 61 00 69 00 60 15 62
 R 00 00 00 01
 T 00 62 00 67 33 68 33 63 00 66 00 D1 00 D3 00 D0
 R 00 00 00 01
 T 00 70 00 D2 00 E1 FF E2 00 DF FF DE 02 DD 00 FF
 R 00 00 00 01
-T 00 00 70 EF 62 00 00 71 10 62 00 03 62 01 FC 70
+T 00 00 70 EF 62 00 00 71 10 62 00 03 62 01 F8 70
 R 00 00 00 02
-T 00 0E EF 62 03 FC 62 02 00 71 10 62 02 00 62 03
+T 00 0E EF 62 03 38 62 02 00 71 10 62 02 00 62 03
 R 00 00 00 02
 T 00 1C 00 70 EF 62 01 00 62 04 00 71 10 62 04 00
 R 00 00 00 02
@@ -116,7 +116,7 @@ T 00 2A 62 05 FF 70 EF 62 07 FF 62 06 00 71 10 62
 R 00 00 00 02
 T 00 38 06 00 62 07 00 70 EF 62 05 00 62 08 00 71
 R 00 00 00 02
-T 00 46 10 62 08 00 62 09 FF 70 EF 62 0B FF 62 0A
+T 00 46 10 62 08 7F 62 09 80 70 EF 62 0B 80 62 0A
 R 00 00 00 02
 T 00 54 00 71 10 62 0A 00 62 0B 00 70 EF 62 09 00
 R 00 00 00 02

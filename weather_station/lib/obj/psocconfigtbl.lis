@@ -627,8 +627,8 @@
                 export LoadConfigTBL_weather_station_Ordered
                 AREA lit(rom, rel)
  0000           LoadConfigTBL_weather_station_Bank0:
- 0000           ;  Instance name I2Cm_1, User Module I2Cm
- 0000           ;  Instance name LCD_1, User Module LCD
+ 0000           ;  Instance name I2Cm, User Module I2Cm
+ 0000           ;  Instance name LCD, User Module LCD
  0000           ;  Instance name PGA_rain, User Module PGA
  0000           ;       Instance name PGA_rain, Block Name GAIN(ACB02)
  0000 790E              db              79h, 0eh                ;PGA_rain_GAIN_CR0(ACB02CR0)
@@ -665,6 +665,7 @@
  002A 815F              db              81h, 5fh                ;SAR6_wind_CR1(ASC10CR1)
  002C 8260              db              82h, 60h                ;SAR6_wind_CR2(ASC10CR2)
  002E 8300              db              83h, 00h                ;SAR6_wind_CR3(ASC10CR3)
+ 0030           ;  Instance name SleepTimer, User Module SleepTimer
  0030           ;  Global Register values Bank 0
  0030 6029              db              60h, 29h                ; AnalogColumnInputSelect register (AMX_IN)
  0032 6600              db              66h, 00h                ; AnalogComparatorControl1 register (CMP_CR1)
@@ -689,8 +690,8 @@
  0058 BE00              db              beh, 00h                ; Row_1_OutputDrive_1 register (RDI1SRO1)
  005A FF                db              ffh
  005B           LoadConfigTBL_weather_station_Bank1:
- 005B           ;  Instance name I2Cm_1, User Module I2Cm
- 005B           ;  Instance name LCD_1, User Module LCD
+ 005B           ;  Instance name I2Cm, User Module I2Cm
+ 005B           ;  Instance name LCD, User Module LCD
  005B           ;  Instance name PGA_rain, User Module PGA
  005B           ;       Instance name PGA_rain, Block Name GAIN(ACB02)
  005B           ;  Instance name PGA_sun, User Module PGA
@@ -703,10 +704,11 @@
  005B           ;       Instance name SAR6_sun, Block Name SA(ASD11)
  005B           ;  Instance name SAR6_wind, User Module SAR6
  005B           ;       Instance name SAR6_wind, Block Name SA(ASC10)
+ 005B           ;  Instance name SleepTimer, User Module SleepTimer
  005B           ;  Global Register values Bank 1
  005B 6100              db              61h, 00h                ; AnalogClockSelect1 register (CLK_CR1)
  005D 6900              db              69h, 00h                ; AnalogClockSelect2 register (CLK_CR2)
- 005F 6000              db              60h, 00h                ; AnalogColumnClockSelect register (CLK_CR0)
+ 005F 6015              db              60h, 15h                ; AnalogColumnClockSelect register (CLK_CR0)
  0061 6200              db              62h, 00h                ; AnalogIOControl_0 register (ABF_CR0)
  0063 6733              db              67h, 33h                ; AnalogLUTControl0 register (ALT_CR0)
  0065 6833              db              68h, 33h                ; AnalogLUTControl1 register (ALT_CR1)
@@ -729,9 +731,9 @@
  0002 620000            mov     reg[00h], 00h           ; Port_0_Data register (PRT0DR)
  0005 7110          or    F, FLAG_XIO_MASK
  0007 620003            mov     reg[00h], 03h           ; Port_0_DriveMode_0 register (PRT0DM0)
- 000A 6201FC            mov     reg[01h], fch           ; Port_0_DriveMode_1 register (PRT0DM1)
+ 000A 6201F8            mov     reg[01h], f8h           ; Port_0_DriveMode_1 register (PRT0DM1)
  000D 70EF          and   F, ~FLAG_XIO_MASK
- 000F 6203FC            mov     reg[03h], fch           ; Port_0_DriveMode_2 register (PRT0DM2)
+ 000F 620338            mov     reg[03h], 38h           ; Port_0_DriveMode_2 register (PRT0DM2)
  0012 620200            mov     reg[02h], 00h           ; Port_0_GlobalSelect register (PRT0GS)
  0015 7110          or    F, FLAG_XIO_MASK
  0017 620200            mov     reg[02h], 00h           ; Port_0_IntCtrl_0 register (PRT0IC0)
@@ -752,10 +754,10 @@
  003F 620500            mov     reg[05h], 00h           ; Port_1_IntEn register (PRT1IE)
  0042 620800            mov     reg[08h], 00h           ; Port_2_Data register (PRT2DR)
  0045 7110          or    F, FLAG_XIO_MASK
- 0047 620800            mov     reg[08h], 00h           ; Port_2_DriveMode_0 register (PRT2DM0)
- 004A 6209FF            mov     reg[09h], ffh           ; Port_2_DriveMode_1 register (PRT2DM1)
+ 0047 62087F            mov     reg[08h], 7fh           ; Port_2_DriveMode_0 register (PRT2DM0)
+ 004A 620980            mov     reg[09h], 80h           ; Port_2_DriveMode_1 register (PRT2DM1)
  004D 70EF          and   F, ~FLAG_XIO_MASK
- 004F 620BFF            mov     reg[0bh], ffh           ; Port_2_DriveMode_2 register (PRT2DM2)
+ 004F 620B80            mov     reg[0bh], 80h           ; Port_2_DriveMode_2 register (PRT2DM2)
  0052 620A00            mov     reg[0ah], 00h           ; Port_2_GlobalSelect register (PRT2GS)
  0055 7110          or    F, FLAG_XIO_MASK
  0057 620A00            mov     reg[0ah], 00h           ; Port_2_IntCtrl_0 register (PRT2IC0)

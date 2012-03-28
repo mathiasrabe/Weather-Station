@@ -96,8 +96,8 @@
  0000           ANALOG_IO_CONTROL:		equ 0h	;Analog IO Control register (ABF_CR)
  0000           PORT_0_GLOBAL_SELECT:	equ 0h	;Port 0 global select register (PRT0GS)
  0003           PORT_0_DRIVE_0:			equ 3h	;Port 0 drive mode 0 register (PRT0DM0)
- 00FC           PORT_0_DRIVE_1:			equ fch	;Port 0 drive mode 1 register (PRT0DM1)
- 00FC           PORT_0_DRIVE_2:			equ fch	;Port 0 drive mode 2 register (PRT0DM2)
+ 00F8           PORT_0_DRIVE_1:			equ f8h	;Port 0 drive mode 1 register (PRT0DM1)
+ 0038           PORT_0_DRIVE_2:			equ 38h	;Port 0 drive mode 2 register (PRT0DM2)
  0000           PORT_0_INTENABLE:		equ 0h	;Port 0 interrupt enable register (PRT0IE)
  0000           PORT_0_INTCTRL_0:		equ 0h	;Port 0 interrupt control 0 register (PRT0IC0)
  0000           PORT_0_INTCTRL_1:		equ 0h	;Port 0 interrupt control 1 register (PRT0IC1)
@@ -109,9 +109,9 @@
  0000           PORT_1_INTCTRL_0:		equ 0h	;Port 1 interrupt control 0 register (PRT1IC0)
  0000           PORT_1_INTCTRL_1:		equ 0h	;Port 1 interrupt control 1 register (PRT1IC1)
  0000           PORT_2_GLOBAL_SELECT:	equ 0h	;Port 2 global select register (PRT2GS)
- 0000           PORT_2_DRIVE_0:			equ 0h	;Port 2 drive mode 0 register (PRT2DM0)
- 00FF           PORT_2_DRIVE_1:			equ ffh	;Port 2 drive mode 1 register (PRT2DM1)
- 00FF           PORT_2_DRIVE_2:			equ ffh	;Port 2 drive mode 2 register (PRT2DM2)
+ 007F           PORT_2_DRIVE_0:			equ 7fh	;Port 2 drive mode 0 register (PRT2DM0)
+ 0080           PORT_2_DRIVE_1:			equ 80h	;Port 2 drive mode 1 register (PRT2DM1)
+ 0080           PORT_2_DRIVE_2:			equ 80h	;Port 2 drive mode 2 register (PRT2DM2)
  0000           PORT_2_INTENABLE:		equ 0h	;Port 2 interrupt enable register (PRT2IE)
  0000           PORT_2_INTCTRL_0:		equ 0h	;Port 2 interrupt control 0 register (PRT2IC0)
  0000           PORT_2_INTCTRL_1:		equ 0h	;Port 2 interrupt control 1 register (PRT2IC1)
@@ -1298,20 +1298,20 @@
  0060 7E            reti
  0061           
                     org   64h                      ;Sleep Timer Interrupt Vector
-                    // call     void_handler
- 0064 7E            reti
- 0065               ;---------------------------------------------------
- 0065               ; Insert your custom code above this banner
- 0065               ;---------------------------------------------------
- 0065               ;@PSoC_BOOT_ISR_UserCode_END@
- 0065           
- 0065           ;-----------------------------------------------------------------------------
- 0065           ;  Start of Execution.
- 0065           ;-----------------------------------------------------------------------------
- 0065           ;  The Supervisory ROM SWBootReset function has already completed the
- 0065           ;  calibrate1 process, loading trim values for 5 volt operation.
- 0065           ;
- 0065           
+ 0064 7D0000        ljmp        _SleepTimer_ISR
+ 0067 7E            reti
+ 0068               ;---------------------------------------------------
+ 0068               ; Insert your custom code above this banner
+ 0068               ;---------------------------------------------------
+ 0068               ;@PSoC_BOOT_ISR_UserCode_END@
+ 0068           
+ 0068           ;-----------------------------------------------------------------------------
+ 0068           ;  Start of Execution.
+ 0068           ;-----------------------------------------------------------------------------
+ 0068           ;  The Supervisory ROM SWBootReset function has already completed the
+ 0068           ;  calibrate1 process, loading trim values for 5 volt operation.
+ 0068           ;
+ 0068           
                 IF      (TOOLCHAIN & HITECH)
                         AREA PD_startup(CODE, REL, CON)
                 ELSE

@@ -182,7 +182,7 @@ ENDIF
     reti
 
     org   64h                      ;Sleep Timer Interrupt Vector
-    // call	void_handler
+    ljmp	_SleepTimer_ISR
     reti
     ;---------------------------------------------------
     ; Insert your custom code above this banner
