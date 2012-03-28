@@ -1,0 +1,36 @@
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000                   .dbfile C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 23
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; // Ports:
+ 0000           ; // P0_0 = MCLK
+ 0000           ; // P0_1 = XCLR adc reset
+ 0000           ; // P0_2 = Button SW
+ 0000           ; // P0_3 = windspeed input
+ 0000           ; // P0_4 = rainsensor input
+ 0000           ; // P0_5 = sunlight (solar) input
+ 0000           ; // P0_6 = I2C
+ 0000           ; // P0_7 = I2C
+ 0000           ; // P1_0 = Gray Code
+ 0000           ; // P1_1 = Gray Code
+ 0000           ; // P1_1 = Gray Code
+ 0000           ; // P2 = LCD
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline -2
+ 0000           L1:
+ 0000                   .dbline 0 ; func end
+ 0000 8FFF              jmp .
+ 0002                   .dbend

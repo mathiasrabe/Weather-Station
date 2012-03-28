@@ -1,0 +1,623 @@
+XH
+H 3 areas 3B global symbols
+M i2cm_1.asm
+S NO_SHADOW Ref0000
+A text size 0 flags 0
+dbfile lib/i2cm_1.asm
+dbfunc 0 ? 0 I
+dbfile ./lib/I2Cm_1.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2cm_1.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2cm_1.asm
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
+dbfunc 0 ? 0 I
+A weather_station_RAM size 4 flags 20
+S I2Cm_1_bStatus Def0000
+S _I2Cm_1_bData Def0001
+S _I2Cm_1_bAddr Def0002
+S _I2Cm_1_bStatus Def0000
+S I2Cm_1_bData Def0001
+S I2Cm_1_bAddr Def0002
+A UserModules size 343 flags 0
+dbfile lib/i2cm_1.asm
+dbfunc 0 ? 0 I
+dbline 7D 0
+dbline 7E 3
+dbline 2 6
+dbline 81 8
+dbline 82 A
+dbline 83 C
+dbline 84 E
+dbline 2 10
+dbline 88 12
+dbline 89 15
+dbline 8A 17
+dbline 8C 19
+dbline A8 1A
+dbline D6 1B
+dbline D8 1C
+dbline D9 1E
+dbline DB 1F
+dbline DC 21
+dbline DD 24
+dbline DE 27
+dbline DF 29
+dbline E0 2B
+dbline E2 2D
+dbline E5 2F
+dbline E6 32
+dbline E8 34
+dbline EA 37
+dbline EB 38
+dbline EC 3A
+dbline ED 3C
+dbline EF 3F
+dbline F1 41
+dbline F2 42
+dbline F3 43
+dbline F4 45
+dbline F9 46
+dbline FA 47
+dbline FB 49
+dbline FC 4B
+dbline FE 4C
+dbline FF 4E
+dbline 100 51
+dbline 102 53
+dbline 103 56
+dbline 104 58
+dbline 107 5A
+dbline 108 5C
+dbline 109 5F
+dbline 10A 61
+dbline 10E 63
+dbline 134 64
+dbline 136 65
+dbline 137 67
+dbline 138 6A
+dbline 139 6D
+dbline 13A 6F
+dbline 13B 71
+dbline 13D 73
+dbline 13F 75
+dbline 140 78
+dbline 142 7A
+dbline 144 7D
+dbline 145 7E
+dbline 146 80
+dbline 147 82
+dbline 149 85
+dbline 14A 87
+dbline 14B 88
+dbline 14C 89
+dbline 14D 8B
+dbline 14E 8D
+dbline 14F 8F
+dbline 150 90
+dbline 151 92
+dbline 152 95
+dbline 154 97
+dbline 155 9A
+dbline 156 9C
+dbline 158 9E
+dbline 159 A0
+dbline 15A A3
+dbline 15B A5
+dbline 15D A7
+dbline 18E A8
+dbline 190 A9
+dbline 191 AB
+dbline 194 AC
+dbline 197 AF
+dbline 198 B2
+dbline 199 B4
+dbline 19A B6
+dbline 19C B8
+dbline 19F BA
+dbline 1A0 BD
+dbline 1A1 C0
+dbline 1A4 C2
+dbline 1A5 C3
+dbline 1A6 C5
+dbline 1AB C6
+dbline 1AC C7
+dbline 1AD C9
+dbline 1AE CB
+dbline 1B1 CD
+dbline 1B2 CE
+dbline 1B3 D1
+dbline 1B4 D3
+dbline 1B5 D5
+dbline 1B6 D7
+dbline 1B7 D9
+dbline 1B9 DB
+dbline 1BA DE
+dbline 1BC E0
+dbline 1BF E2
+dbline 1C3 E4
+dbline 1EC E5
+dbline 1EF E6
+dbline 1F2 E9
+dbline 1F3 EC
+dbline 1F4 EE
+dbline 1F5 F0
+dbline 1F7 F2
+dbline 1F9 F4
+dbline 1FA F7
+dbline 1FB FA
+dbline 1FD FC
+dbline 1FE FD
+dbline 1FF FF
+dbline 200 101
+dbline 201 103
+dbline 202 105
+dbline 203 106
+dbline 204 109
+dbline 205 10B
+dbline 206 10D
+dbline 207 10F
+dbline 208 111
+dbline 20A 113
+dbline 20B 116
+dbline 20D 118
+dbline 20F 11A
+dbline 211 11C
+dbline 23F 11D
+dbline 241 11E
+dbline 242 120
+dbline 245 121
+dbline 248 124
+dbline 249 127
+dbline 24A 129
+dbline 24B 12B
+dbline 24D 12D
+dbline 251 12F
+dbline 252 132
+dbline 253 135
+dbline 255 137
+dbline 257 138
+dbline 258 13A
+dbline 259 13C
+dbline 25A 13D
+dbline 25B 13F
+dbline 25D 141
+dbline 25E 142
+dbline 25F 145
+dbline 260 147
+dbline 261 149
+dbline 262 14B
+dbline 263 14D
+dbline 266 14F
+dbline 267 151
+dbline 269 153
+dbline 26A 156
+dbline 26C 158
+dbline 26F 15A
+dbline 273 15C
+dbline 29B 15D
+dbline 29E 15E
+dbline 2A1 161
+dbline 2A2 164
+dbline 2A3 166
+dbline 2A4 168
+dbline 2A6 16A
+dbline 2A9 16C
+dbline 2AA 16F
+dbline 2AB 172
+dbline 2AD 174
+dbline 2AF 175
+dbline 2B0 177
+dbline 2B1 179
+dbline 2B2 17A
+dbline 2B3 17C
+dbline 2B4 17E
+dbline 2B5 17F
+dbline 2B6 182
+dbline 2B7 184
+dbline 2B8 186
+dbline 2B9 188
+dbline 2BA 18A
+dbline 2BD 18C
+dbline 2BE 18E
+dbline 2C0 190
+dbline 2C1 193
+dbline 2C3 195
+dbline 2C5 197
+dbline 2C7 199
+dbline 2EB 19A
+dbline 2EC 19B
+dbline 2ED 19C
+dbline 2EE 19E
+dbline 2F0 1A0
+dbline 2F2 1A1
+dbline 2F3 1A3
+dbline 2F5 1A5
+dbline 2FA 1A6
+dbline 2 1A7
+dbline 2FC 1A9
+dbline 2FD 1AC
+dbline 2FE 1AF
+dbline 2FF 1B1
+dbline 302 1B3
+dbline 303 1B5
+dbline 305 1B7
+dbline 306 1BA
+dbline 307 1BC
+dbline 2 1BE
+dbline 30C 1C0
+dbline 30D 1C3
+dbline 30F 1C5
+dbline 310 1C7
+dbline 311 1C9
+dbline 312 1CA
+dbline 314 1CC
+dbline 338 1CD
+dbline 339 1CE
+dbline 33A 1CF
+dbline 33B 1D1
+dbline 33D 1D3
+dbline 33F 1D4
+dbline 340 1D6
+dbline 342 1D8
+dbline 2 1D9
+dbline 348 1DB
+dbline 349 1DC
+dbline 34A 1DF
+dbline 34B 1E1
+dbline 34D 1E3
+dbline 34E 1E5
+dbline 34F 1E7
+dbline 2 1E8
+dbline 352 1EA
+dbline 2 1EC
+dbline 356 1EE
+dbline 357 1F1
+dbline 358 1F3
+dbline 2 1F5
+dbline 35B 1F7
+dbline 35C 1F9
+dbline 35D 1FB
+dbline 35F 1FD
+dbline 392 1FE
+dbline 393 200
+dbline 395 202
+dbline 39C 203
+dbline 39E 206
+dbline 2 208
+dbline 3A3 20A
+dbline 3A4 20D
+dbline 3A5 20F
+dbline 2 211
+dbline 3A9 213
+dbline 2 215
+dbline 3AC 217
+dbline 3AD 219
+dbline 3AE 21C
+dbline 3AF 21E
+dbline 3B1 220
+dbline 3B3 222
+dbline 3B4 225
+dbline 3B5 227
+dbline 3B8 229
+dbline 3B9 22B
+dbline 3BB 22D
+dbline 3BC 230
+dbline 3BD 232
+dbline 2 234
+dbline 3C2 236
+dbline 3C3 239
+dbline 3C5 23B
+dbline 3C6 23D
+dbline 3C9 23F
+dbline 3CA 242
+dbline 3CB 244
+dbline 3CE 246
+dbline 2 247
+dbline 3EF 249
+dbline 3F0 24C
+dbline 3F1 24E
+dbline 3F3 250
+dbline 3F4 253
+dbline 3F5 255
+dbline 3F7 257
+dbline 3F8 259
+dbline 3FA 25B
+dbline 3FB 25E
+dbline 3FC 260
+dbline 2 262
+dbline 401 264
+dbline 402 267
+dbline 406 269
+dbline 407 26C
+dbline 408 26F
+dbline 409 271
+dbline 40C 274
+dbline 40D 276
+dbline 40F 278
+dbline 410 27A
+dbline 412 27C
+dbline 436 27D
+dbline 437 280
+dbline 438 282
+dbline 439 284
+dbline 43A 287
+dbline 43C 289
+dbline 442 28A
+dbline 444 28D
+dbline 445 28F
+dbline 2 291
+dbline 449 293
+dbline 44A 296
+dbline 44B 298
+dbline 44D 29A
+dbline 44E 29C
+dbline 450 29E
+dbline 451 2A1
+dbline 452 2A3
+dbline 2 2A5
+dbline 459 2A7
+dbline 45A 2AA
+dbline 45C 2AC
+dbline 45D 2AE
+dbline 45F 2B0
+dbline 460 2B3
+dbline 461 2B6
+dbline 462 2B8
+dbline 464 2BB
+dbline 465 2BE
+dbline 467 2C0
+dbline 469 2C2
+dbline 2 2C3
+dbline 48D 2C5
+dbline 48E 2C8
+dbline 48F 2CA
+dbline 2 2CC
+dbline 494 2CE
+dbline 2 2D1
+dbline 499 2D3
+dbline 49B 2D5
+dbline 49C 2D8
+dbline 49D 2DA
+dbline 49F 2DC
+dbline 4A1 2DE
+dbline 4A2 2E1
+dbline 4A3 2E3
+dbline 4A6 2E5
+dbline 4A7 2E7
+dbline 4A9 2E9
+dbline 4AA 2EC
+dbline 4AB 2EE
+dbline 2 2F0
+dbline 4B0 2F2
+dbline 4B1 2F5
+dbline 4B3 2F7
+dbline 4B4 2F9
+dbline 2 2FB
+dbline 4B7 2FD
+dbline 4B8 300
+dbline 4B9 302
+dbline 4BC 304
+dbline 4BD 307
+dbline 4BE 309
+dbline 2 30B
+dbline 4C2 30D
+dbline 4C4 30F
+dbline 2 310
+dbline 4E6 312
+dbline 4E7 315
+dbline 4E8 317
+dbline 4EA 319
+dbline 4EB 31B
+dbline 4ED 31D
+dbline 4EE 320
+dbline 4EF 322
+dbline 2 324
+dbline 4F4 326
+dbline 4F5 329
+dbline 2 32B
+dbline 4F8 32D
+dbline 4F9 32F
+dbline 4FC 331
+dbline 4FD 334
+dbline 4FE 336
+dbline 500 338
+dbline 501 33A
+dbline 2 33C
+dbline 505 33E
+dbline 51E 33F
+dbline 51F 340
+dbline 520 342
+S I2Cm_1_fReadBytes Def0064
+S $sb$I2Cm_1_get_ack Def0247
+S $se$I2Cm_1_get_ack Def027D
+S $sb$_I2Cm_1_bWriteBytes Def00A8
+S $se$_I2Cm_1_bWriteBytes Def00E5
+S $sb$I2Cm_1_bRead Def027D
+S $se$I2Cm_1_bRead Def02C3
+S I2Cm_1_fSendStart Def01CD
+S $sb$I2Cm_1_put_ack Def02C3
+S _I2Cm_1_Stop Def001A
+S $sb$I2Cm_1_fReadBytes Def0064
+S $se$I2Cm_1_put_ack Def0310
+S $se$I2Cm_1_fReadBytes Def00A8
+S I2Cm_1_Start Def0000
+S _I2Cm_1_bWriteCBytes Def011D
+S $sb$I2Cm_1_fSendStart Def01CD
+S $se$I2Cm_1_fSendStart Def01FE
+S $sb$I2Cm_1_Start Def0000
+S $sb$I2Cm_1_delay Def033F
+S $se$I2Cm_1_Start Def001A
+S $se$I2Cm_1_delay Def0343
+S I2Cm_1_SendStop Def0310
+S $sb$_I2Cm_1_bWriteCBytes Def011D
+S $se$_I2Cm_1_bWriteCBytes Def015D
+S _I2Cm_1_bRead Def027D
+S _I2Cm_1_fReadBytes Def001B
+S $sb$I2Cm_1_SendStop Def0310
+S $se$I2Cm_1_SendStop Def033F
+S _I2Cm_1_fSendStart Def01CD
+S I2Cm_1_fSendRepeatStart Def019A
+S $sb$_I2Cm_1_fReadBytes Def001B
+S $se$_I2Cm_1_fReadBytes Def0064
+S _I2Cm_1_Start Def0000
+S I2Cm_1_fWrite Def01FE
+S I2Cm_1_bWriteBytes Def00E5
+S $sb$I2Cm_1_fSendRepeatStart Def019A
+S $se$I2Cm_1_fSendRepeatStart Def01CD
+S $sb$I2Cm_1_fWrite Def01FE
+S _I2Cm_1_SendStop Def0310
+S $se$I2Cm_1_fWrite Def0247
+S $sb$I2Cm_1_bWriteBytes Def00E5
+S $se$I2Cm_1_bWriteBytes Def011D
+S I2Cm_1_Stop Def001A
+S I2Cm_1_bWriteCBytes Def015D
+S _I2Cm_1_fSendRepeatStart Def019A
+S $sb$I2Cm_1_Stop Def001A
+S $se$I2Cm_1_Stop Def001B
+S _I2Cm_1_fWrite Def01FE
+S _I2Cm_1_bWriteBytes Def00A8
+S $sb$I2Cm_1_bWriteCBytes Def015D
+S $se$I2Cm_1_bWriteCBytes Def019A
+S I2Cm_1_bRead Def027D
+T 00 00 2E 00 00 01 26 00 00 FE 71 10 51 00 00 60
+R 00 00 00 02 03 03 00 00 03 07 00 00 03 0D 00 00
+T 00 0B 01 51 00 00 60 00 70 EF 26 00 00 FE 51
+R 00 00 00 02 03 04 00 00 03 0B 00 00
+T 00 16 00 00 60 00 7F 7F 4F 52 FD 64 29 01 55
+R 00 00 00 02 03 02 00 00
+T 00 22 00 00 00 48 F9 01 B0 05 91 AE 80 03 91 77
+R 00 00 00 02 01 02 00 01
+T 00 2F 47 00 00 01 A0 20 2E 00 00 10 10 7B FA B0
+R 00 00 00 02 01 03 00 01 01 09 00 01
+T 00 3B 04 26 00 00 EF 92 49 20 10 52 FC 08 20 51
+R 00 00 00 02 01 04 00 01
+T 00 48 00 01 54 00 20 77 FC 48 FA FF BF E5 48 F9
+R 00 00 00 02 01 02 00 01
+T 00 55 02 B0 03 92 B6 50 00 47 00 00 01 A0 03 50
+R 00 00 00 02 01 0A 00 01
+T 00 62 01 7F 64 29 01 55 00 00 00 48 FD 01 B0 05
+R 00 00 00 02 01 08 00 01
+T 00 6F 91 68 80 03 91 31 47 00 00 01 A0 1E 2E
+R 00 00 00 02 01 09 00 01
+T 00 7B 00 00 10 10 7B FE B0 04 26 00 00 EF 92 03
+R 00 00 00 02 01 02 00 01 01 0B 00 01
+T 00 87 20 10 59 00 51 00 01 54 00 20 77 00 48 FE
+R 00 00 00 02 01 07 00 01
+T 00 94 FF BF E7 48 FD 02 B0 03 92 72 50 00 47
+R 00 00 00 02
+T 00 A1 00 00 01 A0 03 50 01 7F 4F 52 FD 64 55
+R 00 00 00 02 01 02 00 01
+T 00 AD 00 00 00 48 F9 01 B0 05 91 23 80 03 90 EC
+R 00 00 00 02 01 02 00 01
+T 00 BA 55 00 02 00 47 00 00 01 A0 1A 10 52 FC 08
+R 00 00 00 02 01 03 00 01 01 07 00 01
+T 00 C6 20 52 00 53 00 01 91 36 20 47 00 00 01 A0
+R 00 00 00 02 01 06 00 01 01 0C 00 01
+T 00 D2 0E 76 00 02 77 FC 7B FA BF E8 48 F9 02 B0
+R 00 00 00 02 01 04 00 01
+T 00 DF 03 92 2E 51 00 02 7F 64 55 00 00 00 48 FD
+R 00 00 00 02 01 06 00 01 01 0B 00 01
+T 00 EB 01 B0 05 90 E9 80 03 90 B2 55 00 02 00 47
+R 00 00 00 02 01 0C 00 01
+T 00 F8 00 00 01 A0 18 10 59 00 52 00 53 00 01 90
+R 00 00 00 02 01 02 00 01 01 0D 00 01
+T 01 04 FE 20 47 00 00 01 A0 0E 76 00 02 77 00 7B
+R 00 00 00 02 01 05 00 01 01 0B 00 01
+T 01 10 FE BF EA 48 FD 02 B0 03 91 F6 51 00 02 7F
+R 00 00 00 02 01 0D 00 01
+T 01 1D 4F 52 FD 64 55 00 00 00 48 F9 01 B0 05 90
+R 00 00 00 02 01 07 00 01
+T 01 2A AE 80 03 90 77 55 00 02 00 47 00 00 01 A0
+R 00 00 00 02 01 08 00 01 01 0C 00 01
+T 01 36 1D 10 52 FB 59 FC 28 53 00 01 90 C2 20 47
+R 00 00 00 02 01 0A 00 01
+T 01 43 00 00 01 A0 12 76 00 02 77 FC D0 03 77 FB
+R 00 00 00 02 01 02 00 01 01 08 00 01
+T 01 4F 7B FA BF E5 48 F9 02 B0 03 91 B6 51 00 02
+R 00 00 00 02 01 0E 00 01
+T 01 5C 7F 64 55 00 00 00 48 FD 01 B0 05 90 71 80
+R 00 00 00 02 01 05 00 01
+T 01 69 03 90 3A 55 00 02 00 47 00 00 01 A0 1D 10
+R 00 00 00 02 01 06 00 01 01 0A 00 01
+T 01 75 52 FF 59 00 28 53 00 01 90 85 20 47 00 00
+R 00 00 00 02 01 08 00 01 01 0E 00 01
+T 01 81 01 A0 12 76 00 02 77 00 D0 03 77 FF 7B FE
+R 00 00 00 02 01 06 00 01
+T 01 8E BF E5 48 FD 02 B0 03 91 79 51 00 02 7F 64
+R 00 00 00 02 01 0C 00 01
+T 01 9B 79 D0 04 90 06 7F 29 01 90 01 7F 08 71 10
+R 00 00 00 02
+T 01 A9 2E 00 00 01 26 00 00 FE 51 00 00 60 00 50
+R 00 00 00 02 03 03 00 00 03 07 00 00 03 0B 00 00
+T 01 B4 0C 91 88 26 00 00 FE 51 00 00 60 00 70 EF
+R 00 00 00 02 03 06 00 00 03 0A 00 00
+T 01 C0 49 00 01 AF FC 50 0C 91 76 18 90 0D 7F 64
+R 00 00 00 02
+T 01 CE 79 D0 04 90 06 7F 29 01 90 01 7F 71 10 08
+R 00 00 00 02
+T 01 DC 2E 00 00 01 51 00 00 60 00 50 05 91 58 18
+R 00 00 00 02 03 03 00 00 03 07 00 00
+T 01 E8 70 EF 53 00 01 71 10 2E 00 00 01 51 00 00
+R 00 00 00 02 01 05 00 01 03 0A 00 00 03 0E 00 00
+T 01 F3 60 00 70 EF 50 02 91 44 90 06 7F 53 00 01
+R 00 00 00 02 01 0E 00 01
+T 02 00 90 01 7F 55 00 03 08 7A 00 03 71 10 2E
+R 00 00 00 02 01 06 00 01 01 0A 00 01
+T 02 0B 00 00 01 51 00 00 60 00 70 EF 6B 00 01 71
+R 00 00 00 02 03 02 00 00 03 06 00 00 01 0D 00 01
+T 02 16 10 C0 0A 2E 00 00 01 51 00 00 60 00 80 08
+R 00 00 00 02 03 06 00 00 03 0A 00 00
+T 02 22 26 00 00 FE 51 00 00 60 00 50 05 91 12 26
+R 00 00 00 02 03 03 00 00 03 07 00 00
+T 02 2E 00 00 FE 51 00 00 60 00 70 EF 49 00 01 AF
+R 00 00 00 02 03 02 00 00 03 06 00 00
+T 02 3A FC 50 05 91 00 3C 00 03 00 BF C3 90 01 7F
+R 00 00 00 02 01 08 00 01
+T 02 47 71 10 2E 00 00 01 51 00 00 60 00 26 00 00
+R 00 00 00 02 03 05 00 00 03 09 00 00 03 0E 00 00
+T 02 52 FE 51 00 00 60 00 50 0C 90 E4 26 00 00 FE
+R 00 00 00 02 03 04 00 00 03 0D 00 00
+T 02 5E 51 00 00 60 00 70 EF 49 00 01 AF FC 26
+R 00 00 00 02 03 03 00 00
+T 02 6A 00 00 FE 49 00 01 B0 04 2E 00 00 01 50 05
+R 00 00 00 02 01 02 00 01 01 0B 00 01
+T 02 76 90 C7 51 00 00 21 01 7F 55 00 00 00 21 FF
+R 00 00 00 02 01 05 00 01 01 0B 00 01
+T 02 82 A0 07 2E 00 00 10 90 01 7F 55 00 03 08 7A
+R 00 00 00 02 01 05 00 01 01 0C 00 01
+T 02 8E 00 03 6B 00 01 71 10 2E 00 00 01 51
+R 00 00 00 02 01 02 00 01 01 05 00 01 03 0A 00 00
+T 02 97 00 00 60 00 50 05 90 A1 26 00 00 FE 51
+R 00 00 00 02 03 02 00 00 03 0B 00 00
+T 02 A2 00 00 60 00 70 EF 49 00 01 AF FC 50 02 90
+R 00 00 00 02 03 02 00 00
+T 02 AF 8F 26 00 01 FE 49 00 01 A0 04 2E 00 01 01
+R 00 00 00 02 01 04 00 01 01 0D 00 01
+T 02 BB 3C 00 03 00 BF CE 90 01 7F 71 10 2E 00 00
+R 00 00 00 02 01 03 00 01 03 0E 00 00
+T 02 C7 01 51 00 00 60 00 70 EF 47 00 00 10 71 10
+R 00 00 00 02 03 04 00 00 01 0B 00 01
+T 02 D3 A0 0A 2E 00 00 01 51 00 00 60 00 80 08 26
+R 00 00 00 02 03 05 00 00 03 09 00 00
+T 02 DF 00 00 FE 51 00 00 60 00 50 02 90 56 26
+R 00 00 00 02 03 02 00 00 03 06 00 00
+T 02 EA 00 00 FE 51 00 00 60 00 70 EF 49 00 01 AF
+R 00 00 00 02 03 02 00 00 03 06 00 00
+T 02 F6 FC 50 05 90 44 71 10 2E 00 00 01 51 00 00
+R 00 00 00 02 03 0A 00 00 03 0E 00 00
+T 03 02 60 00 26 00 00 FE 51 00 00 60 00 70 EF 51
+R 00 00 00 02 03 05 00 00 03 09 00 00
+T 03 0E 00 01 7F 71 10 2E 00 00 01 51 00 00 60 00
+R 00 00 00 02 01 02 00 01 03 08 00 00 03 0C 00 00
+T 03 19 50 0C 90 22 26 00 00 FE 51 00 00 60 00 70
+R 00 00 00 02 03 07 00 00 03 0B 00 00
+T 03 25 EF 49 00 01 AF FC 71 10 50 0C 90 0E 26
+R 00 00 00 02
+T 03 32 00 00 FE 51 00 00 60 00 50 05 90 03 70 EF
+R 00 00 00 02 03 02 00 00 03 06 00 00
+T 03 3E 7F 78 BF FE 7F
+R 00 00 00 02

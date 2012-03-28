@@ -1,0 +1,21 @@
+Starting MAKE...
+creating project.mk 
+lib/i2cm_1.asm
+lib/lcd_1.asm
+lib/pga_rain.asm
+lib/pga_sun.asm
+lib/pga_wind.asm
+lib/psocconfig.asm
+lib/psocconfigtbl.asm
+lib/sar6_rain.asm
+lib/sar6_sun.asm
+lib/sar6_wind.asm
+./boot.asm
+./main.c
+Linking..
+  ROM 3% full. 419 out of 16384 bytes used (does not include absolute areas).
+  RAM 1% full. 1 bytes used (does not include stack usage).
+Built with ICCM8C STD V7.05.00
+ 
+weather_station - 0 error(s) 0 warning(s) 10:20:13
+
