@@ -1,0 +1,37 @@
+                        .module sunsensor.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./sunsensor.c
+ 0000                   .dbfile C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\sunsensor.c
+ 0000                   .dbfunc e sunsensor _sunsensor fV
+ 0000           ;      firstLine -> X-5
+ 0000           _sunsensor::
+ 0000                   .dbline -1
+ 0000 10                push X
+ 0001 4F                mov X,SP
+ 0002                   .dbline 3
+ 0002           ; #include <stdio.h>
+ 0002           ; 
+ 0002           ; void sunsensor(char *firstLine) {
+ 0002                   .dbline 4
+ 0002           ;       csprintf(firstLine, "Sun and rain    ");
+ 0002 5000              mov A,>L2
+ 0004 08                push A
+ 0005 5000              mov A,<L2
+ 0007 08                push A
+ 0008 52FB              mov A,[X-5]
+ 000A 08                push A
+ 000B 52FC              mov A,[X-4]
+ 000D 08                push A
+ 000E 7C0000            xcall _csprintf
+ 0011 38FC              add SP,-4
+ 0013                   .dbline -2
+ 0013           L1:
+ 0013 20                pop X
+ 0014                   .dbline 0 ; func end
+ 0014 7F                ret
+ 0015                   .dbsym l firstLine -5 pc
+ 0015                   .dbend
+                        .area lit(rom, con, rel, lit)
+ 0000           L2:
+ 0000 53756E20616E64207261696E20202020  .byte 'S,'u,'n,32,'a,'n,'d,32,'r,'a,'i,'n,32,32,32,32
+ 0010 00                .byte 0

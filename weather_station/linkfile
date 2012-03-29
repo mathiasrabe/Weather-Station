@@ -1,5 +1,5 @@
 -F0x30 -g -blit:0x150.0x3fff 
  -bdata:0.0xFF -rwh:SSCParmBlk:0x00F7.0x00FF   
  -o"output/weather_station" 
- ./obj/main.o  
+ ./obj/main.o ./obj/sunsensor.o  
  C:/Users/MATHIA~1/DOCUME~1/PSOCDE~1.2PR/WEATHE~1/WEATHE~1/lib/libPSoc.a -LC:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/lib/SMM C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/lib/CY8C27000B/cms.a C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/lib/SMM/UASW/MAC/arith.a  

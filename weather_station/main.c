@@ -20,6 +20,8 @@
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
 #include <stdio.h>
 
+#include "sunsensor.h"
+
 typedef enum {
 	overview = 0,
 	temp = 1,
@@ -70,7 +72,7 @@ void main(void)
 				break;
 				
 			case rain:
-				// rain();
+				sunsensor(lcdFirstLine);
 				break;
 				
 			case wind:
