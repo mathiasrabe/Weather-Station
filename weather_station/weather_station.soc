@@ -14,66 +14,6 @@
 				<SOURCE_FILE NAME="psocapi.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" FILEMODTIME="107277688" LIBTIME="3"/>
 				<SOURCE_FILE NAME="psocgpioint.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" FILEMODTIME="1631416" LIBTIME="59247958"/>
 				<SOURCE_FILE NAME="memory.inc" TYPE="UserIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE"/>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				<SOURCE_FILE NAME="i2cm.h" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" FILEMODTIME="9501467" LIBTIME="1996743564"/>
 				<SOURCE_FILE NAME="i2cm.inc" TYPE="LibraryIncludeFile" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" FILEMODTIME="9501467" LIBTIME="1996743564"/>
 				<SOURCE_FILE NAME="i2cm.asm" TYPE="LibrarySource" LANGUAGE="ASM" OVERLAY_NAME="" USER_FILE="FALSE" FILEMODTIME="9501467" LIBTIME="1996743564"/>
