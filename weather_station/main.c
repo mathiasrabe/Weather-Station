@@ -14,7 +14,7 @@
 // P2 = LCD
 //----------------------------------------------------------------------------
 
-#define LCD_LENGTH 15 // 14 plus \0 termination?
+#define LCD_LENGTH 16 // 16 plus \0 termination?
 
 #include <m8c.h>        // part specific constants and macros
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
@@ -46,11 +46,11 @@ void main(void)
 	LCD_Init();
 	
 	// print welcome screen to LCD
-	csprintf(lcdFirstLine,"  Welcome to  ");
-	csprintf(lcdSecondLine, "Weatherstation");
+	csprintf(lcdFirstLine,"   Welcome to   ");
+	csprintf(lcdSecondLine, " Weatherstation ");
 	LCD_Position(0,0);
 	LCD_PrString(lcdFirstLine);
-	LCD_Position(0,0);
+	LCD_Position(1,0);
 	LCD_PrString(lcdSecondLine);
 	
 	while(1) {
@@ -79,14 +79,14 @@ void main(void)
 		
 			default:
 				displaymode = 0;
-				csprintf(lcdFirstLine,"    Error     ");
-				csprintf(lcdSecondLine,"              ");
+				csprintf(lcdFirstLine,"     Error      ");
+				csprintf(lcdSecondLine,"                ");
 		}
 		
 		// lets see what we've got
 		LCD_Position(0,0);
 		LCD_PrString(lcdFirstLine);
-		LCD_Position(0,0);
+		LCD_Position(1,0);
 		LCD_PrString(lcdSecondLine);
 		
 		// lets sleep for a while

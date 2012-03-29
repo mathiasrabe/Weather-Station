@@ -3,14 +3,14 @@
  0000                   .dbfile ./main.c
  0000                   .dbfile C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\main.c
  0000                   .dbfunc e main _main fV
- 0000           ;    displaymode -> X+30
- 0000           ;  lcdSecondLine -> X+15
+ 0000           ;    displaymode -> X+32
+ 0000           ;  lcdSecondLine -> X+16
  0000           ;   lcdFirstLine -> X+0
  0000           _main::
  0000                   .dbline -1
  0000 10                push X
  0001 4F                mov X,SP
- 0002 3821              add SP,33
+ 0002 3823              add SP,35
  0004                   .dbline 32
  0004           ; //----------------------------------------------------------------------------
  0004           ; // Ports:
@@ -28,7 +28,7 @@
  0004           ; // P2 = LCD
  0004           ; //----------------------------------------------------------------------------
  0004           ; 
- 0004           ; #define LCD_LENGTH 15 // 14 plus \0 termination?
+ 0004           ; #define LCD_LENGTH 16 // 16 plus \0 termination?
  0004           ; 
  0004           ; #include <m8c.h>        // part specific constants and macros
  0004           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
@@ -48,7 +48,7 @@
  0004           ;       //Variables
  0004           ;       char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
  0004           ;       char displaymode = 0;
- 0004 561E00            mov [X+30],0
+ 0004 562000            mov [X+32],0
  0007                   .dbline 40
  0007           ;       
  0007           ;       /** init **/
@@ -77,23 +77,23 @@
  0019                   .dbline 49
  0019           ;       
  0019           ;       // print welcome screen to LCD
- 0019           ;       csprintf(lcdFirstLine,"  Welcome to  ");
- 0019 502D              mov A,>L3
+ 0019           ;       csprintf(lcdFirstLine,"   Welcome to   ");
+ 0019 5033              mov A,>L3
  001B 08                push A
- 001C 502D              mov A,<L3
+ 001C 5033              mov A,<L3
  001E 08                push A
  001F 5100              mov A,[__r0]
  0021 08                push A
  0022 10                push X
  0023 7C0000            xcall _csprintf
  0026                   .dbline 50
- 0026           ;       csprintf(lcdSecondLine, "Weatherstation");
- 0026 501E              mov A,>L4
+ 0026           ;       csprintf(lcdSecondLine, " Weatherstation ");
+ 0026 5022              mov A,>L4
  0028 08                push A
- 0029 501E              mov A,<L4
+ 0029 5022              mov A,<L4
  002B 08                push A
  002C 5A00              mov [__r1],X
- 002E 06000F            add [__r1],15
+ 002E 060010            add [__r1],16
  0031 5100              mov A,[__r0]
  0033 08                push A
  0034 5100              mov A,[__r1]
@@ -113,15 +113,15 @@
  0046 5100              mov A,[__r0]
  0048 7C0000            xcall _LCD_PrString
  004B                   .dbline 53
- 004B           ;       LCD_Position(0,0);
- 004B 5000              mov A,0
- 004D 5700              mov X,0
+ 004B           ;       LCD_Position(1,0);
+ 004B 5700              mov X,0
+ 004D 5001              mov A,1
  004F 7C0000            xcall _LCD_Position
  0052 20                pop X
  0053                   .dbline 54
  0053           ;       LCD_PrString(lcdSecondLine);
  0053 5A00              mov [__r1],X
- 0055 06000F            add [__r1],15
+ 0055 060010            add [__r1],16
  0058 10                push X
  0059 5100              mov A,[__r0]
  005B 08                push A
@@ -139,32 +139,32 @@
  0066           ;               // get temp and humidity here
  0066           ;               
  0066           ;               switch(displaymode) {
- 0066 521E              mov A,[X+30]
- 0068 5420              mov [X+32],A
- 006A 561F00            mov [X+31],0
- 006D 3D1F00            cmp [X+31],0
+ 0066 5220              mov A,[X+32]
+ 0068 5422              mov [X+34],A
+ 006A 562100            mov [X+33],0
+ 006D 3D2100            cmp [X+33],0
  0070 B006              jnz X1
- 0072 3D2000            cmp [X+32],0
+ 0072 3D2200            cmp [X+34],0
  0075 A051              jz L9
  0077           X1:
- 0077 3D1F00            cmp [X+31],0
+ 0077 3D2100            cmp [X+33],0
  007A B006              jnz X2
- 007C 3D2001            cmp [X+32],1
+ 007C 3D2201            cmp [X+34],1
  007F A047              jz L9
  0081           X2:
- 0081 3D1F00            cmp [X+31],0
+ 0081 3D2100            cmp [X+33],0
  0084 B006              jnz X3
- 0086 3D2002            cmp [X+32],2
+ 0086 3D2202            cmp [X+34],2
  0089 A03D              jz L9
  008B           X3:
- 008B 3D1F00            cmp [X+31],0
+ 008B 3D2100            cmp [X+33],0
  008E B006              jnz X4
- 0090 3D2003            cmp [X+32],3
+ 0090 3D2203            cmp [X+34],3
  0093 A033              jz L9
  0095           X4:
- 0095 3D1F00            cmp [X+31],0
+ 0095 3D2100            cmp [X+33],0
  0098 B006              jnz X5
- 009A 3D2004            cmp [X+32],4
+ 009A 3D2204            cmp [X+34],4
  009D A029              jz L9
  009F           X5:
  009F 8001              xjmp L8
@@ -192,25 +192,25 @@
  00A1           ;               
  00A1           ;                       default:
  00A1           ;                               displaymode = 0;
- 00A1 561E00            mov [X+30],0
+ 00A1 562000            mov [X+32],0
  00A4                   .dbline 82
- 00A4           ;                               csprintf(lcdFirstLine,"    Error     ");
- 00A4 500F              mov A,>L16
+ 00A4           ;                               csprintf(lcdFirstLine,"     Error      ");
+ 00A4 5011              mov A,>L16
  00A6 08                push A
- 00A7 500F              mov A,<L16
+ 00A7 5011              mov A,<L16
  00A9 08                push A
  00AA 5100              mov A,[__r0]
  00AC 08                push A
  00AD 10                push X
  00AE 7C0000            xcall _csprintf
  00B1                   .dbline 83
- 00B1           ;                               csprintf(lcdSecondLine,"              ");
+ 00B1           ;                               csprintf(lcdSecondLine,"                ");
  00B1 5000              mov A,>L17
  00B3 08                push A
  00B4 5000              mov A,<L17
  00B6 08                push A
  00B7 5A00              mov [__r1],X
- 00B9 06000F            add [__r1],15
+ 00B9 060010            add [__r1],16
  00BC 5100              mov A,[__r0]
  00BE 08                push A
  00BF 5100              mov A,[__r1]
@@ -235,15 +235,15 @@
  00D1 5100              mov A,[__r0]
  00D3 7C0000            xcall _LCD_PrString
  00D6                   .dbline 89
- 00D6           ;               LCD_Position(0,0);
- 00D6 5000              mov A,0
- 00D8 5700              mov X,0
+ 00D6           ;               LCD_Position(1,0);
+ 00D6 5700              mov X,0
+ 00D8 5001              mov A,1
  00DA 7C0000            xcall _LCD_Position
  00DD 20                pop X
  00DE                   .dbline 90
  00DE           ;               LCD_PrString(lcdSecondLine);
  00DE 5A00              mov [__r1],X
- 00E0 06000F            add [__r1],15
+ 00E0 060010            add [__r1],16
  00E3 10                push X
  00E4 5100              mov A,[__r0]
  00E6 08                push A
@@ -267,20 +267,24 @@
  00F8           X0:
  00F8                   .dbline -2
  00F8           L2:
- 00F8 38DF              add SP,-33
+ 00F8 38DD              add SP,-35
  00FA 20                pop X
  00FB                   .dbline 0 ; func end
  00FB 8FFF              jmp .
- 00FD                   .dbsym l displaymode 30 c
- 00FD                   .dbsym l lcdSecondLine 15 A[15:15]c
- 00FD                   .dbsym l lcdFirstLine 0 A[15:15]c
+ 00FD                   .dbsym l displaymode 32 c
+ 00FD                   .dbsym l lcdSecondLine 16 A[16:16]c
+ 00FD                   .dbsym l lcdFirstLine 0 A[16:16]c
  00FD                   .dbend
                         .area lit(rom, con, rel, lit)
  0000           L17:
- 0000 202020202020202020202020202000    .byte 32,32,32,32,32,32,32,32,32,32,32,32,32,32,0
- 000F           L16:
- 000F 202020204572726F72202020202000    .byte 32,32,32,32,'E,'r,'r,'o,'r,32,32,32,32,32,0
- 001E           L4:
- 001E 5765617468657273746174696F6E00    .byte 'W,'e,'a,'t,'h,'e,'r,'s,'t,'a,'t,'i,'o,'n,0
- 002D           L3:
- 002D 202057656C636F6D6520746F202000    .byte 32,32,'W,'e,'l,'c,'o,'m,'e,32,'t,'o,32,32,0
+ 0000 20202020202020202020202020202020  .byte 32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32
+ 0010 00                .byte 0
+ 0011           L16:
+ 0011 20202020204572726F72202020202020  .byte 32,32,32,32,32,'E,'r,'r,'o,'r,32,32,32,32,32,32
+ 0021 00                .byte 0
+ 0022           L4:
+ 0022 205765617468657273746174696F6E20  .byte 32,'W,'e,'a,'t,'h,'e,'r,'s,'t,'a,'t,'i,'o,'n,32
+ 0032 00                .byte 0
+ 0033           L3:
+ 0033 20202057656C636F6D6520746F202020  .byte 32,32,32,'W,'e,'l,'c,'o,'m,'e,32,'t,'o,32,32,32
+ 0043 00                .byte 0
