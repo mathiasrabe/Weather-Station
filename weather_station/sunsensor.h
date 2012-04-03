@@ -1,1 +1,1 @@
-void sunsensor(char *firstLine);
+void sunsensor(char *firstLine, char *secondLine);

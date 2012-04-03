@@ -21,20 +21,20 @@
 #include <stdio.h>
 
 #include "sunsensor.h"
-
+/*
 typedef enum {
 	overview = 0,
 	temp = 1,
 	humidity = 2,
 	rain = 3,
 	wind = 4,
-} MODE;
+} MODE;*/
 
 void main(void)
 {
 	//Variables
 	char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
-	char displaymode = 0;
+	unsigned int displaymode = 3; // FIXME: sollte 0 sein!
 	
 	/** init **/
 	
@@ -43,6 +43,14 @@ void main(void)
 	SleepTimer_Start();
     SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
     SleepTimer_EnableInt();                     // 8 Hz rate
+	
+	// init PGA and SAR6 for sun and rain sensor
+	PGA_sun_SetGain(PGA_sun_G4_00);  // gain of 4
+    PGA_sun_Start(PGA_sun_MEDPOWER);
+	//PGA_rain_SetGain(PGA_rain_G8_00);
+    //PGA_rain_Start(PGA_rain_MEDPOWER);
+	SAR6_sun_Start(SAR6_sun_MEDPOWER);
+	//SAR6_rain_Start(SAR6_sun_MEDPOWER);
 
 	// LCD init
 	LCD_Init();
@@ -59,23 +67,23 @@ void main(void)
 		// get temp and humidity here
 		
 		switch(displaymode) {
-			case overview:
+			case 0:
 				// overview();
 				break;
 				
-			case temp:
+			case 1:
 				// temp();
 				break;
 				
-			case humidity:
+			case 2:
 				// humidity();
 				break;
 				
-			case rain:
-				sunsensor(lcdFirstLine);
+			case 3:
+				sunsensor(lcdFirstLine, lcdSecondLine);
 				break;
 				
-			case wind:
+			case 4:
 				// wind();
 				break;
 		
