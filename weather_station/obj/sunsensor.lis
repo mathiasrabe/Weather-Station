@@ -12,70 +12,144 @@
  0000 10                push X
  0001 4F                mov X,SP
  0002 3803              add SP,3
- 0004                   .dbline 5
+ 0004                   .dbline 26
+ 0004           ; /**
+ 0004           ; Measuring the lightintensity with an active PV on an ADC.
+ 0004           ; 
+ 0004           ; ADC: SAR6
+ 0004           ; 
+ 0004           ; +31 entspricht 5V
+ 0004           ; -31 entspricht 0V
+ 0004           ; 
+ 0004           ; 5V/63 = 0,079V
+ 0004           ; 
+ 0004           ; Solarpanel max V: 0,9V
+ 0004           ; 
+ 0004           ; Night:  < 0,1V * 5,33 gain = 0,533V
+ 0004           ;                               0,533V/0,079V = 7
+ 0004           ; Cloudy: 0,35V * 5,33 gain = 1,8655V
+ 0004           ;                               1,8655/0,079V = 24
+ 0004           ; max:    0,9V * 5,33 gain = 4,797V
+ 0004           ;                               4,797V/0,079V = 61
+ 0004           ; **/
+ 0004           ; 
+ 0004           ; 
  0004           ; #include "PSoCAPI.h"
  0004           ; #include <stdio.h>
  0004           ; #include <stdlib.h>
  0004           ; 
  0004           ; void sunsensor(char *firstLine, char *secondLine) {
- 0004                   .dbline 6
+ 0004                   .dbline 27
  0004           ;       char sample = 0x00, sampleAsChar[2];
  0004 560000            mov [X+0],0
- 0007                   .dbline 8
+ 0007                   .dbline 29
  0007           ; 
  0007           ;       sample = SAR6_sun_cGetSample();
  0007 10                push X
  0008 7C0000            xcall _SAR6_sun_cGetSample
  000B 20                pop X
  000C 5400              mov [X+0],A
- 000E                   .dbline 14
- 000E           ;       //itoa(sampleAsChar, sample, 10);
- 000E           ;       //2er Komplement:
- 000E           ;       //sample = ~(sample & 0x20)
- 000E           ;       //sample += 0x01;
- 000E           ;       
- 000E           ;       csprintf(firstLine, "Sun and rain    ");
- 000E 5007              mov A,>L2
- 0010 08                push A
- 0011 5007              mov A,<L2
+ 000E                   .dbline 30
+ 000E           ;       sample += 31;
+ 000E 07001F            add [X+0],31
+ 0011                   .dbline 32
+ 0011           ;       
+ 0011           ;       csprintf(firstLine, "Sun and rain    ");
+ 0011 5033              mov A,>L2
  0013 08                push A
- 0014 52FB              mov A,[X-5]
+ 0014 5033              mov A,<L2
  0016 08                push A
- 0017 52FC              mov A,[X-4]
+ 0017 52FB              mov A,[X-5]
  0019 08                push A
- 001A 7C0000            xcall _csprintf
- 001D                   .dbline 15
- 001D           ;       csprintf(secondLine, "%i adc", sample);
- 001D 5200              mov A,[X+0]
- 001F 5300              mov [__r1],A
- 0021 5000              mov A,0
- 0023 08                push A
- 0024 5100              mov A,[__r1]
- 0026 08                push A
- 0027 5000              mov A,>L3
+ 001A 52FC              mov A,[X-4]
+ 001C 08                push A
+ 001D 7C0000            xcall _csprintf
+ 0020 38FC              add SP,-4
+ 0022                   .dbline 34
+ 0022           ;       
+ 0022           ;       if( sample >= 24 ) {
+ 0022 3D0018            cmp [X+0],24
+ 0025 C014              jc L3
+ 0027           X0:
+ 0027                   .dbline 36
+ 0027           ;               // sunshine!
+ 0027           ;               csprintf(secondLine, "sunny           ");
+ 0027                   .dbline 36
+ 0027 5022              mov A,>L5
  0029 08                push A
- 002A 5000              mov A,<L3
+ 002A 5022              mov A,<L5
  002C 08                push A
  002D 52F9              mov A,[X-7]
  002F 08                push A
  0030 52FA              mov A,[X-6]
  0032 08                push A
  0033 7C0000            xcall _csprintf
- 0036 38F6              add SP,-10
- 0038                   .dbline -2
- 0038           L1:
- 0038 38FD              add SP,-3
- 003A 20                pop X
- 003B                   .dbline 0 ; func end
- 003B 7F                ret
- 003C                   .dbsym l sampleAsChar 1 A[2:2]c
- 003C                   .dbsym l sample 0 c
- 003C                   .dbsym l secondLine -7 pc
- 003C                   .dbsym l firstLine -5 pc
- 003C                   .dbend
+ 0036 38FC              add SP,-4
+ 0038                   .dbline 37
+ 0038           ;       } else if( sample >= 5 ) {
+ 0038 802A              xjmp L4
+ 003A           L3:
+ 003A                   .dbline 37
+ 003A 3D0005            cmp [X+0],5
+ 003D C014              jc L6
+ 003F           X1:
+ 003F                   .dbline 39
+ 003F           ;               // cloudy!
+ 003F           ;               csprintf(secondLine, "cloudy          ");
+ 003F                   .dbline 39
+ 003F 5011              mov A,>L8
+ 0041 08                push A
+ 0042 5011              mov A,<L8
+ 0044 08                push A
+ 0045 52F9              mov A,[X-7]
+ 0047 08                push A
+ 0048 52FA              mov A,[X-6]
+ 004A 08                push A
+ 004B 7C0000            xcall _csprintf
+ 004E 38FC              add SP,-4
+ 0050                   .dbline 40
+ 0050           ;       } else {
+ 0050 8012              xjmp L7
+ 0052           L6:
+ 0052                   .dbline 40
+ 0052                   .dbline 42
+ 0052           ;               // good night!
+ 0052           ;               csprintf(secondLine, "night           ");
+ 0052 5000              mov A,>L9
+ 0054 08                push A
+ 0055 5000              mov A,<L9
+ 0057 08                push A
+ 0058 52F9              mov A,[X-7]
+ 005A 08                push A
+ 005B 52FA              mov A,[X-6]
+ 005D 08                push A
+ 005E 7C0000            xcall _csprintf
+ 0061 38FC              add SP,-4
+ 0063                   .dbline 43
+ 0063           ;       }
+ 0063           L7:
+ 0063           L4:
+ 0063                   .dbline -2
+ 0063           L1:
+ 0063 38FD              add SP,-3
+ 0065 20                pop X
+ 0066                   .dbline 0 ; func end
+ 0066 7F                ret
+ 0067                   .dbsym l sampleAsChar 1 A[2:2]c
+ 0067                   .dbsym l sample 0 c
+ 0067                   .dbsym l secondLine -7 pc
+ 0067                   .dbsym l firstLine -5 pc
+ 0067                   .dbend
                         .area lit(rom, con, rel, lit)
- 0000           L3:
- 0000 25692061646300    .byte 37,'i,32,'a,'d,'c,0
- 0007           L2:
- 0007 53756E20616E64207261696E20202020  .byte 'S,'u,'n,32,'a,'n,'d,32,'r,'a,'i,'n,32,32,32,32
- 0017 00                .byte 0
+ 0000           L9:
+ 0000 6E696768742020202020202020202020  .byte 'n,'i,'g,'h,'t,32,32,32,32,32,32,32,32,32,32,32
+ 0010 00                .byte 0
+ 0011           L8:
+ 0011 636C6F75647920202020202020202020  .byte 'c,'l,'o,'u,'d,'y,32,32,32,32,32,32,32,32,32,32
+ 0021 00                .byte 0
+ 0022           L5:
+ 0022 73756E6E792020202020202020202020  .byte 's,'u,'n,'n,'y,32,32,32,32,32,32,32,32,32,32,32
+ 0032 00                .byte 0
+ 0033           L2:
+ 0033 53756E20616E64207261696E20202020  .byte 'S,'u,'n,32,'a,'n,'d,32,'r,'a,'i,'n,32,32,32,32
+ 0043 00                .byte 0

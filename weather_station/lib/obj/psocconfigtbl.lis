@@ -631,7 +631,7 @@
  0000           ;  Instance name LCD, User Module LCD
  0000           ;  Instance name PGA_rain, User Module PGA
  0000           ;       Instance name PGA_rain, Block Name GAIN(ACB02)
- 0000 790E              db              79h, 0eh                ;PGA_rain_GAIN_CR0(ACB02CR0)
+ 0000 790D              db              79h, 0dh                ;PGA_rain_GAIN_CR0(ACB02CR0)
  0002 7A21              db              7ah, 21h                ;PGA_rain_GAIN_CR1(ACB02CR1)
  0004 7B20              db              7bh, 20h                ;PGA_rain_GAIN_CR2(ACB02CR2)
  0006 7800              db              78h, 00h                ;PGA_rain_GAIN_CR3(ACB02CR3)
@@ -643,7 +643,7 @@
  000E 7400              db              74h, 00h                ;PGA_sun_GAIN_CR3(ACB01CR3)
  0010           ;  Instance name PGA_wind, User Module PGA
  0010           ;       Instance name PGA_wind, Block Name GAIN(ACB00)
- 0010 710E              db              71h, 0eh                ;PGA_wind_GAIN_CR0(ACB00CR0)
+ 0010 710D              db              71h, 0dh                ;PGA_wind_GAIN_CR0(ACB00CR0)
  0012 7221              db              72h, 21h                ;PGA_wind_GAIN_CR1(ACB00CR1)
  0014 7320              db              73h, 20h                ;PGA_wind_GAIN_CR2(ACB00CR2)
  0016 7000              db              70h, 00h                ;PGA_wind_GAIN_CR3(ACB00CR3)

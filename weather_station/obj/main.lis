@@ -18,8 +18,8 @@
  0004           ; // P0_1 = XCLR adc reset
  0004           ; // P0_2 = Button SW
  0004           ; // P0_3 = windspeed input
- 0004           ; // P0_4 = rainsensor input
- 0004           ; // P0_5 = sunlight (solar) input
+ 0004           ; // P0_4 = sunlight (solar) input
+ 0004           ; // P0_5 = rainsensor input
  0004           ; // P0_6 = I2C SDA
  0004           ; // P0_7 = I2C SCL
  0004           ; // P1_0 = Gray Code
@@ -74,8 +74,8 @@
  0018                   .dbline 48
  0018           ;       
  0018           ;       // init PGA and SAR6 for sun and rain sensor
- 0018           ;       PGA_sun_SetGain(PGA_sun_G0_50);  // gain of 4
- 0018 5070              mov A,112
+ 0018           ;       PGA_sun_SetGain(PGA_sun_G5_33);  // gain of 5,33
+ 0018 5028              mov A,40
  001A 7C0000            xcall _PGA_sun_SetGain
  001D                   .dbline 49
  001D           ;     PGA_sun_Start(PGA_sun_HIGHPOWER);

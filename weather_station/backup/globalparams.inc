@@ -77,9 +77,9 @@ ANALOG_POWER_JUST:		equ	5h	;Analog power control justified
 OP_AMP_BIAS:			equ	0h	;Op amp bias level
 OP_AMP_BIAS_MASK:		equ	40h	;Op amp bias level mask
 OP_AMP_BIAS_JUST:		equ	0h	;Op amp bias level justified
-REF_MUX:				equ	0h	;Ref mux setting
+REF_MUX:				equ	2h	;Ref mux setting
 REF_MUX_MASK:			equ	38h	;Ref mux setting mask
-REF_MUX_JUST:			equ	0h	;Ref mux setting justified
+REF_MUX_JUST:			equ	10h	;Ref mux setting justified
 AGND_BYPASS:				equ	0h	;AGndBypass setting
 AGND_BYPASS_MASK:			equ	40h	;AGndBypass setting mask
 AGND_BYPASS_JUST:			equ	0h	;AGndBypass setting justified

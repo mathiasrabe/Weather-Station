@@ -4,8 +4,8 @@
 // P0_1 = XCLR adc reset
 // P0_2 = Button SW
 // P0_3 = windspeed input
-// P0_4 = rainsensor input
-// P0_5 = sunlight (solar) input
+// P0_4 = sunlight (solar) input
+// P0_5 = rainsensor input
 // P0_6 = I2C SDA
 // P0_7 = I2C SCL
 // P1_0 = Gray Code
@@ -45,7 +45,7 @@ void main(void)
     SleepTimer_EnableInt();                     // 8 Hz rate
 	
 	// init PGA and SAR6 for sun and rain sensor
-	PGA_sun_SetGain(PGA_sun_G0_50);  // gain of 4
+	PGA_sun_SetGain(PGA_sun_G5_33);  // gain of 5,33
     PGA_sun_Start(PGA_sun_HIGHPOWER);
 	//PGA_rain_SetGain(PGA_rain_G8_00);
     //PGA_rain_Start(PGA_rain_MEDPOWER);
