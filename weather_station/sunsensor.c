@@ -1,5 +1,6 @@
 /**
 Measuring the lightintensity with an active PV on an ADC.
+We also measure if it is rainy or not.
 
 ADC: SAR6
 
@@ -16,25 +17,31 @@ Cloudy: 0,35V * 5,33 gain = 1,8655V
 				1,8655/0,079V = 24
 max:    0,9V * 5,33 gain = 4,797V
 				4,797V/0,079V = 61
+____________________________________
+rain: high on P0_5
+no rain: low
+
 **/
 
+#define PORT PRT0DR
+#define RAINPIN 0x10 // P0_5
 
 #include "PSoCAPI.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 void sunsensor(char *firstLine, char *secondLine) {
-	char sample = 0x00, sampleAsChar[2];
+	char sunSample = 0x00;
 
-	sample = SAR6_sun_cGetSample();
-	sample += 31;
+	sunSample = SAR6_sun_cGetSample();
+	sunSample += 31;
 	
 	csprintf(firstLine, "Sun and rain    ");
 	
-	if( sample >= 24 ) {
+	if( sunSample >= 24 ) {
 		// sunshine!
 		csprintf(secondLine, "sunny           ");
-	} else if( sample >= 5 ) {
+	} else if( sunSample >= 5 ) {
 		// cloudy!
 		csprintf(secondLine, "cloudy          ");
 	} else {
@@ -42,5 +49,8 @@ void sunsensor(char *firstLine, char *secondLine) {
 		csprintf(secondLine, "night           ");
 	}
 	
-	//csprintf(secondLine, "%i adc    ", sample);
+	if ((PORT & RAINPIN) == 1) {
+		// rainy!
+		csprintf(&secondLine[10], "rainy");
+	}
 }
