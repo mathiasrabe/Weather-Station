@@ -45,11 +45,11 @@ void main(void)
     SleepTimer_EnableInt();                     // 8 Hz rate
 	
 	// init PGA and SAR6 for sun and rain sensor
-	PGA_sun_SetGain(PGA_sun_G4_00);  // gain of 4
-    PGA_sun_Start(PGA_sun_MEDPOWER);
+	PGA_sun_SetGain(PGA_sun_G0_50);  // gain of 4
+    PGA_sun_Start(PGA_sun_HIGHPOWER);
 	//PGA_rain_SetGain(PGA_rain_G8_00);
     //PGA_rain_Start(PGA_rain_MEDPOWER);
-	SAR6_sun_Start(SAR6_sun_MEDPOWER);
+	SAR6_sun_Start(SAR6_sun_HIGHPOWER);
 	//SAR6_rain_Start(SAR6_sun_MEDPOWER);
 
 	// LCD init

@@ -18,83 +18,64 @@
  0004           ; #include <stdlib.h>
  0004           ; 
  0004           ; void sunsensor(char *firstLine, char *secondLine) {
- 0004                   .dbline 13
- 0004           ;       char sample, sampleAsChar[2];
- 0004           ;       
- 0004           ;       /*
- 0004           ;       csprintf(firstLine, "subsensor       ");
- 0004           ;       LCD_Position(0,0);
- 0004           ;       LCD_PrString(firstLine);
- 0004           ;       */
- 0004           ;       sample = SAR6_sun_cGetSample();
- 0004 10                push X
- 0005 7C0000            xcall _SAR6_sun_cGetSample
- 0008 20                pop X
- 0009 5400              mov [X+0],A
- 000B                   .dbline 14
- 000B           ;       itoa(sampleAsChar, sample, 10);
- 000B 5000              mov A,0
- 000D 08                push A
- 000E 500A              mov A,10
+ 0004                   .dbline 6
+ 0004           ;       char sample = 0x00, sampleAsChar[2];
+ 0004 560000            mov [X+0],0
+ 0007                   .dbline 8
+ 0007           ; 
+ 0007           ;       sample = SAR6_sun_cGetSample();
+ 0007 10                push X
+ 0008 7C0000            xcall _SAR6_sun_cGetSample
+ 000B 20                pop X
+ 000C 5400              mov [X+0],A
+ 000E                   .dbline 14
+ 000E           ;       //itoa(sampleAsChar, sample, 10);
+ 000E           ;       //2er Komplement:
+ 000E           ;       //sample = ~(sample & 0x20)
+ 000E           ;       //sample += 0x01;
+ 000E           ;       
+ 000E           ;       csprintf(firstLine, "Sun and rain    ");
+ 000E 5007              mov A,>L2
  0010 08                push A
- 0011 5200              mov A,[X+0]
- 0013 5300              mov [__r1],A
- 0015 5000              mov A,0
- 0017 08                push A
- 0018 5100              mov A,[__r1]
- 001A 08                push A
- 001B 5A00              mov [__r1],X
- 001D 060001            add [__r1],1
- 0020 5000              mov A,0
- 0022 08                push A
- 0023 5100              mov A,[__r1]
- 0025 08                push A
- 0026 7C0000            xcall _itoa
- 0029 38FA              add SP,-6
- 002B                   .dbline 16
- 002B           ;       
- 002B           ;       csprintf(firstLine, "Sun and rain    ");
- 002B 5007              mov A,>L2
- 002D 08                push A
- 002E 5007              mov A,<L2
- 0030 08                push A
- 0031 52FB              mov A,[X-5]
- 0033 08                push A
- 0034 52FC              mov A,[X-4]
- 0036 08                push A
- 0037 7C0000            xcall _csprintf
- 003A                   .dbline 17
- 003A           ;       csprintf(secondLine, "%c adc", sampleAsChar);
- 003A 5A00              mov [__r1],X
- 003C 060001            add [__r1],1
- 003F 5100              mov A,[__r0]
- 0041 08                push A
- 0042 5100              mov A,[__r1]
- 0044 08                push A
- 0045 5000              mov A,>L3
- 0047 08                push A
- 0048 5000              mov A,<L3
- 004A 08                push A
- 004B 52F9              mov A,[X-7]
- 004D 08                push A
- 004E 52FA              mov A,[X-6]
- 0050 08                push A
- 0051 7C0000            xcall _csprintf
- 0054 38F6              add SP,-10
- 0056                   .dbline -2
- 0056           L1:
- 0056 38FD              add SP,-3
- 0058 20                pop X
- 0059                   .dbline 0 ; func end
- 0059 7F                ret
- 005A                   .dbsym l sampleAsChar 1 A[2:2]c
- 005A                   .dbsym l sample 0 c
- 005A                   .dbsym l secondLine -7 pc
- 005A                   .dbsym l firstLine -5 pc
- 005A                   .dbend
+ 0011 5007              mov A,<L2
+ 0013 08                push A
+ 0014 52FB              mov A,[X-5]
+ 0016 08                push A
+ 0017 52FC              mov A,[X-4]
+ 0019 08                push A
+ 001A 7C0000            xcall _csprintf
+ 001D                   .dbline 15
+ 001D           ;       csprintf(secondLine, "%i adc", sample);
+ 001D 5200              mov A,[X+0]
+ 001F 5300              mov [__r1],A
+ 0021 5000              mov A,0
+ 0023 08                push A
+ 0024 5100              mov A,[__r1]
+ 0026 08                push A
+ 0027 5000              mov A,>L3
+ 0029 08                push A
+ 002A 5000              mov A,<L3
+ 002C 08                push A
+ 002D 52F9              mov A,[X-7]
+ 002F 08                push A
+ 0030 52FA              mov A,[X-6]
+ 0032 08                push A
+ 0033 7C0000            xcall _csprintf
+ 0036 38F6              add SP,-10
+ 0038                   .dbline -2
+ 0038           L1:
+ 0038 38FD              add SP,-3
+ 003A 20                pop X
+ 003B                   .dbline 0 ; func end
+ 003B 7F                ret
+ 003C                   .dbsym l sampleAsChar 1 A[2:2]c
+ 003C                   .dbsym l sample 0 c
+ 003C                   .dbsym l secondLine -7 pc
+ 003C                   .dbsym l firstLine -5 pc
+ 003C                   .dbend
                         .area lit(rom, con, rel, lit)
  0000           L3:
- 0000 25632061646300    .byte 37,'c,32,'a,'d,'c,0
+ 0000 25692061646300    .byte 37,'i,32,'a,'d,'c,0
  0007           L2:
  0007 53756E20616E64207261696E20202020  .byte 'S,'u,'n,32,'a,'n,'d,32,'r,'a,'i,'n,32,32,32,32
  0017 00                .byte 0

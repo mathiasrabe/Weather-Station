@@ -49,7 +49,7 @@ LoadConfigTBL_weather_station_Bank0:
 ;  Global Register values Bank 0
 	db		60h, 29h		; AnalogColumnInputSelect register (AMX_IN)
 	db		66h, 00h		; AnalogComparatorControl1 register (CMP_CR1)
-	db		63h, 05h		; AnalogReferenceControl register (ARF_CR)
+	db		63h, 15h		; AnalogReferenceControl register (ARF_CR)
 	db		65h, 00h		; AnalogSyncControl register (ASY_CR)
 	db		e6h, 00h		; DecimatorControl_0 register (DEC_CR0)
 	db		e7h, 00h		; DecimatorControl_1 register (DEC_CR1)

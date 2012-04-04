@@ -74,18 +74,18 @@
  0018                   .dbline 48
  0018           ;       
  0018           ;       // init PGA and SAR6 for sun and rain sensor
- 0018           ;       PGA_sun_SetGain(PGA_sun_G4_00);  // gain of 4
- 0018 5038              mov A,56
+ 0018           ;       PGA_sun_SetGain(PGA_sun_G0_50);  // gain of 4
+ 0018 5070              mov A,112
  001A 7C0000            xcall _PGA_sun_SetGain
  001D                   .dbline 49
- 001D           ;     PGA_sun_Start(PGA_sun_MEDPOWER);
- 001D 5002              mov A,2
+ 001D           ;     PGA_sun_Start(PGA_sun_HIGHPOWER);
+ 001D 5003              mov A,3
  001F 7C0000            xcall _PGA_sun_Start
  0022                   .dbline 52
  0022           ;       //PGA_rain_SetGain(PGA_rain_G8_00);
  0022           ;     //PGA_rain_Start(PGA_rain_MEDPOWER);
- 0022           ;       SAR6_sun_Start(SAR6_sun_MEDPOWER);
- 0022 5002              mov A,2
+ 0022           ;       SAR6_sun_Start(SAR6_sun_HIGHPOWER);
+ 0022 5003              mov A,3
  0024 7C0000            xcall _SAR6_sun_Start
  0027                   .dbline 56
  0027           ;       //SAR6_rain_Start(SAR6_sun_MEDPOWER);

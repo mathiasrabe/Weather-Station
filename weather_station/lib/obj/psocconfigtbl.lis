@@ -669,7 +669,7 @@
  0030           ;  Global Register values Bank 0
  0030 6029              db              60h, 29h                ; AnalogColumnInputSelect register (AMX_IN)
  0032 6600              db              66h, 00h                ; AnalogComparatorControl1 register (CMP_CR1)
- 0034 6305              db              63h, 05h                ; AnalogReferenceControl register (ARF_CR)
+ 0034 6315              db              63h, 15h                ; AnalogReferenceControl register (ARF_CR)
  0036 6500              db              65h, 00h                ; AnalogSyncControl register (ASY_CR)
  0038 E600              db              e6h, 00h                ; DecimatorControl_0 register (DEC_CR0)
  003A E700              db              e7h, 00h                ; DecimatorControl_1 register (DEC_CR1)

@@ -947,9 +947,9 @@
  0000           OP_AMP_BIAS:			equ	0h	;Op amp bias level
  0040           OP_AMP_BIAS_MASK:		equ	40h	;Op amp bias level mask
  0000           OP_AMP_BIAS_JUST:		equ	0h	;Op amp bias level justified
- 0000           REF_MUX:				equ	0h	;Ref mux setting
+ 0002           REF_MUX:				equ	2h	;Ref mux setting
  0038           REF_MUX_MASK:			equ	38h	;Ref mux setting mask
- 0000           REF_MUX_JUST:			equ	0h	;Ref mux setting justified
+ 0010           REF_MUX_JUST:			equ	10h	;Ref mux setting justified
  0000           AGND_BYPASS:				equ	0h	;AGndBypass setting
  0040           AGND_BYPASS_MASK:			equ	40h	;AGndBypass setting mask
  0000           AGND_BYPASS_JUST:			equ	0h	;AGndBypass setting justified

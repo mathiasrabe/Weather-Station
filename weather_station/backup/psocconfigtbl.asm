@@ -45,6 +45,7 @@ LoadConfigTBL_weather_station_Bank0:
 	db		81h, 5fh		;SAR6_wind_CR1(ASC10CR1)
 	db		82h, 60h		;SAR6_wind_CR2(ASC10CR2)
 	db		83h, 00h		;SAR6_wind_CR3(ASC10CR3)
+;  Instance name SleepTimer, User Module SleepTimer
 ;  Global Register values Bank 0
 	db		60h, 29h		; AnalogColumnInputSelect register (AMX_IN)
 	db		66h, 00h		; AnalogComparatorControl1 register (CMP_CR1)
@@ -83,6 +84,7 @@ LoadConfigTBL_weather_station_Bank1:
 ;       Instance name SAR6_sun, Block Name SA(ASD11)
 ;  Instance name SAR6_wind, User Module SAR6
 ;       Instance name SAR6_wind, Block Name SA(ASC10)
+;  Instance name SleepTimer, User Module SleepTimer
 ;  Global Register values Bank 1
 	db		61h, 00h		; AnalogClockSelect1 register (CLK_CR1)
 	db		69h, 00h		; AnalogClockSelect2 register (CLK_CR2)
