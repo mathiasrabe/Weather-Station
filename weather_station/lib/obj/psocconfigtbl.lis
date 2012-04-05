@@ -629,101 +629,85 @@
  0000           LoadConfigTBL_weather_station_Bank0:
  0000           ;  Instance name I2Cm, User Module I2Cm
  0000           ;  Instance name LCD, User Module LCD
- 0000           ;  Instance name PGA_rain, User Module PGA
- 0000           ;       Instance name PGA_rain, Block Name GAIN(ACB02)
- 0000 790D              db              79h, 0dh                ;PGA_rain_GAIN_CR0(ACB02CR0)
- 0002 7A21              db              7ah, 21h                ;PGA_rain_GAIN_CR1(ACB02CR1)
- 0004 7B20              db              7bh, 20h                ;PGA_rain_GAIN_CR2(ACB02CR2)
- 0006 7800              db              78h, 00h                ;PGA_rain_GAIN_CR3(ACB02CR3)
- 0008           ;  Instance name PGA_sun, User Module PGA
- 0008           ;       Instance name PGA_sun, Block Name GAIN(ACB01)
- 0008 750E              db              75h, 0eh                ;PGA_sun_GAIN_CR0(ACB01CR0)
- 000A 7621              db              76h, 21h                ;PGA_sun_GAIN_CR1(ACB01CR1)
- 000C 7720              db              77h, 20h                ;PGA_sun_GAIN_CR2(ACB01CR2)
- 000E 7400              db              74h, 00h                ;PGA_sun_GAIN_CR3(ACB01CR3)
- 0010           ;  Instance name PGA_wind, User Module PGA
- 0010           ;       Instance name PGA_wind, Block Name GAIN(ACB00)
- 0010 710D              db              71h, 0dh                ;PGA_wind_GAIN_CR0(ACB00CR0)
- 0012 7221              db              72h, 21h                ;PGA_wind_GAIN_CR1(ACB00CR1)
- 0014 7320              db              73h, 20h                ;PGA_wind_GAIN_CR2(ACB00CR2)
- 0016 7000              db              70h, 00h                ;PGA_wind_GAIN_CR3(ACB00CR3)
- 0018           ;  Instance name SAR6_rain, User Module SAR6
- 0018           ;       Instance name SAR6_rain, Block Name SA(ASC12)
- 0018 8800              db              88h, 00h                ;SAR6_rain_CR0(ASC12CR0)
- 001A 895F              db              89h, 5fh                ;SAR6_rain_CR1(ASC12CR1)
- 001C 8A60              db              8ah, 60h                ;SAR6_rain_CR2(ASC12CR2)
- 001E 8B00              db              8bh, 00h                ;SAR6_rain_CR3(ASC12CR3)
- 0020           ;  Instance name SAR6_sun, User Module SAR6
- 0020           ;       Instance name SAR6_sun, Block Name SA(ASD11)
- 0020 8400              db              84h, 00h                ;SAR6_sun_CR0(ASD11CR0)
- 0022 859F              db              85h, 9fh                ;SAR6_sun_CR1(ASD11CR1)
- 0024 8660              db              86h, 60h                ;SAR6_sun_CR2(ASD11CR2)
- 0026 870C              db              87h, 0ch                ;SAR6_sun_CR3(ASD11CR3)
- 0028           ;  Instance name SAR6_wind, User Module SAR6
- 0028           ;       Instance name SAR6_wind, Block Name SA(ASC10)
- 0028 8000              db              80h, 00h                ;SAR6_wind_CR0(ASC10CR0)
- 002A 815F              db              81h, 5fh                ;SAR6_wind_CR1(ASC10CR1)
- 002C 8260              db              82h, 60h                ;SAR6_wind_CR2(ASC10CR2)
- 002E 8300              db              83h, 00h                ;SAR6_wind_CR3(ASC10CR3)
- 0030           ;  Instance name SleepTimer, User Module SleepTimer
- 0030           ;  Global Register values Bank 0
- 0030 6029              db              60h, 29h                ; AnalogColumnInputSelect register (AMX_IN)
- 0032 6600              db              66h, 00h                ; AnalogComparatorControl1 register (CMP_CR1)
- 0034 6315              db              63h, 15h                ; AnalogReferenceControl register (ARF_CR)
- 0036 6500              db              65h, 00h                ; AnalogSyncControl register (ASY_CR)
- 0038 E600              db              e6h, 00h                ; DecimatorControl_0 register (DEC_CR0)
- 003A E700              db              e7h, 00h                ; DecimatorControl_1 register (DEC_CR1)
- 003C D600              db              d6h, 00h                ; I2CConfig register (I2CCFG)
- 003E B000              db              b0h, 00h                ; Row_0_InputMux register (RDI0RI)
- 0040 B100              db              b1h, 00h                ; Row_0_InputSync register (RDI0SYN)
- 0042 B200              db              b2h, 00h                ; Row_0_LogicInputAMux register (RDI0IS)
- 0044 B333              db              b3h, 33h                ; Row_0_LogicSelect_0 register (RDI0LT0)
- 0046 B433              db              b4h, 33h                ; Row_0_LogicSelect_1 register (RDI0LT1)
- 0048 B500              db              b5h, 00h                ; Row_0_OutputDrive_0 register (RDI0SRO0)
- 004A B600              db              b6h, 00h                ; Row_0_OutputDrive_1 register (RDI0SRO1)
- 004C B855              db              b8h, 55h                ; Row_1_InputMux register (RDI1RI)
- 004E B900              db              b9h, 00h                ; Row_1_InputSync register (RDI1SYN)
- 0050 BA10              db              bah, 10h                ; Row_1_LogicInputAMux register (RDI1IS)
- 0052 BB33              db              bbh, 33h                ; Row_1_LogicSelect_0 register (RDI1LT0)
- 0054 BC33              db              bch, 33h                ; Row_1_LogicSelect_1 register (RDI1LT1)
- 0056 BD00              db              bdh, 00h                ; Row_1_OutputDrive_0 register (RDI1SRO0)
- 0058 BE00              db              beh, 00h                ; Row_1_OutputDrive_1 register (RDI1SRO1)
- 005A FF                db              ffh
- 005B           LoadConfigTBL_weather_station_Bank1:
- 005B           ;  Instance name I2Cm, User Module I2Cm
- 005B           ;  Instance name LCD, User Module LCD
- 005B           ;  Instance name PGA_rain, User Module PGA
- 005B           ;       Instance name PGA_rain, Block Name GAIN(ACB02)
- 005B           ;  Instance name PGA_sun, User Module PGA
- 005B           ;       Instance name PGA_sun, Block Name GAIN(ACB01)
- 005B           ;  Instance name PGA_wind, User Module PGA
- 005B           ;       Instance name PGA_wind, Block Name GAIN(ACB00)
- 005B           ;  Instance name SAR6_rain, User Module SAR6
- 005B           ;       Instance name SAR6_rain, Block Name SA(ASC12)
- 005B           ;  Instance name SAR6_sun, User Module SAR6
- 005B           ;       Instance name SAR6_sun, Block Name SA(ASD11)
- 005B           ;  Instance name SAR6_wind, User Module SAR6
- 005B           ;       Instance name SAR6_wind, Block Name SA(ASC10)
- 005B           ;  Instance name SleepTimer, User Module SleepTimer
- 005B           ;  Global Register values Bank 1
- 005B 6100              db              61h, 00h                ; AnalogClockSelect1 register (CLK_CR1)
- 005D 6900              db              69h, 00h                ; AnalogClockSelect2 register (CLK_CR2)
- 005F 6015              db              60h, 15h                ; AnalogColumnClockSelect register (CLK_CR0)
- 0061 6200              db              62h, 00h                ; AnalogIOControl_0 register (ABF_CR0)
- 0063 6733              db              67h, 33h                ; AnalogLUTControl0 register (ALT_CR0)
- 0065 6833              db              68h, 33h                ; AnalogLUTControl1 register (ALT_CR1)
- 0067 6300              db              63h, 00h                ; AnalogModulatorControl_0 register (AMD_CR0)
- 0069 6600              db              66h, 00h                ; AnalogModulatorControl_1 register (AMD_CR1)
- 006B D100              db              d1h, 00h                ; GlobalDigitalInterconnect_Drive_Even_Input register (GDI_E_IN)
- 006D D300              db              d3h, 00h                ; GlobalDigitalInterconnect_Drive_Even_Output register (GDI_E_OU)
- 006F D000              db              d0h, 00h                ; GlobalDigitalInterconnect_Drive_Odd_Input register (GDI_O_IN)
- 0071 D200              db              d2h, 00h                ; GlobalDigitalInterconnect_Drive_Odd_Output register (GDI_O_OU)
- 0073 E1FF              db              e1h, ffh                ; OscillatorControl_1 register (OSC_CR1)
- 0075 E200              db              e2h, 00h                ; OscillatorControl_2 register (OSC_CR2)
- 0077 DFFF              db              dfh, ffh                ; OscillatorControl_3 register (OSC_CR3)
- 0079 DE02              db              deh, 02h                ; OscillatorControl_4 register (OSC_CR4)
- 007B DD00              db              ddh, 00h                ; OscillatorGlobalBusEnableControl register (OSC_GO_EN)
- 007D FF                db              ffh
+ 0000           ;  Instance name PGA_sun, User Module PGA
+ 0000           ;       Instance name PGA_sun, Block Name GAIN(ACB01)
+ 0000 750E              db              75h, 0eh                ;PGA_sun_GAIN_CR0(ACB01CR0)
+ 0002 7621              db              76h, 21h                ;PGA_sun_GAIN_CR1(ACB01CR1)
+ 0004 7720              db              77h, 20h                ;PGA_sun_GAIN_CR2(ACB01CR2)
+ 0006 7400              db              74h, 00h                ;PGA_sun_GAIN_CR3(ACB01CR3)
+ 0008           ;  Instance name PGA_wind, User Module PGA
+ 0008           ;       Instance name PGA_wind, Block Name GAIN(ACB00)
+ 0008 710D              db              71h, 0dh                ;PGA_wind_GAIN_CR0(ACB00CR0)
+ 000A 7221              db              72h, 21h                ;PGA_wind_GAIN_CR1(ACB00CR1)
+ 000C 7320              db              73h, 20h                ;PGA_wind_GAIN_CR2(ACB00CR2)
+ 000E 7000              db              70h, 00h                ;PGA_wind_GAIN_CR3(ACB00CR3)
+ 0010           ;  Instance name SAR6_sun, User Module SAR6
+ 0010           ;       Instance name SAR6_sun, Block Name SA(ASD11)
+ 0010 8400              db              84h, 00h                ;SAR6_sun_CR0(ASD11CR0)
+ 0012 859F              db              85h, 9fh                ;SAR6_sun_CR1(ASD11CR1)
+ 0014 8660              db              86h, 60h                ;SAR6_sun_CR2(ASD11CR2)
+ 0016 870C              db              87h, 0ch                ;SAR6_sun_CR3(ASD11CR3)
+ 0018           ;  Instance name SAR6_wind, User Module SAR6
+ 0018           ;       Instance name SAR6_wind, Block Name SA(ASC10)
+ 0018 8000              db              80h, 00h                ;SAR6_wind_CR0(ASC10CR0)
+ 001A 815F              db              81h, 5fh                ;SAR6_wind_CR1(ASC10CR1)
+ 001C 8260              db              82h, 60h                ;SAR6_wind_CR2(ASC10CR2)
+ 001E 8300              db              83h, 00h                ;SAR6_wind_CR3(ASC10CR3)
+ 0020           ;  Instance name SleepTimer, User Module SleepTimer
+ 0020           ;  Global Register values Bank 0
+ 0020 6029              db              60h, 29h                ; AnalogColumnInputSelect register (AMX_IN)
+ 0022 6600              db              66h, 00h                ; AnalogComparatorControl1 register (CMP_CR1)
+ 0024 6315              db              63h, 15h                ; AnalogReferenceControl register (ARF_CR)
+ 0026 6500              db              65h, 00h                ; AnalogSyncControl register (ASY_CR)
+ 0028 E600              db              e6h, 00h                ; DecimatorControl_0 register (DEC_CR0)
+ 002A E700              db              e7h, 00h                ; DecimatorControl_1 register (DEC_CR1)
+ 002C D600              db              d6h, 00h                ; I2CConfig register (I2CCFG)
+ 002E B000              db              b0h, 00h                ; Row_0_InputMux register (RDI0RI)
+ 0030 B100              db              b1h, 00h                ; Row_0_InputSync register (RDI0SYN)
+ 0032 B200              db              b2h, 00h                ; Row_0_LogicInputAMux register (RDI0IS)
+ 0034 B333              db              b3h, 33h                ; Row_0_LogicSelect_0 register (RDI0LT0)
+ 0036 B433              db              b4h, 33h                ; Row_0_LogicSelect_1 register (RDI0LT1)
+ 0038 B500              db              b5h, 00h                ; Row_0_OutputDrive_0 register (RDI0SRO0)
+ 003A B600              db              b6h, 00h                ; Row_0_OutputDrive_1 register (RDI0SRO1)
+ 003C B855              db              b8h, 55h                ; Row_1_InputMux register (RDI1RI)
+ 003E B900              db              b9h, 00h                ; Row_1_InputSync register (RDI1SYN)
+ 0040 BA10              db              bah, 10h                ; Row_1_LogicInputAMux register (RDI1IS)
+ 0042 BB33              db              bbh, 33h                ; Row_1_LogicSelect_0 register (RDI1LT0)
+ 0044 BC33              db              bch, 33h                ; Row_1_LogicSelect_1 register (RDI1LT1)
+ 0046 BD00              db              bdh, 00h                ; Row_1_OutputDrive_0 register (RDI1SRO0)
+ 0048 BE00              db              beh, 00h                ; Row_1_OutputDrive_1 register (RDI1SRO1)
+ 004A FF                db              ffh
+ 004B           LoadConfigTBL_weather_station_Bank1:
+ 004B           ;  Instance name I2Cm, User Module I2Cm
+ 004B           ;  Instance name LCD, User Module LCD
+ 004B           ;  Instance name PGA_sun, User Module PGA
+ 004B           ;       Instance name PGA_sun, Block Name GAIN(ACB01)
+ 004B           ;  Instance name PGA_wind, User Module PGA
+ 004B           ;       Instance name PGA_wind, Block Name GAIN(ACB00)
+ 004B           ;  Instance name SAR6_sun, User Module SAR6
+ 004B           ;       Instance name SAR6_sun, Block Name SA(ASD11)
+ 004B           ;  Instance name SAR6_wind, User Module SAR6
+ 004B           ;       Instance name SAR6_wind, Block Name SA(ASC10)
+ 004B           ;  Instance name SleepTimer, User Module SleepTimer
+ 004B           ;  Global Register values Bank 1
+ 004B 6100              db              61h, 00h                ; AnalogClockSelect1 register (CLK_CR1)
+ 004D 6900              db              69h, 00h                ; AnalogClockSelect2 register (CLK_CR2)
+ 004F 6015              db              60h, 15h                ; AnalogColumnClockSelect register (CLK_CR0)
+ 0051 6200              db              62h, 00h                ; AnalogIOControl_0 register (ABF_CR0)
+ 0053 6733              db              67h, 33h                ; AnalogLUTControl0 register (ALT_CR0)
+ 0055 6833              db              68h, 33h                ; AnalogLUTControl1 register (ALT_CR1)
+ 0057 6300              db              63h, 00h                ; AnalogModulatorControl_0 register (AMD_CR0)
+ 0059 6600              db              66h, 00h                ; AnalogModulatorControl_1 register (AMD_CR1)
+ 005B D100              db              d1h, 00h                ; GlobalDigitalInterconnect_Drive_Even_Input register (GDI_E_IN)
+ 005D D300              db              d3h, 00h                ; GlobalDigitalInterconnect_Drive_Even_Output register (GDI_E_OU)
+ 005F D000              db              d0h, 00h                ; GlobalDigitalInterconnect_Drive_Odd_Input register (GDI_O_IN)
+ 0061 D200              db              d2h, 00h                ; GlobalDigitalInterconnect_Drive_Odd_Output register (GDI_O_OU)
+ 0063 E1FF              db              e1h, ffh                ; OscillatorControl_1 register (OSC_CR1)
+ 0065 E200              db              e2h, 00h                ; OscillatorControl_2 register (OSC_CR2)
+ 0067 DFFF              db              dfh, ffh                ; OscillatorControl_3 register (OSC_CR3)
+ 0069 DE02              db              deh, 02h                ; OscillatorControl_4 register (OSC_CR4)
+ 006B DD00              db              ddh, 00h                ; OscillatorGlobalBusEnableControl register (OSC_GO_EN)
+ 006D FF                db              ffh
                 AREA psoc_config(rom, rel)
  0000           LoadConfigTBL_weather_station_Ordered:
  0000           ;  Ordered Global Register values
@@ -733,7 +717,7 @@
  0007 620003            mov     reg[00h], 03h           ; Port_0_DriveMode_0 register (PRT0DM0)
  000A 6201F8            mov     reg[01h], f8h           ; Port_0_DriveMode_1 register (PRT0DM1)
  000D 70EF          and   F, ~FLAG_XIO_MASK
- 000F 620338            mov     reg[03h], 38h           ; Port_0_DriveMode_2 register (PRT0DM2)
+ 000F 620318            mov     reg[03h], 18h           ; Port_0_DriveMode_2 register (PRT0DM2)
  0012 620200            mov     reg[02h], 00h           ; Port_0_GlobalSelect register (PRT0GS)
  0015 7110          or    F, FLAG_XIO_MASK
  0017 620200            mov     reg[02h], 00h           ; Port_0_IntCtrl_0 register (PRT0IC0)

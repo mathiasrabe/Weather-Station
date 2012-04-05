@@ -24,7 +24,7 @@ no rain: low
 **/
 
 #define PORT PRT0DR
-#define RAINPIN 0x10 // P0_5
+#define RAINPIN 0b00100000 // P0_5
 
 #include "PSoCAPI.h"
 #include <stdio.h>
@@ -49,8 +49,8 @@ void sunsensor(char *firstLine, char *secondLine) {
 		csprintf(secondLine, "night           ");
 	}
 	
-	if ((PORT & RAINPIN) == 1) {
+	if (PORT & RAINPIN) {
 		// rainy!
-		csprintf(&secondLine[10], "rainy");
+		csprintf(&secondLine[11], "rainy");
 	}
 }

@@ -38,7 +38,7 @@
  0004           ; **/
  0004           ; 
  0004           ; #define PORT PRT0DR
- 0004           ; #define RAINPIN 0x10 // P0_5
+ 0004           ; #define RAINPIN 0b00100000 // P0_5
  0004           ; 
  0004           ; #include "PSoCAPI.h"
  0004           ; #include <stdio.h>
@@ -137,42 +137,42 @@
  0063           L4:
  0063                   .dbline 52
  0063           ;       
- 0063           ;       if ((PORT & RAINPIN) == 1) {
+ 0063           ;       if (PORT & RAINPIN) {
  0063 5D00              mov A,REG[0]
- 0065 2110              and A,16
- 0067 3901              cmp A,1
- 0069 B01A              jnz L10
- 006B                   .dbline 54
- 006B           ;               // rainy!
- 006B           ;               csprintf(&secondLine[10], "rainy");
- 006B                   .dbline 54
- 006B 5000              mov A,>L12
- 006D 08                push A
- 006E 5000              mov A,<L12
- 0070 08                push A
- 0071 52FA              mov A,[X-6]
- 0073 010A              add A,10
- 0075 5300              mov [__r1],A
- 0077 52F9              mov A,[X-7]
- 0079 0900              adc A,0
- 007B 08                push A
- 007C 5100              mov A,[__r1]
- 007E 08                push A
- 007F 7C0000            xcall _csprintf
- 0082 38FC              add SP,-4
- 0084                   .dbline 55
- 0084           ;       }
- 0084           L10:
- 0084                   .dbline -2
- 0084           L1:
- 0084 38FF              add SP,-1
- 0086 20                pop X
- 0087                   .dbline 0 ; func end
- 0087 7F                ret
- 0088                   .dbsym l sunSample 0 c
- 0088                   .dbsym l secondLine -7 pc
- 0088                   .dbsym l firstLine -5 pc
- 0088                   .dbend
+ 0065 5300              mov [__r0],A
+ 0067 470020            tst [__r0],32
+ 006A A01A              jz L10
+ 006C                   .dbline 54
+ 006C           ;               // rainy!
+ 006C           ;               csprintf(&secondLine[11], "rainy");
+ 006C                   .dbline 54
+ 006C 5000              mov A,>L12
+ 006E 08                push A
+ 006F 5000              mov A,<L12
+ 0071 08                push A
+ 0072 52FA              mov A,[X-6]
+ 0074 010B              add A,11
+ 0076 5300              mov [__r1],A
+ 0078 52F9              mov A,[X-7]
+ 007A 0900              adc A,0
+ 007C 08                push A
+ 007D 5100              mov A,[__r1]
+ 007F 08                push A
+ 0080 7C0000            xcall _csprintf
+ 0083 38FC              add SP,-4
+ 0085                   .dbline 55
+ 0085           ;       }
+ 0085           L10:
+ 0085                   .dbline -2
+ 0085           L1:
+ 0085 38FF              add SP,-1
+ 0087 20                pop X
+ 0088                   .dbline 0 ; func end
+ 0088 7F                ret
+ 0089                   .dbsym l sunSample 0 c
+ 0089                   .dbsym l secondLine -7 pc
+ 0089                   .dbsym l firstLine -5 pc
+ 0089                   .dbend
                         .area lit(rom, con, rel, lit)
  0000           L12:
  0000 7261696E7900      .byte 'r,'a,'i,'n,'y,0

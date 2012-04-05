@@ -369,81 +369,6 @@ R 00 00 00 01
 .end
 .start
 XH
-H 2 areas 10 global symbols
-M sar6_rain.asm
-A text size 0 flags 0
-dbfile lib/sar6_rain.asm
-dbfunc 0 ? 0 I
-dbfile ./lib/SAR6_rain.inc
-dbfunc 0 ? 0 I
-dbfile lib/sar6_rain.asm
-dbfunc 0 ? 0 I
-dbfile memory.inc
-dbfunc 0 ? 0 I
-dbfile lib/sar6_rain.asm
-dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
-dbfunc 0 ? 0 I
-A UserModules size 3A flags 0
-dbfile lib/sar6_rain.asm
-dbfunc 0 ? 0 I
-dbline 49 0
-dbline 4A 2
-dbline 4B 3
-dbline 4E 4
-dbline 4F 6
-dbline 50 8
-dbline 51 A
-dbline 52 C
-dbline 54 D
-dbline 80 E
-dbline 81 11
-dbline 82 14
-dbline 88 17
-dbline 89 1A
-dbline 8A 1D
-dbline 8B 20
-dbline 8C 23
-dbline 8D 26
-dbline 94 29
-dbline 95 2B
-dbline 96 2D
-dbline 97 30
-dbline 98 32
-dbline 9A 33
-dbline 9C 34
-dbline 9E 35
-dbline B8 36
-dbline BA 39
-S SAR6_rain_GetSample Def000E
-S _SAR6_rain_SetPower Def0000
-S SAR6_rain_Stop Def0036
-S $sb$SAR6_rain_Stop Def0036
-S $se$SAR6_rain_Stop Def003A
-S _SAR6_rain_GetSample Def000E
-S SAR6_rain_cGetSample Def000E
-S $sb$SAR6_rain_cGetSample Def000E
-S $se$SAR6_rain_cGetSample Def0036
-S _SAR6_rain_Stop Def0036
-S SAR6_rain_Start Def0000
-S $sb$SAR6_rain_Start Def0000
-S $se$SAR6_rain_Start Def000E
-S SAR6_rain_SetPower Def0000
-S _SAR6_rain_cGetSample Def000E
-S _SAR6_rain_Start Def0000
-T 00 00 21 03 4F 08 5D 8B 21 FC 2B 00 60 8B 18 7F
-R 00 00 00 01
-T 00 0E 62 65 01 62 88 A0 62 65 6C 43 88 00 43 88
-R 00 00 00 01
-T 00 1C 00 43 88 00 43 88 00 43 88 00 43 88 00 5D
-R 00 00 00 01
-T 00 2A 88 21 1F 49 88 20 B0 03 40 7F 73 7F 41 8B
-R 00 00 00 01
-T 00 38 FC 7F
-R 00 00 00 01
-.end
-.start
-XH
 H 3 areas 3 global symbols
 M psocconfigtbl.asm
 A text size 0 flags 0
@@ -451,109 +376,107 @@ dbfile lib/psocconfigtbl.asm
 dbfunc 0 ? 0 I
 dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
 dbfunc 0 ? 0 I
-A lit size 7E flags 0
+A lit size 6E flags 0
 S LoadConfigTBL_weather_station_Bank0 Def0000
-S LoadConfigTBL_weather_station_Bank1 Def005B
+S LoadConfigTBL_weather_station_Bank1 Def004B
 A psoc_config size C5 flags 0
 dbfile lib/psocconfigtbl.asm
 dbfunc 0 ? 0 I
 dbline 2 0
-dbline 6F 2
+dbline 5F 2
 dbline 2 5
-dbline 71 7
-dbline 72 A
+dbline 61 7
+dbline 62 A
 dbline 2 D
-dbline 74 F
-dbline 75 12
+dbline 64 F
+dbline 65 12
 dbline 2 15
-dbline 77 17
-dbline 78 1A
+dbline 67 17
+dbline 68 1A
 dbline 2 1D
-dbline 7A 1F
-dbline 7B 22
+dbline 6A 1F
+dbline 6B 22
 dbline 2 25
-dbline 7D 27
-dbline 7E 2A
+dbline 6D 27
+dbline 6E 2A
 dbline 2 2D
-dbline 80 2F
-dbline 81 32
+dbline 70 2F
+dbline 71 32
 dbline 2 35
-dbline 83 37
-dbline 84 3A
+dbline 73 37
+dbline 74 3A
 dbline 2 3D
-dbline 86 3F
-dbline 87 42
+dbline 76 3F
+dbline 77 42
 dbline 2 45
-dbline 89 47
-dbline 8A 4A
+dbline 79 47
+dbline 7A 4A
 dbline 2 4D
-dbline 8C 4F
-dbline 8D 52
+dbline 7C 4F
+dbline 7D 52
 dbline 2 55
-dbline 8F 57
-dbline 90 5A
+dbline 7F 57
+dbline 80 5A
 dbline 2 5D
-dbline 92 5F
-dbline 93 62
+dbline 82 5F
+dbline 83 62
 dbline 2 65
-dbline 95 67
-dbline 96 6A
+dbline 85 67
+dbline 86 6A
 dbline 2 6D
-dbline 98 6F
-dbline 99 72
+dbline 88 6F
+dbline 89 72
 dbline 2 75
-dbline 9B 77
-dbline 9C 7A
+dbline 8B 77
+dbline 8C 7A
 dbline 2 7D
-dbline 9E 7F
-dbline 9F 82
+dbline 8E 7F
+dbline 8F 82
 dbline 2 85
-dbline A1 87
-dbline A2 8A
+dbline 91 87
+dbline 92 8A
 dbline 2 8D
-dbline A4 8F
-dbline A5 92
+dbline 94 8F
+dbline 95 92
 dbline 2 95
-dbline A7 97
-dbline A8 9A
+dbline 97 97
+dbline 98 9A
 dbline 2 9D
-dbline AA 9F
-dbline AB A2
+dbline 9A 9F
+dbline 9B A2
 dbline 2 A5
-dbline AD A7
-dbline AE AA
+dbline 9D A7
+dbline 9E AA
 dbline 2 AD
-dbline B0 AF
-dbline B1 B2
+dbline A0 AF
+dbline A1 B2
 dbline 2 B5
-dbline B3 B7
-dbline B4 BA
+dbline A3 B7
+dbline A4 BA
 dbline 2 BD
-dbline B6 BF
+dbline A6 BF
 dbline 2 C2
-dbline B8 C4
+dbline A8 C4
 S LoadConfigTBL_weather_station_Ordered Def0000
-T 00 00 79 0D 7A 21 7B 20 78 00 75 0E 76 21 77 20
+T 00 00 75 0E 76 21 77 20 74 00 71 0D 72 21 73 20
 R 00 00 00 01
-T 00 0E 74 00 71 0D 72 21 73 20 70 00 88 00 89 5F
+T 00 0E 70 00 84 00 85 9F 86 60 87 0C 80 00 81 5F
 R 00 00 00 01
-T 00 1C 8A 60 8B 00 84 00 85 9F 86 60 87 0C 80 00
+T 00 1C 82 60 83 00 60 29 66 00 63 15 65 00 E6 00
 R 00 00 00 01
-T 00 2A 81 5F 82 60 83 00 60 29 66 00 63 15 65 00
+T 00 2A E7 00 D6 00 B0 00 B1 00 B2 00 B3 33 B4 33
 R 00 00 00 01
-T 00 38 E6 00 E7 00 D6 00 B0 00 B1 00 B2 00 B3 33
+T 00 38 B5 00 B6 00 B8 55 B9 00 BA 10 BB 33 BC 33
 R 00 00 00 01
-T 00 46 B4 33 B5 00 B6 00 B8 55 B9 00 BA 10 BB 33
+T 00 46 BD 00 BE 00 FF 61 00 69 00 60 15 62 00 67
 R 00 00 00 01
-T 00 54 BC 33 BD 00 BE 00 FF 61 00 69 00 60 15 62
+T 00 54 33 68 33 63 00 66 00 D1 00 D3 00 D0 00 D2
 R 00 00 00 01
-T 00 62 00 67 33 68 33 63 00 66 00 D1 00 D3 00 D0
-R 00 00 00 01
-T 00 70 00 D2 00 E1 FF E2 00 DF FF DE 02 DD 00 FF
+T 00 62 00 E1 FF E2 00 DF FF DE 02 DD 00 FF
 R 00 00 00 01
 T 00 00 70 EF 62 00 00 71 10 62 00 03 62 01 F8 70
 R 00 00 00 02
-T 00 0E EF 62 03 38 62 02 00 71 10 62 02 00 62 03
+T 00 0E EF 62 03 18 62 02 00 71 10 62 02 00 62 03
 R 00 00 00 02
 T 00 1C 00 70 EF 62 01 00 62 04 00 71 10 62 04 00
 R 00 00 00 02
@@ -849,78 +772,6 @@ R 00 00 00 01
 T 00 1C 74 FE 2B 00 60 75 18 7F 27 00 18 2B 00 60
 R 00 00 00 01
 T 00 2A 75 43 74 01 18 7F 41 77 FC 7F
-R 00 00 00 01
-.end
-.start
-XH
-H 2 areas E global symbols
-M pga_rain.asm
-A text size 0 flags 0
-dbfile lib/pga_rain.asm
-dbfunc 0 ? 0 I
-dbfile memory.inc
-dbfunc 0 ? 0 I
-dbfile lib/pga_rain.asm
-dbfunc 0 ? 0 I
-dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
-dbfunc 0 ? 0 I
-dbfile lib/pga_rain.asm
-dbfunc 0 ? 0 I
-dbfile ./lib/PGA_rain.inc
-dbfunc 0 ? 0 I
-A UserModules size 34 flags 0
-dbfile lib/pga_rain.asm
-dbfunc 0 ? 0 I
-dbline 74 0
-dbline 75 2
-dbline 77 3
-dbline 78 4
-dbline 79 6
-dbline 7A 8
-dbline 7B A
-dbline 7C C
-dbline 7E D
-dbline 9D E
-dbline 9E 10
-dbline A0 11
-dbline A1 12
-dbline A2 14
-dbline A3 16
-dbline A4 19
-dbline A5 1B
-dbline A6 1E
-dbline A7 20
-dbline A8 22
-dbline AA 23
-dbline AD 24
-dbline AE 27
-dbline AF 29
-dbline B0 2B
-dbline B1 2E
-dbline B3 2F
-dbline CE 30
-dbline D0 33
-S $sb$PGA_rain_Stop Def0030
-S $se$PGA_rain_Stop Def0034
-S $sb$PGA_rain_SetGain Def000E
-S $se$PGA_rain_SetGain Def0030
-S _PGA_rain_Stop Def0030
-S _PGA_rain_SetGain Def000E
-S PGA_rain_Start Def0000
-S $sb$PGA_rain_Start Def0000
-S $se$PGA_rain_Start Def000E
-S PGA_rain_SetPower Def0000
-S _PGA_rain_Start Def0000
-S _PGA_rain_SetPower Def0000
-S PGA_rain_Stop Def0030
-S PGA_rain_SetGain Def000E
-T 00 00 21 03 4F 08 5D 7B 21 FC 2B 00 60 7B 18 7F
-R 00 00 00 01
-T 00 0E 21 FC 4F 08 5D 79 21 07 48 00 04 B0 0A 41
-R 00 00 00 01
-T 00 1C 78 FE 2B 00 60 79 18 7F 27 00 18 2B 00 60
-R 00 00 00 01
-T 00 2A 79 43 78 01 18 7F 41 7B FC 7F
 R 00 00 00 01
 .end
 .start

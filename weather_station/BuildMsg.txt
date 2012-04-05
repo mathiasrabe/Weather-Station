@@ -1,12 +1,10 @@
 Starting MAKE...
 creating project.mk -- no changes
-CAUTION lib/psocconfig.asm is older than PSoCConfig.xml or missing
-CAUTION you may need to generate source in PSoC Designer
 ./sunsensor.c
 Linking..
-  ROM 28% full. 4479 out of 16384 bytes used (does not include absolute areas).
+  ROM 28% full. 4464 out of 16384 bytes used (does not include absolute areas).
   RAM 20% full. 49 bytes used (does not include stack usage).
 Built with ICCM8C STD V7.05.00
  
-weather_station - 0 error(s) 0 warning(s) 12:50:34
+weather_station - 0 error(s) 0 warning(s) 11:38:03
 
