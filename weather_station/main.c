@@ -56,6 +56,15 @@ void main(void)
 	while(1) {
 		// get temp and humidity here
 		
+	//checking if butten is prest 
+		if(PRT0DR & 0b00000100)
+			{ 
+				//switches displaymode betwen 0 and 4
+			  	displaymode ++;
+				if(displaymode>4)
+				displaymode = 0;
+			}
+
 		switch(displaymode) {
 			case overview:
 				// overview();
@@ -92,21 +101,4 @@ void main(void)
 		// lets sleep for a while
 		SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
 	}
-}
-// interrupt servis routine 
-
-void isrbutton(void)
-{
-         // ToDo:
-         // Enable interrupt on chip printout
-         // debounching ??
-         // testing
-         // change poot file
-
-         // figur out if there is an better way to increase displaymode than with global variables
-	 // increases subprogram until displaymode > 4
-         displaymode++;
-	 if(displaymode>4)
-	       	displaymode = 0;
-         return;
 }
