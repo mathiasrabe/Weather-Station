@@ -1,0 +1,40 @@
+XH
+H 2 areas 3 global symbols
+M windspeed.c
+S _SAR6_sun_cGetSample Ref0000
+S _csprintf Ref0000
+A text size 41 flags 0
+dbfile ./windspeed.c
+dbfile C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\windspeed.c
+dbfunc e windsensor 0 fV
+dbsym l windSample 0 c
+dbsym l secondLine FFFFFFF9 pc
+dbsym l firstLine FFFFFFFB pc
+dbline FFFFFFFF 0
+dbline 8 4
+dbline 9 4
+dbline B 7
+dbline C E
+dbline D 11
+dbline F 1D
+dbline 10 2C
+dbline FFFFFFFE 3D
+dbline 0 40
+S _windsensor Def0000
+A lit size 21 flags 1
+T 00 00 10 4F 38 01 56 00 00 10 7C 00 00 20 54 00
+R 00 00 00 00 02 0B 00 00
+T 00 0E 07 00 1F 52 00 60 E8 62 E9 25 40 5D EB 54
+R 00 00 00 00
+T 00 1C 00 50 00 10 08 50 00 10 08 52 FB 08 52 FC
+R 00 00 00 00 41 04 00 01 01 08 00 01
+T 00 28 08 7C 00 00 50 00 00 08 50 00 00 08 52 F9
+R 00 00 00 00 02 04 00 01 41 07 00 01 01 0B 00 01
+T 00 34 08 52 FA 08 7C 00 00 38 F8 38 FF 20 7F
+R 00 00 00 00 02 07 00 01
+T 00 00 25 69 20 6B 6D 2F 68 20 20 20 20 20 20 20
+R 00 00 00 01
+T 00 0E 20 00 57 69 6E 64 73 70 65 65 64 20 26 20
+R 00 00 00 01
+T 00 1C 44 69 72 65 00
+R 00 00 00 01

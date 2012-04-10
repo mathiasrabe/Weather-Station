@@ -13,5 +13,5 @@ void windsensor(char *firstLine, char *secondLine) {
 	windSample *= 37; // to get km/h
 	
 	csprintf(firstLine, "Windspeed & Dire");
-	csprintf(secondLine, "%3i km/h        ");
+	csprintf(secondLine, "%i km/h        ");
 }
