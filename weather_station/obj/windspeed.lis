@@ -36,46 +36,64 @@
  0017 A004              jz X0
  0019 5600FF            mov [X+0],-1
  001C           X0:
- 001C                   .dbline 15
- 001C           ;       //windSample += 31; // make unsigned int
- 001C           ;       //windSample *= 37; // to get km/h
- 001C           ;       
- 001C           ;       csprintf(firstLine, "Windspeed & Dire");
- 001C 5010              mov A,>L2
- 001E 08                push A
- 001F 5010              mov A,<L2
- 0021 08                push A
- 0022 52FB              mov A,[X-5]
+ 001C                   .dbline 12
+ 001C           ;       windSample += 31; // make unsigned int
+ 001C 07011F            add [X+1],31
+ 001F 0F0000            adc [X+0],0
+ 0022                   .dbline 13
+ 0022           ;       windSample *= 37; // to get km/h
+ 0022 5200              mov A,[X+0]
  0024 08                push A
- 0025 52FC              mov A,[X-4]
+ 0025 5201              mov A,[X+1]
  0027 08                push A
- 0028 7C0000            xcall _csprintf
- 002B                   .dbline 16
- 002B           ;       csprintf(secondLine, "%i km/h        ", windSample);
- 002B 5200              mov A,[X+0]
+ 0028 5000              mov A,0
+ 002A 08                push A
+ 002B 5025              mov A,37
  002D 08                push A
- 002E 5201              mov A,[X+1]
- 0030 08                push A
- 0031 5000              mov A,>L3
- 0033 08                push A
- 0034 5000              mov A,<L3
- 0036 08                push A
- 0037 52F9              mov A,[X-7]
- 0039 08                push A
- 003A 52FA              mov A,[X-6]
- 003C 08                push A
- 003D 7C0000            xcall _csprintf
- 0040 38F6              add SP,-10
- 0042                   .dbline -2
- 0042           L1:
- 0042 38FE              add SP,-2
- 0044 20                pop X
- 0045                   .dbline 0 ; func end
- 0045 7F                ret
- 0046                   .dbsym l windSample 0 I
- 0046                   .dbsym l secondLine -7 pc
- 0046                   .dbsym l firstLine -5 pc
- 0046                   .dbend
+ 002E 7C0000            xcall __mul16
+ 0031 38FC              add SP,-4
+ 0033 5100              mov A,[__rX]
+ 0035 5401              mov [X+1],A
+ 0037 5100              mov A,[__rY]
+ 0039 5400              mov [X+0],A
+ 003B                   .dbline 15
+ 003B           ;       
+ 003B           ;       csprintf(firstLine, "Windspeed & Dire");
+ 003B 5010              mov A,>L2
+ 003D 08                push A
+ 003E 5010              mov A,<L2
+ 0040 08                push A
+ 0041 52FB              mov A,[X-5]
+ 0043 08                push A
+ 0044 52FC              mov A,[X-4]
+ 0046 08                push A
+ 0047 7C0000            xcall _csprintf
+ 004A                   .dbline 16
+ 004A           ;       csprintf(secondLine, "%i km/h        ", windSample);
+ 004A 5200              mov A,[X+0]
+ 004C 08                push A
+ 004D 5201              mov A,[X+1]
+ 004F 08                push A
+ 0050 5000              mov A,>L3
+ 0052 08                push A
+ 0053 5000              mov A,<L3
+ 0055 08                push A
+ 0056 52F9              mov A,[X-7]
+ 0058 08                push A
+ 0059 52FA              mov A,[X-6]
+ 005B 08                push A
+ 005C 7C0000            xcall _csprintf
+ 005F 38F6              add SP,-10
+ 0061                   .dbline -2
+ 0061           L1:
+ 0061 38FE              add SP,-2
+ 0063 20                pop X
+ 0064                   .dbline 0 ; func end
+ 0064 7F                ret
+ 0065                   .dbsym l windSample 0 I
+ 0065                   .dbsym l secondLine -7 pc
+ 0065                   .dbsym l firstLine -5 pc
+ 0065                   .dbend
                         .area lit(rom, con, rel, lit)
  0000           L3:
  0000 2569206B6D2F68202020202020202000  .byte 37,'i,32,'k,'m,47,'h,32,32,32,32,32,32,32,32,0

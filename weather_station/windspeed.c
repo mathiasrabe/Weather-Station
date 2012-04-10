@@ -9,8 +9,8 @@ void windsensor(char *firstLine, char *secondLine) {
 	int windSample = 0x00;
 
 	windSample = SAR6_wind_cGetSample();
-	//windSample += 31; // make unsigned int
-	//windSample *= 37; // to get km/h
+	windSample += 31; // make unsigned int
+	windSample *= 37; // to get km/h
 	
 	csprintf(firstLine, "Windspeed & Dire");
 	csprintf(secondLine, "%i km/h        ", windSample);

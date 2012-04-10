@@ -4068,7 +4068,7 @@ __UserModules_end|_main|__text_start|_main:
     0988: 08       PUSH  A
     0989: 51 07    MOV   A,[__r1]
     098B: 08       PUSH  A
-    098C: 7C 0E ED LCALL _csprintf
+    098C: 7C 0F 3D LCALL _csprintf
 (0063) 	csprintf(lcdSecondLine, " Weatherstation ");
     098F: 50 01    MOV   A,0x1
     0991: 08       PUSH  A
@@ -4080,7 +4080,7 @@ __UserModules_end|_main|__text_start|_main:
     099C: 08       PUSH  A
     099D: 51 07    MOV   A,[__r1]
     099F: 08       PUSH  A
-    09A0: 7C 0E ED LCALL _csprintf
+    09A0: 7C 0F 3D LCALL _csprintf
     09A3: 38 F8    ADD   SP,0xF8
 (0064) 	LCD_Position(0,0);
     09A5: 10       PUSH  X
@@ -4206,7 +4206,7 @@ __UserModules_end|_main|__text_start|_main:
     0A5A: 08       PUSH  A
     0A5B: 51 07    MOV   A,[__r1]
     0A5D: 08       PUSH  A
-    0A5E: 7C 0E ED LCALL _csprintf
+    0A5E: 7C 0F 3D LCALL _csprintf
 (0096) 				csprintf(lcdSecondLine,"                ");
     0A61: 50 01    MOV   A,0x1
     0A63: 08       PUSH  A
@@ -4218,7 +4218,7 @@ __UserModules_end|_main|__text_start|_main:
     0A6E: 08       PUSH  A
     0A6F: 51 07    MOV   A,[__r1]
     0A71: 08       PUSH  A
-    0A72: 7C 0E ED LCALL _csprintf
+    0A72: 7C 0F 3D LCALL _csprintf
     0A75: 38 F8    ADD   SP,0xF8
 (0097) 		}
 (0098) 		
@@ -4325,7 +4325,7 @@ _sunsensor:
     0AD0: 08       PUSH  A
     0AD1: 52 FC    MOV   A,[X-4]
     0AD3: 08       PUSH  A
-    0AD4: 7C 0E ED LCALL _csprintf
+    0AD4: 7C 0F 3D LCALL _csprintf
     0AD7: 38 FC    ADD   SP,0xFC
 (0040) 	
 (0041) 	if( sunSample >= 24 ) {
@@ -4341,7 +4341,7 @@ _sunsensor:
     0AE6: 08       PUSH  A
     0AE7: 52 FA    MOV   A,[X-6]
     0AE9: 08       PUSH  A
-    0AEA: 7C 0E ED LCALL _csprintf
+    0AEA: 7C 0F 3D LCALL _csprintf
     0AED: 38 FC    ADD   SP,0xFC
 (0044) 	} else if( sunSample >= 5 ) {
     0AEF: 80 2A    JMP   0x0B1A
@@ -4357,7 +4357,7 @@ _sunsensor:
     0AFE: 08       PUSH  A
     0AFF: 52 FA    MOV   A,[X-6]
     0B01: 08       PUSH  A
-    0B02: 7C 0E ED LCALL _csprintf
+    0B02: 7C 0F 3D LCALL _csprintf
     0B05: 38 FC    ADD   SP,0xFC
 (0047) 	} else {
     0B07: 80 12    JMP   0x0B1A
@@ -4371,7 +4371,7 @@ _sunsensor:
     0B11: 08       PUSH  A
     0B12: 52 FA    MOV   A,[X-6]
     0B14: 08       PUSH  A
-    0B15: 7C 0E ED LCALL _csprintf
+    0B15: 7C 0F 3D LCALL _csprintf
     0B18: 38 FC    ADD   SP,0xFC
 (0050) 	}
 (0051) 	
@@ -4394,7 +4394,7 @@ _sunsensor:
     0B33: 08       PUSH  A
     0B34: 51 07    MOV   A,[__r1]
     0B36: 08       PUSH  A
-    0B37: 7C 0E ED LCALL _csprintf
+    0B37: 7C 0F 3D LCALL _csprintf
     0B3A: 38 FC    ADD   SP,0xFC
 (0055) 	}
     0B3C: 38 FF    ADD   SP,0xFF
@@ -4429,34 +4429,50 @@ _windsensor:
     0B54: 48 01 80 TST   [X+1],0x80
     0B57: A0 04    JZ    0x0B5C
     0B59: 56 00 FF MOV   [X+0],0xFF
-(0012) 	//windSample += 31; // make unsigned int
-(0013) 	//windSample *= 37; // to get km/h
+(0012) 	windSample += 31; // make unsigned int
+    0B5C: 07 01 1F ADD   [X+1],0x1F
+    0B5F: 0F 00 00 ADC   [X+0],0x0
+(0013) 	windSample *= 37; // to get km/h
+    0B62: 52 00    MOV   A,[X+0]
+    0B64: 08       PUSH  A
+    0B65: 52 01    MOV   A,[X+1]
+    0B67: 08       PUSH  A
+    0B68: 50 00    MOV   A,0x0
+    0B6A: 08       PUSH  A
+    0B6B: 50 25    MOV   A,0x25
+    0B6D: 08       PUSH  A
+    0B6E: 7C 0B DC LCALL 0x0BDC
+    0B71: 38 FC    ADD   SP,0xFC
+    0B73: 51 02    MOV   A,[__rX]
+    0B75: 54 01    MOV   [X+1],A
+    0B77: 51 01    MOV   A,[__rY]
+    0B79: 54 00    MOV   [X+0],A
 (0014) 	
 (0015) 	csprintf(firstLine, "Windspeed & Dire");
-    0B5C: 50 01    MOV   A,0x1
-    0B5E: 08       PUSH  A
-    0B5F: 50 EE    MOV   A,0xEE
-    0B61: 08       PUSH  A
-    0B62: 52 FB    MOV   A,[X-5]
-    0B64: 08       PUSH  A
-    0B65: 52 FC    MOV   A,[X-4]
-    0B67: 08       PUSH  A
-    0B68: 7C 0E ED LCALL _csprintf
+    0B7B: 50 01    MOV   A,0x1
+    0B7D: 08       PUSH  A
+    0B7E: 50 EE    MOV   A,0xEE
+    0B80: 08       PUSH  A
+    0B81: 52 FB    MOV   A,[X-5]
+    0B83: 08       PUSH  A
+    0B84: 52 FC    MOV   A,[X-4]
+    0B86: 08       PUSH  A
+    0B87: 7C 0F 3D LCALL _csprintf
 (0016) 	csprintf(secondLine, "%i km/h        ", windSample);
-    0B6B: 52 00    MOV   A,[X+0]
-    0B6D: 08       PUSH  A
-    0B6E: 52 01    MOV   A,[X+1]
-    0B70: 08       PUSH  A
-    0B71: 50 01    MOV   A,0x1
-    0B73: 08       PUSH  A
-    0B74: 50 DE    MOV   A,0xDE
-    0B76: 08       PUSH  A
-    0B77: 52 F9    MOV   A,[X-7]
-    0B79: 08       PUSH  A
-    0B7A: 52 FA    MOV   A,[X-6]
-    0B7C: 08       PUSH  A
-    0B7D: 7C 0E ED LCALL _csprintf
-    0B80: 38 F6    ADD   SP,0xF6
-    0B82: 38 FE    ADD   SP,0xFE
-    0B84: 20       POP   X
-    0B85: 7F       RET   
+    0B8A: 52 00    MOV   A,[X+0]
+    0B8C: 08       PUSH  A
+    0B8D: 52 01    MOV   A,[X+1]
+    0B8F: 08       PUSH  A
+    0B90: 50 01    MOV   A,0x1
+    0B92: 08       PUSH  A
+    0B93: 50 DE    MOV   A,0xDE
+    0B95: 08       PUSH  A
+    0B96: 52 F9    MOV   A,[X-7]
+    0B98: 08       PUSH  A
+    0B99: 52 FA    MOV   A,[X-6]
+    0B9B: 08       PUSH  A
+    0B9C: 7C 0F 3D LCALL _csprintf
+    0B9F: 38 F6    ADD   SP,0xF6
+    0BA1: 38 FE    ADD   SP,0xFE
+    0BA3: 20       POP   X
+    0BA4: 7F       RET   

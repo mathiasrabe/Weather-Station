@@ -1,6 +1,6 @@
 Project:      output/weather_station
 Build Number: 0
-Date:         Tue Apr 10 10:52:36 2012
+Date:         Tue Apr 10 10:56:10 2012
 Compiler:     ICCM8C
 Version:      7.05.00
 
@@ -146,7 +146,7 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0941   0A80 =   2688. bytes (rel,con,rom,code)
+                            text   0941   0AD0 =   2768. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
@@ -154,17 +154,17 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
        0941  __text_start
        0AB7  _sunsensor
        0B40  _windsensor
-       0BBD  __plcall
-       0BC9  _itoa
-       0D46  _utoa
-       0E44  _isdigit
-       0E62  _islower
-       0E80  _isspace
-       0E9E  _toupper
-       0ED3  __csdepi
-       0EED  _csprintf
-       0F2C  __cprint
-       13C1  __text_end
+       0C0D  __plcall
+       0C19  _itoa
+       0D96  _utoa
+       0E94  _isdigit
+       0EB2  _islower
+       0ED0  _isspace
+       0EEE  _toupper
+       0F23  __csdepi
+       0F3D  _csprintf
+       0F7C  __cprint
+       1411  __text_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -241,8 +241,8 @@ Files Linked      [ module(s) ]
 ./obj/windspeed.o	[ windspeed.c ]
 <library>	[ sleeptimerint.asm, sleeptimer.asm, sar6_wind.asm, sar6_sun.asm, psocconfigtbl.asm, psocconfig.asm ]
 [ pga_wind.asm, pga_sun.asm, lcd.asm, rZ.asm, rY.asm, rX.asm, r5.asm, r4.asm, r3.asm, r2.asm, r1.asm, r0.asm ]
-[ divmodu_16x16_16_util.asm, i_div16_block_util.asm, plcall.s, itoa.s, utoa.s, isdigit.s, islower.s ]
-[ isspace.s, ctype.s, toupper.s, sprintf.s, _printf.s ]
+[ divmodu_16x16_16_util.asm, i_div16_block_util.asm, mul16_util.asm, plcall.s, itoa.s, utoa.s ]
+[ isdigit.s, islower.s, isspace.s, ctype.s, toupper.s, sprintf.s, _printf.s ]
 
 Area Definitions
 
