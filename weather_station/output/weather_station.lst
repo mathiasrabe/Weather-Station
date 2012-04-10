@@ -4401,14 +4401,11 @@ _sunsensor:
     0B3E: 20       POP   X
     0B3F: 7F       RET   
 FILE: C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\windspeed.c
-(0001) #define PORT PRT0DR
-(0002) #define RAINPIN 0b00001000 // P0_3
-(0003) 
-(0004) #include "PSoCAPI.h"
-(0005) #include <stdio.h>
-(0006) #include <stdlib.h>
-(0007) 
-(0008) void windsensor(char *firstLine, char *secondLine) {
+(0001) #include "PSoCAPI.h"
+(0002) #include <stdio.h>
+(0003) #include <stdlib.h>
+(0004) 
+(0005) void windsensor(char *firstLine, char *secondLine) {
 _windsensor:
   windSample           --> X+0
   secondLine           --> X-7
@@ -4416,11 +4413,11 @@ _windsensor:
     0B40: 10       PUSH  X
     0B41: 4F       MOV   X,SP
     0B42: 38 02    ADD   SP,0x2
-(0009) 	int windSample = 0x00;
+(0006) 	int windSample = 0x00;
     0B44: 56 01 00 MOV   [X+1],0x0
     0B47: 56 00 00 MOV   [X+0],0x0
-(0010) 
-(0011) 	windSample = SAR6_wind_cGetSample();
+(0007) 
+(0008) 	windSample = SAR6_wind_cGetSample();
     0B4A: 10       PUSH  X
     0B4B: 7C 05 BD LCALL _SAR6_wind_cGetSample|_SAR6_wind_GetSample|SAR6_wind_cGetSample|SAR6_wind_GetSample
     0B4E: 20       POP   X
@@ -4429,10 +4426,10 @@ _windsensor:
     0B54: 48 01 80 TST   [X+1],0x80
     0B57: A0 04    JZ    0x0B5C
     0B59: 56 00 FF MOV   [X+0],0xFF
-(0012) 	windSample += 31; // make unsigned int
-    0B5C: 07 01 1F ADD   [X+1],0x1F
+(0009) 	windSample += 30; // make unsigned int
+    0B5C: 07 01 1E ADD   [X+1],0x1E
     0B5F: 0F 00 00 ADC   [X+0],0x0
-(0013) 	windSample *= 37; // to get km/h
+(0010) 	windSample *= 37; // to get km/h
     0B62: 52 00    MOV   A,[X+0]
     0B64: 08       PUSH  A
     0B65: 52 01    MOV   A,[X+1]
@@ -4447,8 +4444,8 @@ _windsensor:
     0B75: 54 01    MOV   [X+1],A
     0B77: 51 01    MOV   A,[__rY]
     0B79: 54 00    MOV   [X+0],A
-(0014) 	
-(0015) 	csprintf(firstLine, "Windspeed & Dire");
+(0011) 	
+(0012) 	csprintf(firstLine, "Windspeed & Dire");
     0B7B: 50 01    MOV   A,0x1
     0B7D: 08       PUSH  A
     0B7E: 50 EE    MOV   A,0xEE
@@ -4458,7 +4455,7 @@ _windsensor:
     0B84: 52 FC    MOV   A,[X-4]
     0B86: 08       PUSH  A
     0B87: 7C 0F 3D LCALL _csprintf
-(0016) 	csprintf(secondLine, "%i km/h        ", windSample);
+(0013) 	csprintf(secondLine, "%i km/h        ", windSample);
     0B8A: 52 00    MOV   A,[X+0]
     0B8C: 08       PUSH  A
     0B8D: 52 01    MOV   A,[X+1]

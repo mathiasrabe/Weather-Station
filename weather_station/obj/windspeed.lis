@@ -11,20 +11,17 @@
  0000 10                push X
  0001 4F                mov X,SP
  0002 3802              add SP,2
- 0004                   .dbline 8
- 0004           ; #define PORT PRT0DR
- 0004           ; #define RAINPIN 0b00001000 // P0_3
- 0004           ; 
+ 0004                   .dbline 5
  0004           ; #include "PSoCAPI.h"
  0004           ; #include <stdio.h>
  0004           ; #include <stdlib.h>
  0004           ; 
  0004           ; void windsensor(char *firstLine, char *secondLine) {
- 0004                   .dbline 9
+ 0004                   .dbline 6
  0004           ;       int windSample = 0x00;
  0004 560100            mov [X+1],0
  0007 560000            mov [X+0],0
- 000A                   .dbline 11
+ 000A                   .dbline 8
  000A           ; 
  000A           ;       windSample = SAR6_wind_cGetSample();
  000A 10                push X
@@ -36,11 +33,11 @@
  0017 A004              jz X0
  0019 5600FF            mov [X+0],-1
  001C           X0:
- 001C                   .dbline 12
- 001C           ;       windSample += 31; // make unsigned int
- 001C 07011F            add [X+1],31
+ 001C                   .dbline 9
+ 001C           ;       windSample += 30; // make unsigned int
+ 001C 07011E            add [X+1],30
  001F 0F0000            adc [X+0],0
- 0022                   .dbline 13
+ 0022                   .dbline 10
  0022           ;       windSample *= 37; // to get km/h
  0022 5200              mov A,[X+0]
  0024 08                push A
@@ -56,7 +53,7 @@
  0035 5401              mov [X+1],A
  0037 5100              mov A,[__rY]
  0039 5400              mov [X+0],A
- 003B                   .dbline 15
+ 003B                   .dbline 12
  003B           ;       
  003B           ;       csprintf(firstLine, "Windspeed & Dire");
  003B 5010              mov A,>L2
@@ -68,7 +65,7 @@
  0044 52FC              mov A,[X-4]
  0046 08                push A
  0047 7C0000            xcall _csprintf
- 004A                   .dbline 16
+ 004A                   .dbline 13
  004A           ;       csprintf(secondLine, "%i km/h        ", windSample);
  004A 5200              mov A,[X+0]
  004C 08                push A
