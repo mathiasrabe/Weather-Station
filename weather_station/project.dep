@@ -4,18 +4,18 @@
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8ssc.inc\
    C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\lib\GLOBAL~1.INC\
    C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\memory.inc
-./obj/main.o :  ./lib/I2Cm.h ./lib/LCD.h ./lib/PGA_rain.h\
-   ./lib/PGA_sun.h ./lib/PGA_wind.h ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
-   ./lib/SAR6_R~1.H ./lib/SAR6_sun.h ./lib/SAR6_W~1.H ./lib/SLEEPT~1.H\
+./obj/main.o :  ./lib/I2Cm.h ./lib/LCD.h ./lib/PGA_sun.h\
+   ./lib/PGA_wind.h ./lib/PSoCAPI.h ./lib/PSOCGP~1.H ./lib/SAR6_sun.h\
+   ./lib/SAR6_W~1.H ./lib/SLEEPT~1.H\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/M8C.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/_const.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/stdarg.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/stdio.h\
    C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\SUNSEN~1.H
-./obj/sunsensor.o :  ./lib/I2Cm.h ./lib/LCD.h ./lib/PGA_rain.h\
-   ./lib/PGA_sun.h ./lib/PGA_wind.h ./lib/PSoCAPI.h ./lib/PSOCGP~1.H\
-   ./lib/SAR6_R~1.H ./lib/SAR6_sun.h ./lib/SAR6_W~1.H ./lib/SLEEPT~1.H\
+./obj/sunsensor.o :  ./lib/I2Cm.h ./lib/LCD.h ./lib/PGA_sun.h\
+   ./lib/PGA_wind.h ./lib/PSoCAPI.h ./lib/PSOCGP~1.H ./lib/SAR6_sun.h\
+   ./lib/SAR6_W~1.H ./lib/SLEEPT~1.H\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/M8C.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.h\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/_const.h\
@@ -29,9 +29,6 @@
 ./lib/obj/lcd.o :  ./lib/LCD.inc\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
    C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\memory.inc
-./lib/obj/pga_rain.o :  ./lib/PGA_rain.inc\
-   C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
-   C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\memory.inc
 ./lib/obj/pga_sun.o :  ./lib/PGA_sun.inc\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
    C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\memory.inc
@@ -43,9 +40,6 @@
    C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\memory.inc
 ./lib/obj/psocconfigtbl.o : \
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc
-./lib/obj/sar6_rain.o :  ./lib/SAR6_R~1.INC\
-   C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
-   C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\memory.inc
 ./lib/obj/sar6_sun.o :  ./lib/SAR6_sun.inc\
    C:/PROGRA~2/Cypress/PSOCDE~1/5.2/Common/CY110F~1/tools/include/CY8C27~1/m8c.inc\
    C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\memory.inc
