@@ -49,6 +49,11 @@ void main(void)
 	PGA_sun_SetGain(PGA_sun_G5_33);  // gain of 5,33
     PGA_sun_Start(PGA_sun_HIGHPOWER);
 	SAR6_sun_Start(SAR6_sun_HIGHPOWER);
+	
+	// init PGA and SAR6 for windsensor
+	PGA_wind_SetGain(PGA_wind_G5_33);  // gain of 5,33
+    PGA_wind_Start(PGA_wind_HIGHPOWER);
+	SAR6_wind_Start(SAR6_wind_HIGHPOWER);
 
 	// LCD init
 	LCD_Init();
