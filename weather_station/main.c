@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include "sunsensor.h"
+#include "windspeed.h"
 /*
 typedef enum {
 	overview = 0,
@@ -34,7 +35,7 @@ void main(void)
 {
 	//Variables
 	char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
-	unsigned int displaymode = 3; // FIXME: sollte 0 sein!
+	unsigned int displaymode = 4; // FIXME: sollte 0 sein!
 	
 	/** init **/
 	
@@ -47,10 +48,7 @@ void main(void)
 	// init PGA and SAR6 for sun and rain sensor
 	PGA_sun_SetGain(PGA_sun_G5_33);  // gain of 5,33
     PGA_sun_Start(PGA_sun_HIGHPOWER);
-	//PGA_rain_SetGain(PGA_rain_G8_00);
-    //PGA_rain_Start(PGA_rain_MEDPOWER);
 	SAR6_sun_Start(SAR6_sun_HIGHPOWER);
-	//SAR6_rain_Start(SAR6_sun_MEDPOWER);
 
 	// LCD init
 	LCD_Init();
@@ -84,7 +82,7 @@ void main(void)
 				break;
 				
 			case 4:
-				// wind();
+				windsensor(lcdFirstLine, lcdSecondLine);
 				break;
 		
 			default:

@@ -1,151 +1,152 @@
 Project:      output/weather_station
 Build Number: 0
-Date:         Thu Apr 05 11:38:03 2012
+Date:         Tue Apr 10 10:28:23 2012
 Compiler:     ICCM8C
 Version:      7.05.00
 
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                             lit   0150   0271 =    625. bytes (rel,con,rom,lit)
+                             lit   0150   0293 =    659. bytes (rel,con,rom,lit)
 
        Addr  Global Symbol
       -----  --------------------------------
-       01DE  LoadConfigTBL_weather_station_Bank0
-       0229  LoadConfigTBL_weather_station_Bank1
-       024C  __ctype
-       03C1  __lit_end
+       0200  LoadConfigTBL_weather_station_Bank0
+       024B  LoadConfigTBL_weather_station_Bank1
+       026E  __ctype
+       03E3  __lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                        func_lit   03C1   0002 =      2. bytes (rel,con,rom,proclab)
+                        func_lit   03E3   0002 =      2. bytes (rel,con,rom,proclab)
 
        Addr  Global Symbol
       -----  --------------------------------
-       03C1  __func_lit_start
-       03C3  __func_lit_end
+       03E3  __func_lit_start
+       03E5  __func_lit_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     psoc_config   03C3   0135 =    309. bytes (rel,con,rom,code)
+                     psoc_config   03E5   0135 =    309. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       03C3  LoadConfigTBL_weather_station_Ordered
-       0488  _LoadConfigInit
-       0488  LoadConfigInit
-       04A1  _LoadConfig_weather_station
-       04A1  LoadConfig_weather_station
-       04F8  __psoc_config_end
+       03E5  LoadConfigTBL_weather_station_Ordered
+       04AA  _LoadConfigInit
+       04AA  LoadConfigInit
+       04C3  _LoadConfig_weather_station
+       04C3  LoadConfig_weather_station
+       051A  __psoc_config_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                     UserModules   04F8   03BA =    954. bytes (rel,con,rom,code)
+                     UserModules   051A   03BA =    954. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       04F8  _SleepTimer_ISR
-       0518  _SleepTimer_EnableInt
-       0518  SleepTimer_EnableInt
-       051C  SleepTimer_DisableInt
-       051C  _SleepTimer_DisableInt
-       0520  SleepTimer_Start
-       0520  _SleepTimer_Start
-       0531  SleepTimer_Stop
-       0531  _SleepTimer_Stop
-       0532  _SleepTimer_SetInterval
-       0532  SleepTimer_SetInterval
-       0544  SleepTimer_TickWait
-       0544  _SleepTimer_TickWait
-       0553  SleepTimer_SyncWait
-       0553  _SleepTimer_SyncWait
-       0561  SleepTimer_bGetTickCntr
-       0561  _SleepTimer_bGetTickCntr
-       0564  _SleepTimer_SetTimer
-       0564  SleepTimer_SetTimer
-       0567  _SleepTimer_bGetTimer
-       0567  SleepTimer_bGetTimer
-       056A  SleepTimer_iGetTickCntr
-       056A  _SleepTimer_iGetTickCntr
-       0575  SleepTimer_lGetTickCntr
-       0575  _SleepTimer_lGetTickCntr
-       058E  _SAR6_sun_SetPower
-       058E  SAR6_sun_Start
-       058E  SAR6_sun_SetPower
-       058E  _SAR6_sun_Start
-       059C  _SAR6_sun_GetSample
-       059C  _SAR6_sun_cGetSample
-       059C  SAR6_sun_GetSample
-       059C  SAR6_sun_cGetSample
-       05C4  _SAR6_sun_Stop
-       05C4  SAR6_sun_Stop
-       05C8  _PGA_sun_SetPower
-       05C8  PGA_sun_SetPower
-       05C8  PGA_sun_Start
-       05C8  _PGA_sun_Start
-       05D6  _PGA_sun_SetGain
-       05D6  PGA_sun_SetGain
-       05F8  PGA_sun_Stop
-       05F8  _PGA_sun_Stop
-       05FC  _LCD_PrCString
-       05FC  LCD_PrCString
-       060E  LCD_HEX_STR
-       061E  _LCD_PrHexByte
-       061E  LCD_PrHexByte
-       0631  LCD_PrHexInt
-       0631  _LCD_PrHexInt
-       0638  LCD_PrString
-       0638  _LCD_PrString
-       0642  LCD_WriteData
-       0642  LCD_Write_Data
-       0642  _LCD_Write_Data
-       0642  _LCD_WriteData
-       0656  _LCD_Control
-       0656  LCD_Control
-       06FD  LCD_Start
-       06FD  _LCD_Start
-       06FD  LCD_Init
-       06FD  _LCD_Init
-       0769  LCD_ROW_OFFSET
-       076D  LCD_Position
-       076D  _LCD_Position
-       0779  _LCD_Delay50uTimes
-       0779  LCD_Delay50uTimes
-       077F  LCD_Delay50u_Table
-       0787  LCD_Delay50u
-       0787  _LCD_Delay50u
-       079B  LCD_DrawBG
-       07C1  _LCD_DrawBG
-       07EA  LCD_DrawVBG
-       0817  _LCD_DrawVBG
-       0847  _LCD_InitVBG
-       0847  LCD_InitVBG
-       0874  LCD_BG_TYPE1
-       087B  LCD_BG_TYPE2
-       0882  LCD_InitBG
-       0882  _LCD_InitBG
-       08B2  __UserModules_end
+       051A  _SleepTimer_ISR
+       053A  _SleepTimer_EnableInt
+       053A  SleepTimer_EnableInt
+       053E  SleepTimer_DisableInt
+       053E  _SleepTimer_DisableInt
+       0542  SleepTimer_Start
+       0542  _SleepTimer_Start
+       0553  SleepTimer_Stop
+       0553  _SleepTimer_Stop
+       0554  _SleepTimer_SetInterval
+       0554  SleepTimer_SetInterval
+       0566  SleepTimer_TickWait
+       0566  _SleepTimer_TickWait
+       0575  SleepTimer_SyncWait
+       0575  _SleepTimer_SyncWait
+       0583  SleepTimer_bGetTickCntr
+       0583  _SleepTimer_bGetTickCntr
+       0586  _SleepTimer_SetTimer
+       0586  SleepTimer_SetTimer
+       0589  _SleepTimer_bGetTimer
+       0589  SleepTimer_bGetTimer
+       058C  SleepTimer_iGetTickCntr
+       058C  _SleepTimer_iGetTickCntr
+       0597  SleepTimer_lGetTickCntr
+       0597  _SleepTimer_lGetTickCntr
+       05B0  _SAR6_sun_SetPower
+       05B0  SAR6_sun_Start
+       05B0  SAR6_sun_SetPower
+       05B0  _SAR6_sun_Start
+       05BE  _SAR6_sun_GetSample
+       05BE  _SAR6_sun_cGetSample
+       05BE  SAR6_sun_GetSample
+       05BE  SAR6_sun_cGetSample
+       05E6  _SAR6_sun_Stop
+       05E6  SAR6_sun_Stop
+       05EA  _PGA_sun_SetPower
+       05EA  PGA_sun_SetPower
+       05EA  PGA_sun_Start
+       05EA  _PGA_sun_Start
+       05F8  _PGA_sun_SetGain
+       05F8  PGA_sun_SetGain
+       061A  PGA_sun_Stop
+       061A  _PGA_sun_Stop
+       061E  _LCD_PrCString
+       061E  LCD_PrCString
+       0630  LCD_HEX_STR
+       0640  _LCD_PrHexByte
+       0640  LCD_PrHexByte
+       0653  LCD_PrHexInt
+       0653  _LCD_PrHexInt
+       065A  LCD_PrString
+       065A  _LCD_PrString
+       0664  LCD_WriteData
+       0664  LCD_Write_Data
+       0664  _LCD_Write_Data
+       0664  _LCD_WriteData
+       0678  _LCD_Control
+       0678  LCD_Control
+       071F  LCD_Start
+       071F  _LCD_Start
+       071F  LCD_Init
+       071F  _LCD_Init
+       078B  LCD_ROW_OFFSET
+       078F  LCD_Position
+       078F  _LCD_Position
+       079B  _LCD_Delay50uTimes
+       079B  LCD_Delay50uTimes
+       07A1  LCD_Delay50u_Table
+       07A9  LCD_Delay50u
+       07A9  _LCD_Delay50u
+       07BD  LCD_DrawBG
+       07E3  _LCD_DrawBG
+       080C  LCD_DrawVBG
+       0839  _LCD_DrawVBG
+       0869  _LCD_InitVBG
+       0869  LCD_InitVBG
+       0896  LCD_BG_TYPE1
+       089D  LCD_BG_TYPE2
+       08A4  LCD_InitBG
+       08A4  _LCD_InitBG
+       08D4  __UserModules_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   08B2   0A0E =   2574. bytes (rel,con,rom,code)
+                            text   08D4   0A6C =   2668. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
-       08B2  _main
-       08B2  __text_start
-       09FC  _sunsensor
-       0ABC  __plcall
-       0AC8  _itoa
-       0C45  _utoa
-       0D43  _isdigit
-       0D61  _islower
-       0D7F  _isspace
-       0D9D  _toupper
-       0DD2  __csdepi
-       0DEC  _csprintf
-       0E2B  __cprint
-       12C0  __text_end
+       08D4  _main
+       08D4  __text_start
+       0A3B  _sunsensor
+       0AC4  _windsensor
+       0B3C  __plcall
+       0B48  _itoa
+       0CC5  _utoa
+       0DC3  _isdigit
+       0DE1  _islower
+       0DFF  _isspace
+       0E1D  _toupper
+       0E52  __csdepi
+       0E6C  _csprintf
+       0EAB  __cprint
+       1340  __text_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
@@ -219,6 +220,7 @@ Files Linked      [ module(s) ]
 ./obj/boot.o	[ boot.asm ]
 ./obj/main.o	[ main.c ]
 ./obj/sunsensor.o	[ sunsensor.c ]
+./obj/windspeed.o	[ windspeed.c ]
 <library>	[ sleeptimerint.asm, sleeptimer.asm, sar6_sun.asm, psocconfigtbl.asm, psocconfig.asm, pga_sun.asm ]
 [ lcd.asm, rZ.asm, rY.asm, rX.asm, r5.asm, r4.asm, r3.asm, r2.asm, r1.asm, r0.asm, divmodu_16x16_16_util.asm ]
 [ i_div16_block_util.asm, plcall.s, itoa.s, utoa.s, isdigit.s, islower.s, isspace.s, ctype.s, toupper.s ]
