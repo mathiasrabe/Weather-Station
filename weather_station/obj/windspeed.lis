@@ -38,14 +38,14 @@
  001C 07011E            add [X+1],30
  001F 0F0000            adc [X+0],0
  0022                   .dbline 10
- 0022           ;       windSample *= 37; // to get km/h
+ 0022           ;       windSample *= 5; // to get km/h
  0022 5200              mov A,[X+0]
  0024 08                push A
  0025 5201              mov A,[X+1]
  0027 08                push A
  0028 5000              mov A,0
  002A 08                push A
- 002B 5025              mov A,37
+ 002B 5005              mov A,5
  002D 08                push A
  002E 7C0000            xcall __mul16
  0031 38FC              add SP,-4

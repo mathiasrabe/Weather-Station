@@ -637,7 +637,7 @@
  0006 7400              db              74h, 00h                ;PGA_sun_GAIN_CR3(ACB01CR3)
  0008           ;  Instance name PGA_wind, User Module PGA
  0008           ;       Instance name PGA_wind, Block Name GAIN(ACB00)
- 0008 710D              db              71h, 0dh                ;PGA_wind_GAIN_CR0(ACB00CR0)
+ 0008 710E              db              71h, 0eh                ;PGA_wind_GAIN_CR0(ACB00CR0)
  000A 7221              db              72h, 21h                ;PGA_wind_GAIN_CR1(ACB00CR1)
  000C 7320              db              73h, 20h                ;PGA_wind_GAIN_CR2(ACB00CR2)
  000E 7000              db              70h, 00h                ;PGA_wind_GAIN_CR3(ACB00CR3)
