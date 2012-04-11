@@ -66,11 +66,11 @@
  000C 10                push X
  000D 7C0000            xcall _SleepTimer_Start
  0010                   .dbline 45
- 0010           ;     SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
+ 0010           ;       SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
  0010 5010              mov A,16
  0012 7C0000            xcall _SleepTimer_SetInterval
  0015                   .dbline 46
- 0015           ;     SleepTimer_EnableInt();                     // 8 Hz rate
+ 0015           ;       SleepTimer_EnableInt();                     // 8 Hz rate
  0015 7C0000            xcall _SleepTimer_EnableInt
  0018                   .dbline 49
  0018           ;       
@@ -79,7 +79,7 @@
  0018 5028              mov A,40
  001A 7C0000            xcall _PGA_sun_SetGain
  001D                   .dbline 50
- 001D           ;     PGA_sun_Start(PGA_sun_HIGHPOWER);
+ 001D           ;       PGA_sun_Start(PGA_sun_HIGHPOWER);
  001D 5003              mov A,3
  001F 7C0000            xcall _PGA_sun_Start
  0022                   .dbline 51
@@ -93,7 +93,7 @@
  0027 5028              mov A,40
  0029 7C0000            xcall _PGA_wind_SetGain
  002C                   .dbline 55
- 002C           ;     PGA_wind_Start(PGA_wind_HIGHPOWER);
+ 002C           ;       PGA_wind_Start(PGA_wind_HIGHPOWER);
  002C 5003              mov A,3
  002E 7C0000            xcall _PGA_wind_Start
  0031                   .dbline 56

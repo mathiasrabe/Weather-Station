@@ -17,7 +17,7 @@ LoadConfigTBL_weather_station_Bank0:
 	db		74h, 00h		;PGA_sun_GAIN_CR3(ACB01CR3)
 ;  Instance name PGA_wind, User Module PGA
 ;       Instance name PGA_wind, Block Name GAIN(ACB00)
-	db		71h, 0dh		;PGA_wind_GAIN_CR0(ACB00CR0)
+	db		71h, 0eh		;PGA_wind_GAIN_CR0(ACB00CR0)
 	db		72h, 21h		;PGA_wind_GAIN_CR1(ACB00CR1)
 	db		73h, 20h		;PGA_wind_GAIN_CR2(ACB00CR2)
 	db		70h, 00h		;PGA_wind_GAIN_CR3(ACB00CR3)

@@ -4023,17 +4023,17 @@ __UserModules_end|_main|__text_start|_main:
 (0044) 	SleepTimer_Start();
     094D: 10       PUSH  X
     094E: 7C 05 41 LCALL _SleepTimer_Start
-(0045)     SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
+(0045) 	SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
     0951: 50 10    MOV   A,0x10
     0953: 7C 05 53 LCALL _SleepTimer_SetInterval
-(0046)     SleepTimer_EnableInt();                     // 8 Hz rate
+(0046) 	SleepTimer_EnableInt();                     // 8 Hz rate
     0956: 7C 05 39 LCALL _SleepTimer_EnableInt
 (0047) 	
 (0048) 	// init PGA and SAR6 for sun and rain sensor
 (0049) 	PGA_sun_SetGain(PGA_sun_G5_33);  // gain of 5,33
     0959: 50 28    MOV   A,0x28
     095B: 7C 06 65 LCALL _PGA_sun_SetGain
-(0050)     PGA_sun_Start(PGA_sun_HIGHPOWER);
+(0050) 	PGA_sun_Start(PGA_sun_HIGHPOWER);
     095E: 50 03    MOV   A,0x3
     0960: 7C 06 57 LCALL _PGA_sun_Start|_PGA_sun_SetPower|PGA_sun_SetPower|PGA_sun_Start
 (0051) 	SAR6_sun_Start(SAR6_sun_HIGHPOWER);
@@ -4044,7 +4044,7 @@ __UserModules_end|_main|__text_start|_main:
 (0054) 	PGA_wind_SetGain(PGA_wind_G5_33);  // gain of 5,33
     0968: 50 28    MOV   A,0x28
     096A: 7C 06 31 LCALL _PGA_wind_SetGain
-(0055)     PGA_wind_Start(PGA_wind_HIGHPOWER);
+(0055) 	PGA_wind_Start(PGA_wind_HIGHPOWER);
     096D: 50 03    MOV   A,0x3
     096F: 7C 06 23 LCALL _PGA_wind_Start|_PGA_wind_SetPower|PGA_wind_SetPower
 (0056) 	SAR6_wind_Start(SAR6_wind_HIGHPOWER);

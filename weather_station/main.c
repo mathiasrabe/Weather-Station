@@ -42,17 +42,17 @@ void main(void)
 	// interrupt and SleepTimer init
 	M8C_EnableGInt ;                            // Turn on interrupts
 	SleepTimer_Start();
-    SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
-    SleepTimer_EnableInt();                     // 8 Hz rate
+	SleepTimer_SetInterval(SleepTimer_8_HZ);    // Set interrupt to a
+	SleepTimer_EnableInt();                     // 8 Hz rate
 	
 	// init PGA and SAR6 for sun and rain sensor
 	PGA_sun_SetGain(PGA_sun_G5_33);  // gain of 5,33
-    PGA_sun_Start(PGA_sun_HIGHPOWER);
+	PGA_sun_Start(PGA_sun_HIGHPOWER);
 	SAR6_sun_Start(SAR6_sun_HIGHPOWER);
 	
 	// init PGA and SAR6 for windsensor
 	PGA_wind_SetGain(PGA_wind_G5_33);  // gain of 5,33
-    PGA_wind_Start(PGA_wind_HIGHPOWER);
+	PGA_wind_Start(PGA_wind_HIGHPOWER);
 	SAR6_wind_Start(SAR6_wind_HIGHPOWER);
 
 	// LCD init
