@@ -35,7 +35,7 @@ void main(void)
 {
 	//Variables
 	char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
-	unsigned int displaymode = 4; // FIXME: sollte 0 sein!
+	unsigned int displaymode = 0;
 	
 	/** init **/
 	
@@ -67,6 +67,15 @@ void main(void)
 	LCD_PrString(lcdSecondLine);
 	
 	while(1) {
+	
+		//checking if butten is prest 
+		if(PRT0DR & 0b00000100) { 
+			//switches displaymode betwen 0 and 4
+		  	displaymode ++;
+			if(displaymode>4)
+			displaymode = 0;
+		}
+			
 		// get temp and humidity here
 		
 		switch(displaymode) {

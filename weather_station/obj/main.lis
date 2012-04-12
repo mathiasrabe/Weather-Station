@@ -50,8 +50,8 @@
  0004                   .dbline 38
  0004           ;       //Variables
  0004           ;       char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
- 0004           ;       unsigned int displaymode = 4; // FIXME: sollte 0 sein!
- 0004 560104            mov [X+1],4
+ 0004           ;       unsigned int displaymode = 0;
+ 0004 560100            mov [X+1],0
  0007 560000            mov [X+0],0
  000A                   .dbline 43
  000A           ;       
@@ -171,108 +171,115 @@
  0091 18                pop A
  0092 7C0000            xcall _LCD_PrString
  0095 20                pop X
- 0096 80D8              xjmp L5
+ 0096 80F6              xjmp L5
  0098           L4:
  0098                   .dbline 69
  0098           ;       
  0098           ;       while(1) {
  0098                   .dbline 72
- 0098           ;               // get temp and humidity here
- 0098           ;               
- 0098           ;               switch(displaymode) {
- 0098 3D0000            cmp [X+0],0
- 009B B006              jnz X1
- 009D 3D0100            cmp [X+1],0
- 00A0 A095              jz L8
- 00A2           X1:
- 00A2 3D0000            cmp [X+0],0
- 00A5 B006              jnz X2
- 00A7 3D0101            cmp [X+1],1
- 00AA A08B              jz L8
- 00AC           X2:
- 00AC 3D0000            cmp [X+0],0
- 00AF B006              jnz X3
- 00B1 3D0102            cmp [X+1],2
- 00B4 A081              jz L8
- 00B6           X3:
+ 0098           ;       
+ 0098           ;               //checking if butten is prest 
+ 0098           ;               if(PRT0DR & 0b00000100) { 
+ 0098 5D00              mov A,REG[0]
+ 009A 5300              mov [__r0],A
+ 009C 470004            tst [__r0],4
+ 009F A016              jz L7
+ 00A1                   .dbline 74
+ 00A1           ;                       //switches displaymode betwen 0 and 4
+ 00A1           ;                       displaymode ++;
+ 00A1                   .dbline 74
+ 00A1 7701              inc [X+1]
+ 00A3 0F0000            adc [X+0],0
+ 00A6                   .dbline 75
+ 00A6           ;                       if(displaymode>4)
+ 00A6 5004              mov A,4
+ 00A8 1301              sub A,[X+1]
+ 00AA 5000              mov A,0
+ 00AC 1B00              sbb A,[X+0]
+ 00AE D007              jnc L9
+ 00B0           X1:
+ 00B0                   .dbline 76
+ 00B0           ;                       displaymode = 0;
+ 00B0 560100            mov [X+1],0
+ 00B3 560000            mov [X+0],0
+ 00B6           L9:
+ 00B6                   .dbline 77
+ 00B6           ;               }
+ 00B6           L7:
+ 00B6                   .dbline 81
+ 00B6           ;                       
+ 00B6           ;               // get temp and humidity here
+ 00B6           ;               
+ 00B6           ;               switch(displaymode) {
  00B6 3D0000            cmp [X+0],0
- 00B9 B006              jnz X4
- 00BB 3D0103            cmp [X+1],3
- 00BE A00D              jz L12
- 00C0           X4:
+ 00B9 B006              jnz X2
+ 00BB 3D0100            cmp [X+1],0
+ 00BE A095              jz L12
+ 00C0           X2:
  00C0 3D0000            cmp [X+0],0
- 00C3 B006              jnz X5
- 00C5 3D0104            cmp [X+1],4
- 00C8 A020              jz L13
- 00CA           X5:
- 00CA 803B              xjmp L7
- 00CC           L12:
- 00CC                   .dbline 86
- 00CC           ;                       case 0:
- 00CC           ;                               // overview();
- 00CC           ;                               break;
- 00CC           ;                               
- 00CC           ;                       case 1:
- 00CC           ;                               // temp();
- 00CC           ;                               break;
- 00CC           ;                               
- 00CC           ;                       case 2:
- 00CC           ;                               // humidity();
- 00CC           ;                               break;
- 00CC           ;                               
- 00CC           ;                       case 3:
- 00CC           ;                               sunsensor(lcdFirstLine, lcdSecondLine);
- 00CC 5A00              mov [__r1],X
- 00CE 060012            add [__r1],18
- 00D1 5100              mov A,[__r0]
- 00D3 08                push A
- 00D4 5100              mov A,[__r1]
- 00D6 08                push A
- 00D7 5A00              mov [__r1],X
- 00D9 060002            add [__r1],2
- 00DC 5100              mov A,[__r0]
- 00DE 08                push A
- 00DF 5100              mov A,[__r1]
- 00E1 08                push A
- 00E2 7C0000            xcall _sunsensor
- 00E5 38FC              add SP,-4
- 00E7                   .dbline 87
- 00E7           ;                               break;
- 00E7 804E              xjmp L8
- 00E9           L13:
- 00E9                   .dbline 90
- 00E9           ;                               
- 00E9           ;                       case 4:
- 00E9           ;                               windsensor(lcdFirstLine, lcdSecondLine);
- 00E9 5A00              mov [__r1],X
- 00EB 060012            add [__r1],18
- 00EE 5100              mov A,[__r0]
- 00F0 08                push A
- 00F1 5100              mov A,[__r1]
- 00F3 08                push A
- 00F4 5A00              mov [__r1],X
- 00F6 060002            add [__r1],2
- 00F9 5100              mov A,[__r0]
- 00FB 08                push A
- 00FC 5100              mov A,[__r1]
- 00FE 08                push A
- 00FF 7C0000            xcall _windsensor
- 0102 38FC              add SP,-4
- 0104                   .dbline 91
- 0104           ;                               break;
- 0104 8031              xjmp L8
- 0106           L7:
- 0106                   .dbline 94
- 0106           ;               
- 0106           ;                       default:
- 0106           ;                               displaymode = 0;
- 0106 560100            mov [X+1],0
- 0109 560000            mov [X+0],0
- 010C                   .dbline 95
- 010C           ;                               csprintf(lcdFirstLine,"     Error      ");
- 010C 5011              mov A,>L14
+ 00C3 B006              jnz X3
+ 00C5 3D0101            cmp [X+1],1
+ 00C8 A08B              jz L12
+ 00CA           X3:
+ 00CA 3D0000            cmp [X+0],0
+ 00CD B006              jnz X4
+ 00CF 3D0102            cmp [X+1],2
+ 00D2 A081              jz L12
+ 00D4           X4:
+ 00D4 3D0000            cmp [X+0],0
+ 00D7 B006              jnz X5
+ 00D9 3D0103            cmp [X+1],3
+ 00DC A00D              jz L16
+ 00DE           X5:
+ 00DE 3D0000            cmp [X+0],0
+ 00E1 B006              jnz X6
+ 00E3 3D0104            cmp [X+1],4
+ 00E6 A020              jz L17
+ 00E8           X6:
+ 00E8 803B              xjmp L11
+ 00EA           L16:
+ 00EA                   .dbline 95
+ 00EA           ;                       case 0:
+ 00EA           ;                               // overview();
+ 00EA           ;                               break;
+ 00EA           ;                               
+ 00EA           ;                       case 1:
+ 00EA           ;                               // temp();
+ 00EA           ;                               break;
+ 00EA           ;                               
+ 00EA           ;                       case 2:
+ 00EA           ;                               // humidity();
+ 00EA           ;                               break;
+ 00EA           ;                               
+ 00EA           ;                       case 3:
+ 00EA           ;                               sunsensor(lcdFirstLine, lcdSecondLine);
+ 00EA 5A00              mov [__r1],X
+ 00EC 060012            add [__r1],18
+ 00EF 5100              mov A,[__r0]
+ 00F1 08                push A
+ 00F2 5100              mov A,[__r1]
+ 00F4 08                push A
+ 00F5 5A00              mov [__r1],X
+ 00F7 060002            add [__r1],2
+ 00FA 5100              mov A,[__r0]
+ 00FC 08                push A
+ 00FD 5100              mov A,[__r1]
+ 00FF 08                push A
+ 0100 7C0000            xcall _sunsensor
+ 0103 38FC              add SP,-4
+ 0105                   .dbline 96
+ 0105           ;                               break;
+ 0105 804E              xjmp L12
+ 0107           L17:
+ 0107                   .dbline 99
+ 0107           ;                               
+ 0107           ;                       case 4:
+ 0107           ;                               windsensor(lcdFirstLine, lcdSecondLine);
+ 0107 5A00              mov [__r1],X
+ 0109 060012            add [__r1],18
+ 010C 5100              mov A,[__r0]
  010E 08                push A
- 010F 5011              mov A,<L14
+ 010F 5100              mov A,[__r1]
  0111 08                push A
  0112 5A00              mov [__r1],X
  0114 060002            add [__r1],2
@@ -280,90 +287,114 @@
  0119 08                push A
  011A 5100              mov A,[__r1]
  011C 08                push A
- 011D 7C0000            xcall _csprintf
- 0120                   .dbline 96
- 0120           ;                               csprintf(lcdSecondLine,"                ");
- 0120 5000              mov A,>L15
- 0122 08                push A
- 0123 5000              mov A,<L15
- 0125 08                push A
- 0126 5A00              mov [__r1],X
- 0128 060012            add [__r1],18
- 012B 5100              mov A,[__r0]
- 012D 08                push A
- 012E 5100              mov A,[__r1]
- 0130 08                push A
- 0131 7C0000            xcall _csprintf
- 0134 38F8              add SP,-8
- 0136                   .dbline 97
- 0136           ;               }
- 0136           L8:
- 0136                   .dbline 100
- 0136           ;               
- 0136           ;               // lets see what we've got
- 0136           ;               LCD_Position(0,0);
- 0136 10                push X
- 0137 5000              mov A,0
- 0139 5700              mov X,0
- 013B 7C0000            xcall _LCD_Position
- 013E 20                pop X
- 013F                   .dbline 101
- 013F           ;               LCD_PrString(lcdFirstLine);
- 013F 5A00              mov [__r1],X
- 0141 060002            add [__r1],2
- 0144 10                push X
- 0145 5100              mov A,[__r0]
- 0147 08                push A
- 0148 5100              mov A,[__r1]
- 014A 5C                mov X,A
- 014B 18                pop A
- 014C 7C0000            xcall _LCD_PrString
- 014F                   .dbline 102
- 014F           ;               LCD_Position(1,0);
- 014F 5700              mov X,0
- 0151 5001              mov A,1
- 0153 7C0000            xcall _LCD_Position
- 0156 20                pop X
- 0157                   .dbline 103
- 0157           ;               LCD_PrString(lcdSecondLine);
- 0157 5A00              mov [__r1],X
- 0159 060012            add [__r1],18
- 015C 10                push X
- 015D 5100              mov A,[__r0]
- 015F 08                push A
- 0160 5100              mov A,[__r1]
- 0162 5C                mov X,A
- 0163 18                pop A
- 0164 7C0000            xcall _LCD_PrString
- 0167                   .dbline 106
- 0167           ;               
- 0167           ;               // lets sleep for a while
- 0167           ;               SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
- 0167 5700              mov X,0
- 0169 5008              mov A,8
- 016B 7C0000            xcall _SleepTimer_SyncWait
- 016E 20                pop X
- 016F                   .dbline 107
- 016F           ;       }
- 016F           L5:
- 016F                   .dbline 69
- 016F 8F28              xjmp L4
- 0171           X0:
- 0171                   .dbline -2
- 0171           L1:
- 0171 38DE              add SP,-34
- 0173 20                pop X
- 0174                   .dbline 0 ; func end
- 0174 8FFF              jmp .
- 0176                   .dbsym l lcdSecondLine 18 A[16:16]c
- 0176                   .dbsym l lcdFirstLine 2 A[16:16]c
- 0176                   .dbsym l displaymode 0 i
- 0176                   .dbend
+ 011D 7C0000            xcall _windsensor
+ 0120 38FC              add SP,-4
+ 0122                   .dbline 100
+ 0122           ;                               break;
+ 0122 8031              xjmp L12
+ 0124           L11:
+ 0124                   .dbline 103
+ 0124           ;               
+ 0124           ;                       default:
+ 0124           ;                               displaymode = 0;
+ 0124 560100            mov [X+1],0
+ 0127 560000            mov [X+0],0
+ 012A                   .dbline 104
+ 012A           ;                               csprintf(lcdFirstLine,"     Error      ");
+ 012A 5011              mov A,>L18
+ 012C 08                push A
+ 012D 5011              mov A,<L18
+ 012F 08                push A
+ 0130 5A00              mov [__r1],X
+ 0132 060002            add [__r1],2
+ 0135 5100              mov A,[__r0]
+ 0137 08                push A
+ 0138 5100              mov A,[__r1]
+ 013A 08                push A
+ 013B 7C0000            xcall _csprintf
+ 013E                   .dbline 105
+ 013E           ;                               csprintf(lcdSecondLine,"                ");
+ 013E 5000              mov A,>L19
+ 0140 08                push A
+ 0141 5000              mov A,<L19
+ 0143 08                push A
+ 0144 5A00              mov [__r1],X
+ 0146 060012            add [__r1],18
+ 0149 5100              mov A,[__r0]
+ 014B 08                push A
+ 014C 5100              mov A,[__r1]
+ 014E 08                push A
+ 014F 7C0000            xcall _csprintf
+ 0152 38F8              add SP,-8
+ 0154                   .dbline 106
+ 0154           ;               }
+ 0154           L12:
+ 0154                   .dbline 109
+ 0154           ;               
+ 0154           ;               // lets see what we've got
+ 0154           ;               LCD_Position(0,0);
+ 0154 10                push X
+ 0155 5000              mov A,0
+ 0157 5700              mov X,0
+ 0159 7C0000            xcall _LCD_Position
+ 015C 20                pop X
+ 015D                   .dbline 110
+ 015D           ;               LCD_PrString(lcdFirstLine);
+ 015D 5A00              mov [__r1],X
+ 015F 060002            add [__r1],2
+ 0162 10                push X
+ 0163 5100              mov A,[__r0]
+ 0165 08                push A
+ 0166 5100              mov A,[__r1]
+ 0168 5C                mov X,A
+ 0169 18                pop A
+ 016A 7C0000            xcall _LCD_PrString
+ 016D                   .dbline 111
+ 016D           ;               LCD_Position(1,0);
+ 016D 5700              mov X,0
+ 016F 5001              mov A,1
+ 0171 7C0000            xcall _LCD_Position
+ 0174 20                pop X
+ 0175                   .dbline 112
+ 0175           ;               LCD_PrString(lcdSecondLine);
+ 0175 5A00              mov [__r1],X
+ 0177 060012            add [__r1],18
+ 017A 10                push X
+ 017B 5100              mov A,[__r0]
+ 017D 08                push A
+ 017E 5100              mov A,[__r1]
+ 0180 5C                mov X,A
+ 0181 18                pop A
+ 0182 7C0000            xcall _LCD_PrString
+ 0185                   .dbline 115
+ 0185           ;               
+ 0185           ;               // lets sleep for a while
+ 0185           ;               SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
+ 0185 5700              mov X,0
+ 0187 5008              mov A,8
+ 0189 7C0000            xcall _SleepTimer_SyncWait
+ 018C 20                pop X
+ 018D                   .dbline 116
+ 018D           ;       }
+ 018D           L5:
+ 018D                   .dbline 69
+ 018D 8F0A              xjmp L4
+ 018F           X0:
+ 018F                   .dbline -2
+ 018F           L1:
+ 018F 38DE              add SP,-34
+ 0191 20                pop X
+ 0192                   .dbline 0 ; func end
+ 0192 8FFF              jmp .
+ 0194                   .dbsym l lcdSecondLine 18 A[16:16]c
+ 0194                   .dbsym l lcdFirstLine 2 A[16:16]c
+ 0194                   .dbsym l displaymode 0 i
+ 0194                   .dbend
                         .area lit(rom, con, rel, lit)
- 0000           L15:
+ 0000           L19:
  0000 20202020202020202020202020202020  .byte 32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32
  0010 00                .byte 0
- 0011           L14:
+ 0011           L18:
  0011 20202020204572726F72202020202020  .byte 32,32,32,32,32,'E,'r,'r,'o,'r,32,32,32,32,32,32
  0021 00                .byte 0
  0022           L3:

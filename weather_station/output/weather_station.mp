@@ -1,6 +1,6 @@
 Project:      output/weather_station
 Build Number: 0
-Date:         Wed Apr 11 17:35:25 2012
+Date:         Thu Apr 12 10:02:07 2012
 Compiler:     ICCM8C
 Version:      7.05.00
 
@@ -146,25 +146,25 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------
-                            text   0941   0AD0 =   2768. bytes (rel,con,rom,code)
+                            text   0941   0AEE =   2798. bytes (rel,con,rom,code)
 
        Addr  Global Symbol
       -----  --------------------------------
        0941  _main
        0941  __text_start
-       0AB7  _sunsensor
-       0B40  _windsensor
-       0C0D  __plcall
-       0C19  _itoa
-       0D96  _utoa
-       0E94  _isdigit
-       0EB2  _islower
-       0ED0  _isspace
-       0EEE  _toupper
-       0F23  __csdepi
-       0F3D  _csprintf
-       0F7C  __cprint
-       1411  __text_end
+       0AD5  _sunsensor
+       0B5E  _windsensor
+       0C2B  __plcall
+       0C37  _itoa
+       0DB4  _utoa
+       0EB2  _isdigit
+       0ED0  _islower
+       0EEE  _isspace
+       0F0C  _toupper
+       0F41  __csdepi
+       0F5B  _csprintf
+       0F9A  __cprint
+       142F  __text_end
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
 --------------------------------   ----   ----   ------- ----- ------------

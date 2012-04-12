@@ -4011,8 +4011,8 @@ __UserModules_end|_main|__text_start|_main:
     0943: 38 22    ADD   SP,0x22
 (0036) 	//Variables
 (0037) 	char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
-(0038) 	unsigned int displaymode = 4; // FIXME: sollte 0 sein!
-    0945: 56 01 04 MOV   [X+1],0x4
+(0038) 	unsigned int displaymode = 0;
+    0945: 56 01 00 MOV   [X+1],0x0
     0948: 56 00 00 MOV   [X+0],0x0
 (0039) 	
 (0040) 	/** init **/
@@ -4068,7 +4068,7 @@ __UserModules_end|_main|__text_start|_main:
     0988: 08       PUSH  A
     0989: 51 07    MOV   A,[__r1]
     098B: 08       PUSH  A
-    098C: 7C 0F 3D LCALL _csprintf
+    098C: 7C 0F 5B LCALL _csprintf
 (0063) 	csprintf(lcdSecondLine, " Weatherstation ");
     098F: 50 01    MOV   A,0x1
     0991: 08       PUSH  A
@@ -4080,7 +4080,7 @@ __UserModules_end|_main|__text_start|_main:
     099C: 08       PUSH  A
     099D: 51 07    MOV   A,[__r1]
     099F: 08       PUSH  A
-    09A0: 7C 0F 3D LCALL _csprintf
+    09A0: 7C 0F 5B LCALL _csprintf
     09A3: 38 F8    ADD   SP,0xF8
 (0064) 	LCD_Position(0,0);
     09A5: 10       PUSH  X
@@ -4114,91 +4114,93 @@ __UserModules_end|_main|__text_start|_main:
     09D2: 18       POP   A
     09D3: 7C 06 C7 LCALL _LCD_PrString
     09D6: 20       POP   X
-    09D7: 80 D8    JMP   0x0AB0
+    09D7: 80 F6    JMP   0x0ACE
 (0068) 	
 (0069) 	while(1) {
-(0070) 		// get temp and humidity here
-(0071) 		
-(0072) 		switch(displaymode) {
-    09D9: 3D 00 00 CMP   [X+0],0x0
-    09DC: B0 06    JNZ   0x09E3
-    09DE: 3D 01 00 CMP   [X+1],0x0
-    09E1: A0 95    JZ    0x0A77
-    09E3: 3D 00 00 CMP   [X+0],0x0
-    09E6: B0 06    JNZ   0x09ED
-    09E8: 3D 01 01 CMP   [X+1],0x1
-    09EB: A0 8B    JZ    0x0A77
-    09ED: 3D 00 00 CMP   [X+0],0x0
-    09F0: B0 06    JNZ   0x09F7
-    09F2: 3D 01 02 CMP   [X+1],0x2
-    09F5: A0 81    JZ    0x0A77
+(0070) 	
+(0071) 		//checking if butten is prest 
+(0072) 		if(PRT0DR & 0b00000100) { 
+    09D9: 5D 00    MOV   A,REG[0x0]
+    09DB: 53 08    MOV   [__r0],A
+    09DD: 47 08 04 TST   [__r0],0x4
+    09E0: A0 16    JZ    0x09F7
+(0073) 			//switches displaymode betwen 0 and 4
+(0074) 		  	displaymode ++;
+    09E2: 77 01    INC   [X+1]
+    09E4: 0F 00 00 ADC   [X+0],0x0
+(0075) 			if(displaymode>4)
+    09E7: 50 04    MOV   A,0x4
+    09E9: 13 01    SUB   A,[X+1]
+    09EB: 50 00    MOV   A,0x0
+    09ED: 1B 00    SBB   A,[X+0]
+    09EF: D0 07    JNC   0x09F7
+(0076) 			displaymode = 0;
+    09F1: 56 01 00 MOV   [X+1],0x0
+    09F4: 56 00 00 MOV   [X+0],0x0
+(0077) 		}
+(0078) 			
+(0079) 		// get temp and humidity here
+(0080) 		
+(0081) 		switch(displaymode) {
     09F7: 3D 00 00 CMP   [X+0],0x0
     09FA: B0 06    JNZ   0x0A01
-    09FC: 3D 01 03 CMP   [X+1],0x3
-    09FF: A0 0D    JZ    0x0A0D
+    09FC: 3D 01 00 CMP   [X+1],0x0
+    09FF: A0 95    JZ    0x0A95
     0A01: 3D 00 00 CMP   [X+0],0x0
     0A04: B0 06    JNZ   0x0A0B
-    0A06: 3D 01 04 CMP   [X+1],0x4
-    0A09: A0 20    JZ    0x0A2A
-    0A0B: 80 3B    JMP   0x0A47
-(0073) 			case 0:
-(0074) 				// overview();
-(0075) 				break;
-(0076) 				
-(0077) 			case 1:
-(0078) 				// temp();
-(0079) 				break;
-(0080) 				
-(0081) 			case 2:
-(0082) 				// humidity();
-(0083) 				break;
-(0084) 				
-(0085) 			case 3:
-(0086) 				sunsensor(lcdFirstLine, lcdSecondLine);
-    0A0D: 5A 07    MOV   [__r1],X
-    0A0F: 06 07 12 ADD   [__r1],0x12
-    0A12: 51 08    MOV   A,[__r0]
-    0A14: 08       PUSH  A
-    0A15: 51 07    MOV   A,[__r1]
-    0A17: 08       PUSH  A
-    0A18: 5A 07    MOV   [__r1],X
-    0A1A: 06 07 02 ADD   [__r1],0x2
-    0A1D: 51 08    MOV   A,[__r0]
-    0A1F: 08       PUSH  A
-    0A20: 51 07    MOV   A,[__r1]
-    0A22: 08       PUSH  A
-    0A23: 7C 0A B7 LCALL _sunsensor
-    0A26: 38 FC    ADD   SP,0xFC
-(0087) 				break;
-    0A28: 80 4E    JMP   0x0A77
-(0088) 				
-(0089) 			case 4:
-(0090) 				windsensor(lcdFirstLine, lcdSecondLine);
-    0A2A: 5A 07    MOV   [__r1],X
-    0A2C: 06 07 12 ADD   [__r1],0x12
-    0A2F: 51 08    MOV   A,[__r0]
-    0A31: 08       PUSH  A
-    0A32: 51 07    MOV   A,[__r1]
-    0A34: 08       PUSH  A
-    0A35: 5A 07    MOV   [__r1],X
-    0A37: 06 07 02 ADD   [__r1],0x2
-    0A3A: 51 08    MOV   A,[__r0]
-    0A3C: 08       PUSH  A
-    0A3D: 51 07    MOV   A,[__r1]
-    0A3F: 08       PUSH  A
-    0A40: 7C 0B 40 LCALL _windsensor
-    0A43: 38 FC    ADD   SP,0xFC
-(0091) 				break;
-    0A45: 80 31    JMP   0x0A77
-(0092) 		
-(0093) 			default:
-(0094) 				displaymode = 0;
-    0A47: 56 01 00 MOV   [X+1],0x0
-    0A4A: 56 00 00 MOV   [X+0],0x0
-(0095) 				csprintf(lcdFirstLine,"     Error      ");
-    0A4D: 50 01    MOV   A,0x1
+    0A06: 3D 01 01 CMP   [X+1],0x1
+    0A09: A0 8B    JZ    0x0A95
+    0A0B: 3D 00 00 CMP   [X+0],0x0
+    0A0E: B0 06    JNZ   0x0A15
+    0A10: 3D 01 02 CMP   [X+1],0x2
+    0A13: A0 81    JZ    0x0A95
+    0A15: 3D 00 00 CMP   [X+0],0x0
+    0A18: B0 06    JNZ   0x0A1F
+    0A1A: 3D 01 03 CMP   [X+1],0x3
+    0A1D: A0 0D    JZ    0x0A2B
+    0A1F: 3D 00 00 CMP   [X+0],0x0
+    0A22: B0 06    JNZ   0x0A29
+    0A24: 3D 01 04 CMP   [X+1],0x4
+    0A27: A0 20    JZ    0x0A48
+    0A29: 80 3B    JMP   0x0A65
+(0082) 			case 0:
+(0083) 				// overview();
+(0084) 				break;
+(0085) 				
+(0086) 			case 1:
+(0087) 				// temp();
+(0088) 				break;
+(0089) 				
+(0090) 			case 2:
+(0091) 				// humidity();
+(0092) 				break;
+(0093) 				
+(0094) 			case 3:
+(0095) 				sunsensor(lcdFirstLine, lcdSecondLine);
+    0A2B: 5A 07    MOV   [__r1],X
+    0A2D: 06 07 12 ADD   [__r1],0x12
+    0A30: 51 08    MOV   A,[__r0]
+    0A32: 08       PUSH  A
+    0A33: 51 07    MOV   A,[__r1]
+    0A35: 08       PUSH  A
+    0A36: 5A 07    MOV   [__r1],X
+    0A38: 06 07 02 ADD   [__r1],0x2
+    0A3B: 51 08    MOV   A,[__r0]
+    0A3D: 08       PUSH  A
+    0A3E: 51 07    MOV   A,[__r1]
+    0A40: 08       PUSH  A
+    0A41: 7C 0A D5 LCALL _sunsensor
+    0A44: 38 FC    ADD   SP,0xFC
+(0096) 				break;
+    0A46: 80 4E    JMP   0x0A95
+(0097) 				
+(0098) 			case 4:
+(0099) 				windsensor(lcdFirstLine, lcdSecondLine);
+    0A48: 5A 07    MOV   [__r1],X
+    0A4A: 06 07 12 ADD   [__r1],0x12
+    0A4D: 51 08    MOV   A,[__r0]
     0A4F: 08       PUSH  A
-    0A50: 50 61    MOV   A,0x61
+    0A50: 51 07    MOV   A,[__r1]
     0A52: 08       PUSH  A
     0A53: 5A 07    MOV   [__r1],X
     0A55: 06 07 02 ADD   [__r1],0x2
@@ -4206,64 +4208,84 @@ __UserModules_end|_main|__text_start|_main:
     0A5A: 08       PUSH  A
     0A5B: 51 07    MOV   A,[__r1]
     0A5D: 08       PUSH  A
-    0A5E: 7C 0F 3D LCALL _csprintf
-(0096) 				csprintf(lcdSecondLine,"                ");
-    0A61: 50 01    MOV   A,0x1
-    0A63: 08       PUSH  A
-    0A64: 50 50    MOV   A,0x50
-    0A66: 08       PUSH  A
-    0A67: 5A 07    MOV   [__r1],X
-    0A69: 06 07 12 ADD   [__r1],0x12
-    0A6C: 51 08    MOV   A,[__r0]
-    0A6E: 08       PUSH  A
-    0A6F: 51 07    MOV   A,[__r1]
-    0A71: 08       PUSH  A
-    0A72: 7C 0F 3D LCALL _csprintf
-    0A75: 38 F8    ADD   SP,0xF8
-(0097) 		}
-(0098) 		
-(0099) 		// lets see what we've got
-(0100) 		LCD_Position(0,0);
-    0A77: 10       PUSH  X
-    0A78: 50 00    MOV   A,0x0
-    0A7A: 57 00    MOV   X,0x0
-    0A7C: 7C 07 FC LCALL _LCD_Position
-    0A7F: 20       POP   X
-(0101) 		LCD_PrString(lcdFirstLine);
-    0A80: 5A 07    MOV   [__r1],X
-    0A82: 06 07 02 ADD   [__r1],0x2
-    0A85: 10       PUSH  X
-    0A86: 51 08    MOV   A,[__r0]
-    0A88: 08       PUSH  A
-    0A89: 51 07    MOV   A,[__r1]
-    0A8B: 5C       MOV   X,A
-    0A8C: 18       POP   A
-    0A8D: 7C 06 C7 LCALL _LCD_PrString
-(0102) 		LCD_Position(1,0);
-    0A90: 57 00    MOV   X,0x0
-    0A92: 50 01    MOV   A,0x1
-    0A94: 7C 07 FC LCALL _LCD_Position
-    0A97: 20       POP   X
-(0103) 		LCD_PrString(lcdSecondLine);
-    0A98: 5A 07    MOV   [__r1],X
-    0A9A: 06 07 12 ADD   [__r1],0x12
-    0A9D: 10       PUSH  X
-    0A9E: 51 08    MOV   A,[__r0]
-    0AA0: 08       PUSH  A
-    0AA1: 51 07    MOV   A,[__r1]
-    0AA3: 5C       MOV   X,A
-    0AA4: 18       POP   A
-    0AA5: 7C 06 C7 LCALL _LCD_PrString
-(0104) 		
-(0105) 		// lets sleep for a while
-(0106) 		SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
-    0AA8: 57 00    MOV   X,0x0
-    0AAA: 50 08    MOV   A,0x8
-    0AAC: 7C 05 74 LCALL _SleepTimer_SyncWait
-    0AAF: 20       POP   X
-(0107) 	}
-    0AB0: 8F 28    JMP   0x09D9
-(0108) }
+    0A5E: 7C 0B 5E LCALL _windsensor
+    0A61: 38 FC    ADD   SP,0xFC
+(0100) 				break;
+    0A63: 80 31    JMP   0x0A95
+(0101) 		
+(0102) 			default:
+(0103) 				displaymode = 0;
+    0A65: 56 01 00 MOV   [X+1],0x0
+    0A68: 56 00 00 MOV   [X+0],0x0
+(0104) 				csprintf(lcdFirstLine,"     Error      ");
+    0A6B: 50 01    MOV   A,0x1
+    0A6D: 08       PUSH  A
+    0A6E: 50 61    MOV   A,0x61
+    0A70: 08       PUSH  A
+    0A71: 5A 07    MOV   [__r1],X
+    0A73: 06 07 02 ADD   [__r1],0x2
+    0A76: 51 08    MOV   A,[__r0]
+    0A78: 08       PUSH  A
+    0A79: 51 07    MOV   A,[__r1]
+    0A7B: 08       PUSH  A
+    0A7C: 7C 0F 5B LCALL _csprintf
+(0105) 				csprintf(lcdSecondLine,"                ");
+    0A7F: 50 01    MOV   A,0x1
+    0A81: 08       PUSH  A
+    0A82: 50 50    MOV   A,0x50
+    0A84: 08       PUSH  A
+    0A85: 5A 07    MOV   [__r1],X
+    0A87: 06 07 12 ADD   [__r1],0x12
+    0A8A: 51 08    MOV   A,[__r0]
+    0A8C: 08       PUSH  A
+    0A8D: 51 07    MOV   A,[__r1]
+    0A8F: 08       PUSH  A
+    0A90: 7C 0F 5B LCALL _csprintf
+    0A93: 38 F8    ADD   SP,0xF8
+(0106) 		}
+(0107) 		
+(0108) 		// lets see what we've got
+(0109) 		LCD_Position(0,0);
+    0A95: 10       PUSH  X
+    0A96: 50 00    MOV   A,0x0
+    0A98: 57 00    MOV   X,0x0
+    0A9A: 7C 07 FC LCALL _LCD_Position
+    0A9D: 20       POP   X
+(0110) 		LCD_PrString(lcdFirstLine);
+    0A9E: 5A 07    MOV   [__r1],X
+    0AA0: 06 07 02 ADD   [__r1],0x2
+    0AA3: 10       PUSH  X
+    0AA4: 51 08    MOV   A,[__r0]
+    0AA6: 08       PUSH  A
+    0AA7: 51 07    MOV   A,[__r1]
+    0AA9: 5C       MOV   X,A
+    0AAA: 18       POP   A
+    0AAB: 7C 06 C7 LCALL _LCD_PrString
+(0111) 		LCD_Position(1,0);
+    0AAE: 57 00    MOV   X,0x0
+    0AB0: 50 01    MOV   A,0x1
+    0AB2: 7C 07 FC LCALL _LCD_Position
+    0AB5: 20       POP   X
+(0112) 		LCD_PrString(lcdSecondLine);
+    0AB6: 5A 07    MOV   [__r1],X
+    0AB8: 06 07 12 ADD   [__r1],0x12
+    0ABB: 10       PUSH  X
+    0ABC: 51 08    MOV   A,[__r0]
+    0ABE: 08       PUSH  A
+    0ABF: 51 07    MOV   A,[__r1]
+    0AC1: 5C       MOV   X,A
+    0AC2: 18       POP   A
+    0AC3: 7C 06 C7 LCALL _LCD_PrString
+(0113) 		
+(0114) 		// lets sleep for a while
+(0115) 		SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
+    0AC6: 57 00    MOV   X,0x0
+    0AC8: 50 08    MOV   A,0x8
+    0ACA: 7C 05 74 LCALL _SleepTimer_SyncWait
+    0ACD: 20       POP   X
+(0116) 	}
+    0ACE: 8F 0A    JMP   0x09D9
+(0117) }
 FILE: C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\sunsensor.c
 (0001) /**
 (0002) Measuring the lightintensity with an active PV on an ADC.
@@ -4302,104 +4324,104 @@ _sunsensor:
   sunSample            --> X+0
   secondLine           --> X-7
   firstLine            --> X-5
-    0AB7: 10       PUSH  X
-    0AB8: 4F       MOV   X,SP
-    0AB9: 38 01    ADD   SP,0x1
+    0AD5: 10       PUSH  X
+    0AD6: 4F       MOV   X,SP
+    0AD7: 38 01    ADD   SP,0x1
 (0034) 	char sunSample = 0x00;
-    0ABB: 56 00 00 MOV   [X+0],0x0
+    0AD9: 56 00 00 MOV   [X+0],0x0
 (0035) 
 (0036) 	sunSample = SAR6_sun_cGetSample();
-    0ABE: 10       PUSH  X
-    0ABF: 7C 05 F7 LCALL SAR6_sun_cGetSample|SAR6_sun_GetSample|_SAR6_sun_cGetSample|_SAR6_sun_GetSample
-    0AC2: 20       POP   X
-    0AC3: 54 00    MOV   [X+0],A
+    0ADC: 10       PUSH  X
+    0ADD: 7C 05 F7 LCALL SAR6_sun_cGetSample|SAR6_sun_GetSample|_SAR6_sun_cGetSample|_SAR6_sun_GetSample
+    0AE0: 20       POP   X
+    0AE1: 54 00    MOV   [X+0],A
 (0037) 	sunSample += 31;
-    0AC5: 07 00 1F ADD   [X+0],0x1F
+    0AE3: 07 00 1F ADD   [X+0],0x1F
 (0038) 	
 (0039) 	csprintf(firstLine, "Sun and rain    ");
-    0AC8: 50 01    MOV   A,0x1
-    0ACA: 08       PUSH  A
-    0ACB: 50 CD    MOV   A,0xCD
-    0ACD: 08       PUSH  A
-    0ACE: 52 FB    MOV   A,[X-5]
-    0AD0: 08       PUSH  A
-    0AD1: 52 FC    MOV   A,[X-4]
-    0AD3: 08       PUSH  A
-    0AD4: 7C 0F 3D LCALL _csprintf
-    0AD7: 38 FC    ADD   SP,0xFC
+    0AE6: 50 01    MOV   A,0x1
+    0AE8: 08       PUSH  A
+    0AE9: 50 CD    MOV   A,0xCD
+    0AEB: 08       PUSH  A
+    0AEC: 52 FB    MOV   A,[X-5]
+    0AEE: 08       PUSH  A
+    0AEF: 52 FC    MOV   A,[X-4]
+    0AF1: 08       PUSH  A
+    0AF2: 7C 0F 5B LCALL _csprintf
+    0AF5: 38 FC    ADD   SP,0xFC
 (0040) 	
 (0041) 	if( sunSample >= 24 ) {
-    0AD9: 3D 00 18 CMP   [X+0],0x18
-    0ADC: C0 14    JC    0x0AF1
+    0AF7: 3D 00 18 CMP   [X+0],0x18
+    0AFA: C0 14    JC    0x0B0F
 (0042) 		// sunshine!
 (0043) 		csprintf(secondLine, "sunny           ");
-    0ADE: 50 01    MOV   A,0x1
-    0AE0: 08       PUSH  A
-    0AE1: 50 BC    MOV   A,0xBC
-    0AE3: 08       PUSH  A
-    0AE4: 52 F9    MOV   A,[X-7]
-    0AE6: 08       PUSH  A
-    0AE7: 52 FA    MOV   A,[X-6]
-    0AE9: 08       PUSH  A
-    0AEA: 7C 0F 3D LCALL _csprintf
-    0AED: 38 FC    ADD   SP,0xFC
+    0AFC: 50 01    MOV   A,0x1
+    0AFE: 08       PUSH  A
+    0AFF: 50 BC    MOV   A,0xBC
+    0B01: 08       PUSH  A
+    0B02: 52 F9    MOV   A,[X-7]
+    0B04: 08       PUSH  A
+    0B05: 52 FA    MOV   A,[X-6]
+    0B07: 08       PUSH  A
+    0B08: 7C 0F 5B LCALL _csprintf
+    0B0B: 38 FC    ADD   SP,0xFC
 (0044) 	} else if( sunSample >= 5 ) {
-    0AEF: 80 2A    JMP   0x0B1A
-    0AF1: 3D 00 05 CMP   [X+0],0x5
-    0AF4: C0 14    JC    0x0B09
+    0B0D: 80 2A    JMP   0x0B38
+    0B0F: 3D 00 05 CMP   [X+0],0x5
+    0B12: C0 14    JC    0x0B27
 (0045) 		// cloudy!
 (0046) 		csprintf(secondLine, "cloudy          ");
-    0AF6: 50 01    MOV   A,0x1
-    0AF8: 08       PUSH  A
-    0AF9: 50 AB    MOV   A,0xAB
-    0AFB: 08       PUSH  A
-    0AFC: 52 F9    MOV   A,[X-7]
-    0AFE: 08       PUSH  A
-    0AFF: 52 FA    MOV   A,[X-6]
-    0B01: 08       PUSH  A
-    0B02: 7C 0F 3D LCALL _csprintf
-    0B05: 38 FC    ADD   SP,0xFC
+    0B14: 50 01    MOV   A,0x1
+    0B16: 08       PUSH  A
+    0B17: 50 AB    MOV   A,0xAB
+    0B19: 08       PUSH  A
+    0B1A: 52 F9    MOV   A,[X-7]
+    0B1C: 08       PUSH  A
+    0B1D: 52 FA    MOV   A,[X-6]
+    0B1F: 08       PUSH  A
+    0B20: 7C 0F 5B LCALL _csprintf
+    0B23: 38 FC    ADD   SP,0xFC
 (0047) 	} else {
-    0B07: 80 12    JMP   0x0B1A
+    0B25: 80 12    JMP   0x0B38
 (0048) 		// good night!
 (0049) 		csprintf(secondLine, "night           ");
-    0B09: 50 01    MOV   A,0x1
-    0B0B: 08       PUSH  A
-    0B0C: 50 9A    MOV   A,0x9A
-    0B0E: 08       PUSH  A
-    0B0F: 52 F9    MOV   A,[X-7]
-    0B11: 08       PUSH  A
-    0B12: 52 FA    MOV   A,[X-6]
-    0B14: 08       PUSH  A
-    0B15: 7C 0F 3D LCALL _csprintf
-    0B18: 38 FC    ADD   SP,0xFC
+    0B27: 50 01    MOV   A,0x1
+    0B29: 08       PUSH  A
+    0B2A: 50 9A    MOV   A,0x9A
+    0B2C: 08       PUSH  A
+    0B2D: 52 F9    MOV   A,[X-7]
+    0B2F: 08       PUSH  A
+    0B30: 52 FA    MOV   A,[X-6]
+    0B32: 08       PUSH  A
+    0B33: 7C 0F 5B LCALL _csprintf
+    0B36: 38 FC    ADD   SP,0xFC
 (0050) 	}
 (0051) 	
 (0052) 	if (PORT & RAINPIN) {
-    0B1A: 5D 00    MOV   A,REG[0x0]
-    0B1C: 53 08    MOV   [__r0],A
-    0B1E: 47 08 20 TST   [__r0],0x20
-    0B21: A0 1A    JZ    0x0B3C
+    0B38: 5D 00    MOV   A,REG[0x0]
+    0B3A: 53 08    MOV   [__r0],A
+    0B3C: 47 08 20 TST   [__r0],0x20
+    0B3F: A0 1A    JZ    0x0B5A
 (0053) 		// rainy!
 (0054) 		csprintf(&secondLine[11], "rainy");
-    0B23: 50 01    MOV   A,0x1
-    0B25: 08       PUSH  A
-    0B26: 50 94    MOV   A,0x94
-    0B28: 08       PUSH  A
-    0B29: 52 FA    MOV   A,[X-6]
-    0B2B: 01 0B    ADD   A,0xB
-    0B2D: 53 07    MOV   [__r1],A
-    0B2F: 52 F9    MOV   A,[X-7]
-    0B31: 09 00    ADC   A,0x0
-    0B33: 08       PUSH  A
-    0B34: 51 07    MOV   A,[__r1]
-    0B36: 08       PUSH  A
-    0B37: 7C 0F 3D LCALL _csprintf
-    0B3A: 38 FC    ADD   SP,0xFC
+    0B41: 50 01    MOV   A,0x1
+    0B43: 08       PUSH  A
+    0B44: 50 94    MOV   A,0x94
+    0B46: 08       PUSH  A
+    0B47: 52 FA    MOV   A,[X-6]
+    0B49: 01 0B    ADD   A,0xB
+    0B4B: 53 07    MOV   [__r1],A
+    0B4D: 52 F9    MOV   A,[X-7]
+    0B4F: 09 00    ADC   A,0x0
+    0B51: 08       PUSH  A
+    0B52: 51 07    MOV   A,[__r1]
+    0B54: 08       PUSH  A
+    0B55: 7C 0F 5B LCALL _csprintf
+    0B58: 38 FC    ADD   SP,0xFC
 (0055) 	}
-    0B3C: 38 FF    ADD   SP,0xFF
-    0B3E: 20       POP   X
-    0B3F: 7F       RET   
+    0B5A: 38 FF    ADD   SP,0xFF
+    0B5C: 20       POP   X
+    0B5D: 7F       RET   
 FILE: C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\windspeed.c
 (0001) #include "PSoCAPI.h"
 (0002) #include <stdio.h>
@@ -4410,66 +4432,66 @@ _windsensor:
   windSample           --> X+0
   secondLine           --> X-7
   firstLine            --> X-5
-    0B40: 10       PUSH  X
-    0B41: 4F       MOV   X,SP
-    0B42: 38 02    ADD   SP,0x2
+    0B5E: 10       PUSH  X
+    0B5F: 4F       MOV   X,SP
+    0B60: 38 02    ADD   SP,0x2
 (0006) 	int windSample = 0x00;
-    0B44: 56 01 00 MOV   [X+1],0x0
-    0B47: 56 00 00 MOV   [X+0],0x0
+    0B62: 56 01 00 MOV   [X+1],0x0
+    0B65: 56 00 00 MOV   [X+0],0x0
 (0007) 
 (0008) 	windSample = SAR6_wind_cGetSample();
-    0B4A: 10       PUSH  X
-    0B4B: 7C 05 BD LCALL _SAR6_wind_cGetSample|_SAR6_wind_GetSample|SAR6_wind_cGetSample|SAR6_wind_GetSample
-    0B4E: 20       POP   X
-    0B4F: 54 01    MOV   [X+1],A
-    0B51: 56 00 00 MOV   [X+0],0x0
-    0B54: 48 01 80 TST   [X+1],0x80
-    0B57: A0 04    JZ    0x0B5C
-    0B59: 56 00 FF MOV   [X+0],0xFF
+    0B68: 10       PUSH  X
+    0B69: 7C 05 BD LCALL _SAR6_wind_cGetSample|_SAR6_wind_GetSample|SAR6_wind_cGetSample|SAR6_wind_GetSample
+    0B6C: 20       POP   X
+    0B6D: 54 01    MOV   [X+1],A
+    0B6F: 56 00 00 MOV   [X+0],0x0
+    0B72: 48 01 80 TST   [X+1],0x80
+    0B75: A0 04    JZ    0x0B7A
+    0B77: 56 00 FF MOV   [X+0],0xFF
 (0009) 	windSample += 30; // make unsigned int
-    0B5C: 07 01 1E ADD   [X+1],0x1E
-    0B5F: 0F 00 00 ADC   [X+0],0x0
+    0B7A: 07 01 1E ADD   [X+1],0x1E
+    0B7D: 0F 00 00 ADC   [X+0],0x0
 (0010) 	windSample *= 5; // to get km/h
-    0B62: 52 00    MOV   A,[X+0]
-    0B64: 08       PUSH  A
-    0B65: 52 01    MOV   A,[X+1]
-    0B67: 08       PUSH  A
-    0B68: 50 00    MOV   A,0x0
-    0B6A: 08       PUSH  A
-    0B6B: 50 05    MOV   A,0x5
-    0B6D: 08       PUSH  A
-    0B6E: 7C 0B DC LCALL 0x0BDC
-    0B71: 38 FC    ADD   SP,0xFC
-    0B73: 51 02    MOV   A,[__rX]
-    0B75: 54 01    MOV   [X+1],A
-    0B77: 51 01    MOV   A,[__rY]
-    0B79: 54 00    MOV   [X+0],A
+    0B80: 52 00    MOV   A,[X+0]
+    0B82: 08       PUSH  A
+    0B83: 52 01    MOV   A,[X+1]
+    0B85: 08       PUSH  A
+    0B86: 50 00    MOV   A,0x0
+    0B88: 08       PUSH  A
+    0B89: 50 05    MOV   A,0x5
+    0B8B: 08       PUSH  A
+    0B8C: 7C 0B FA LCALL 0x0BFA
+    0B8F: 38 FC    ADD   SP,0xFC
+    0B91: 51 02    MOV   A,[__rX]
+    0B93: 54 01    MOV   [X+1],A
+    0B95: 51 01    MOV   A,[__rY]
+    0B97: 54 00    MOV   [X+0],A
 (0011) 	
 (0012) 	csprintf(firstLine, "Windspeed & Dire");
-    0B7B: 50 01    MOV   A,0x1
-    0B7D: 08       PUSH  A
-    0B7E: 50 EE    MOV   A,0xEE
-    0B80: 08       PUSH  A
-    0B81: 52 FB    MOV   A,[X-5]
-    0B83: 08       PUSH  A
-    0B84: 52 FC    MOV   A,[X-4]
-    0B86: 08       PUSH  A
-    0B87: 7C 0F 3D LCALL _csprintf
-(0013) 	csprintf(secondLine, "%i km/h        ", windSample);
-    0B8A: 52 00    MOV   A,[X+0]
-    0B8C: 08       PUSH  A
-    0B8D: 52 01    MOV   A,[X+1]
-    0B8F: 08       PUSH  A
-    0B90: 50 01    MOV   A,0x1
-    0B92: 08       PUSH  A
-    0B93: 50 DE    MOV   A,0xDE
-    0B95: 08       PUSH  A
-    0B96: 52 F9    MOV   A,[X-7]
-    0B98: 08       PUSH  A
-    0B99: 52 FA    MOV   A,[X-6]
+    0B99: 50 01    MOV   A,0x1
     0B9B: 08       PUSH  A
-    0B9C: 7C 0F 3D LCALL _csprintf
-    0B9F: 38 F6    ADD   SP,0xF6
-    0BA1: 38 FE    ADD   SP,0xFE
-    0BA3: 20       POP   X
-    0BA4: 7F       RET   
+    0B9C: 50 EE    MOV   A,0xEE
+    0B9E: 08       PUSH  A
+    0B9F: 52 FB    MOV   A,[X-5]
+    0BA1: 08       PUSH  A
+    0BA2: 52 FC    MOV   A,[X-4]
+    0BA4: 08       PUSH  A
+    0BA5: 7C 0F 5B LCALL _csprintf
+(0013) 	csprintf(secondLine, "%i km/h        ", windSample);
+    0BA8: 52 00    MOV   A,[X+0]
+    0BAA: 08       PUSH  A
+    0BAB: 52 01    MOV   A,[X+1]
+    0BAD: 08       PUSH  A
+    0BAE: 50 01    MOV   A,0x1
+    0BB0: 08       PUSH  A
+    0BB1: 50 DE    MOV   A,0xDE
+    0BB3: 08       PUSH  A
+    0BB4: 52 F9    MOV   A,[X-7]
+    0BB6: 08       PUSH  A
+    0BB7: 52 FA    MOV   A,[X-6]
+    0BB9: 08       PUSH  A
+    0BBA: 7C 0F 5B LCALL _csprintf
+    0BBD: 38 F6    ADD   SP,0xF6
+    0BBF: 38 FE    ADD   SP,0xFE
+    0BC1: 20       POP   X
+    0BC2: 7F       RET   
