@@ -729,7 +729,7 @@
  0027 620400            mov     reg[04h], 00h           ; Port_1_DriveMode_0 register (PRT1DM0)
  002A 6205FF            mov     reg[05h], ffh           ; Port_1_DriveMode_1 register (PRT1DM1)
  002D 70EF          and   F, ~FLAG_XIO_MASK
- 002F 6207FF            mov     reg[07h], ffh           ; Port_1_DriveMode_2 register (PRT1DM2)
+ 002F 6207F8            mov     reg[07h], f8h           ; Port_1_DriveMode_2 register (PRT1DM2)
  0032 620600            mov     reg[06h], 00h           ; Port_1_GlobalSelect register (PRT1GS)
  0035 7110          or    F, FLAG_XIO_MASK
  0037 620600            mov     reg[06h], 00h           ; Port_1_IntCtrl_0 register (PRT1IC0)

@@ -109,7 +109,7 @@ LoadConfigTBL_weather_station_Ordered:
 	mov	reg[04h], 00h		; Port_1_DriveMode_0 register (PRT1DM0)
 	mov	reg[05h], ffh		; Port_1_DriveMode_1 register (PRT1DM1)
 	M8C_SetBank0
-	mov	reg[07h], ffh		; Port_1_DriveMode_2 register (PRT1DM2)
+	mov	reg[07h], f8h		; Port_1_DriveMode_2 register (PRT1DM2)
 	mov	reg[06h], 00h		; Port_1_GlobalSelect register (PRT1GS)
 	M8C_SetBank1
 	mov	reg[06h], 00h		; Port_1_IntCtrl_0 register (PRT1IC0)

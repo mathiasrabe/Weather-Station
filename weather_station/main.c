@@ -20,6 +20,7 @@
 #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
 #include <stdio.h>
 
+#include "HYT271.h"
 #include "sunsensor.h"
 #include "windspeed.h"
 /*
@@ -36,6 +37,8 @@ void main(void)
 	//Variables
 	char lcdFirstLine[LCD_LENGTH], lcdSecondLine[LCD_LENGTH];
 	unsigned int displaymode = 0;
+ 	int temperature[5];
+	int humidity[5];
 	
 	/** init **/
 	
@@ -77,6 +80,9 @@ void main(void)
 		}
 			
 		// get temp and humidity here
+		I2Cm_Start();				//Initialize I2C
+		I2Cm_fSendStart( 0x28, 0);	//Send Measuring Request	
+		//measuring(temperature, humidity);
 		
 		switch(displaymode) {
 			case 0:
@@ -84,11 +90,11 @@ void main(void)
 				break;
 				
 			case 1:
-				// temp();
+				printtemp(lcdFirstLine, lcdSecondLine, temperature);
 				break;
 				
 			case 2:
-				// humidity();
+				printhum(lcdFirstLine, lcdSecondLine, humidity);
 				break;
 				
 			case 3:
@@ -113,5 +119,6 @@ void main(void)
 		
 		// lets sleep for a while
 		SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
+		measuring(temperature, humidity);
 	}
 }

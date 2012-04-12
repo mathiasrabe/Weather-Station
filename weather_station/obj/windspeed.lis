@@ -11,18 +11,24 @@
  0000 10                push X
  0001 4F                mov X,SP
  0002 3802              add SP,2
- 0004                   .dbline 5
+ 0004                   .dbline 10
+ 0004           ; #define PORT PRT1DR
+ 0004           ; #define PIN1 0b00000001 // P1_0
+ 0004           ; #define PIN2 0b00000010 // P1_1
+ 0004           ; #define PIN3 0b00000100 // P1_2
+ 0004           ; 
  0004           ; #include "PSoCAPI.h"
  0004           ; #include <stdio.h>
  0004           ; #include <stdlib.h>
  0004           ; 
  0004           ; void windsensor(char *firstLine, char *secondLine) {
- 0004                   .dbline 6
+ 0004                   .dbline 11
  0004           ;       int windSample = 0x00;
  0004 560100            mov [X+1],0
  0007 560000            mov [X+0],0
- 000A                   .dbline 8
+ 000A                   .dbline 14
  000A           ; 
+ 000A           ;       // get windspeed
  000A           ;       windSample = SAR6_wind_cGetSample();
  000A 10                push X
  000B 7C0000            xcall _SAR6_wind_cGetSample
@@ -33,11 +39,11 @@
  0017 A004              jz X0
  0019 5600FF            mov [X+0],-1
  001C           X0:
- 001C                   .dbline 9
+ 001C                   .dbline 15
  001C           ;       windSample += 30; // make unsigned int
  001C 07011E            add [X+1],30
  001F 0F0000            adc [X+0],0
- 0022                   .dbline 10
+ 0022                   .dbline 16
  0022           ;       windSample *= 5; // to get km/h
  0022 5200              mov A,[X+0]
  0024 08                push A
@@ -53,27 +59,27 @@
  0035 5401              mov [X+1],A
  0037 5100              mov A,[__rY]
  0039 5400              mov [X+0],A
- 003B                   .dbline 12
+ 003B                   .dbline 18
  003B           ;       
  003B           ;       csprintf(firstLine, "Windspeed & Dire");
- 003B 5010              mov A,>L2
+ 003B 5028              mov A,>L2
  003D 08                push A
- 003E 5010              mov A,<L2
+ 003E 5028              mov A,<L2
  0040 08                push A
  0041 52FB              mov A,[X-5]
  0043 08                push A
  0044 52FC              mov A,[X-4]
  0046 08                push A
  0047 7C0000            xcall _csprintf
- 004A                   .dbline 13
+ 004A                   .dbline 19
  004A           ;       csprintf(secondLine, "%i km/h        ", windSample);
  004A 5200              mov A,[X+0]
  004C 08                push A
  004D 5201              mov A,[X+1]
  004F 08                push A
- 0050 5000              mov A,>L3
+ 0050 5018              mov A,>L3
  0052 08                push A
- 0053 5000              mov A,<L3
+ 0053 5018              mov A,<L3
  0055 08                push A
  0056 52F9              mov A,[X-7]
  0058 08                push A
@@ -81,19 +87,332 @@
  005B 08                push A
  005C 7C0000            xcall _csprintf
  005F 38F6              add SP,-10
- 0061                   .dbline -2
- 0061           L1:
- 0061 38FE              add SP,-2
- 0063 20                pop X
- 0064                   .dbline 0 ; func end
- 0064 7F                ret
- 0065                   .dbsym l windSample 0 I
- 0065                   .dbsym l secondLine -7 pc
- 0065                   .dbsym l firstLine -5 pc
- 0065                   .dbend
+ 0061                   .dbline 22
+ 0061           ;       
+ 0061           ;       // get wind direction
+ 0061           ;       if( (PORT & PIN1) &&
+ 0061 5D04              mov A,REG[0x4]
+ 0063 5300              mov [__r0],A
+ 0065 470001            tst [__r0],1
+ 0068 A02E              jz L4
+ 006A 5D04              mov A,REG[0x4]
+ 006C 5300              mov [__r0],A
+ 006E 470002            tst [__r0],2
+ 0071 A025              jz L4
+ 0073 5D04              mov A,REG[0x4]
+ 0075 5300              mov [__r0],A
+ 0077 470004            tst [__r0],4
+ 007A A01C              jz L4
+ 007C                   .dbline 25
+ 007C           ;               (PORT & PIN2) &&
+ 007C           ;               (PORT & PIN3) )
+ 007C           ;       { csprintf(&secondLine[13], "NO");
+ 007C                   .dbline 25
+ 007C 5015              mov A,>L6
+ 007E 08                push A
+ 007F 5015              mov A,<L6
+ 0081 08                push A
+ 0082 52FA              mov A,[X-6]
+ 0084 010D              add A,13
+ 0086 5300              mov [__r1],A
+ 0088 52F9              mov A,[X-7]
+ 008A 0900              adc A,0
+ 008C 08                push A
+ 008D 5100              mov A,[__r1]
+ 008F 08                push A
+ 0090 7C0000            xcall _csprintf
+ 0093 38FC              add SP,-4
+ 0095                   .dbline 26
+ 0095           ;       } else if( !(PORT & PIN1) &&
+ 0095 8179              xjmp L5
+ 0097           L4:
+ 0097                   .dbline 26
+ 0097 5D04              mov A,REG[0x4]
+ 0099 5300              mov [__r0],A
+ 009B 470001            tst [__r0],1
+ 009E B02E              jnz L7
+ 00A0 5D04              mov A,REG[0x4]
+ 00A2 5300              mov [__r0],A
+ 00A4 470002            tst [__r0],2
+ 00A7 A025              jz L7
+ 00A9 5D04              mov A,REG[0x4]
+ 00AB 5300              mov [__r0],A
+ 00AD 470004            tst [__r0],4
+ 00B0 A01C              jz L7
+ 00B2                   .dbline 29
+ 00B2           ;                               (PORT & PIN2) &&
+ 00B2           ;                               (PORT & PIN3) )
+ 00B2           ;       { csprintf(&secondLine[13], "NE");
+ 00B2                   .dbline 29
+ 00B2 5012              mov A,>L9
+ 00B4 08                push A
+ 00B5 5012              mov A,<L9
+ 00B7 08                push A
+ 00B8 52FA              mov A,[X-6]
+ 00BA 010D              add A,13
+ 00BC 5300              mov [__r1],A
+ 00BE 52F9              mov A,[X-7]
+ 00C0 0900              adc A,0
+ 00C2 08                push A
+ 00C3 5100              mov A,[__r1]
+ 00C5 08                push A
+ 00C6 7C0000            xcall _csprintf
+ 00C9 38FC              add SP,-4
+ 00CB                   .dbline 30
+ 00CB           ;       }else if( !(PORT & PIN1) &&
+ 00CB 8143              xjmp L8
+ 00CD           L7:
+ 00CD                   .dbline 30
+ 00CD 5D04              mov A,REG[0x4]
+ 00CF 5300              mov [__r0],A
+ 00D1 470001            tst [__r0],1
+ 00D4 B02E              jnz L10
+ 00D6 5D04              mov A,REG[0x4]
+ 00D8 5300              mov [__r0],A
+ 00DA 470002            tst [__r0],2
+ 00DD A025              jz L10
+ 00DF 5D04              mov A,REG[0x4]
+ 00E1 5300              mov [__r0],A
+ 00E3 470004            tst [__r0],4
+ 00E6 B01C              jnz L10
+ 00E8                   .dbline 33
+ 00E8           ;                               (PORT & PIN2) &&
+ 00E8           ;                               !(PORT & PIN3) )
+ 00E8           ;       { csprintf(&secondLine[13], "EA");
+ 00E8                   .dbline 33
+ 00E8 500F              mov A,>L12
+ 00EA 08                push A
+ 00EB 500F              mov A,<L12
+ 00ED 08                push A
+ 00EE 52FA              mov A,[X-6]
+ 00F0 010D              add A,13
+ 00F2 5300              mov [__r1],A
+ 00F4 52F9              mov A,[X-7]
+ 00F6 0900              adc A,0
+ 00F8 08                push A
+ 00F9 5100              mov A,[__r1]
+ 00FB 08                push A
+ 00FC 7C0000            xcall _csprintf
+ 00FF 38FC              add SP,-4
+ 0101                   .dbline 34
+ 0101           ;       }else if(  (PORT & PIN1) &&
+ 0101 810D              xjmp L11
+ 0103           L10:
+ 0103                   .dbline 34
+ 0103 5D04              mov A,REG[0x4]
+ 0105 5300              mov [__r0],A
+ 0107 470001            tst [__r0],1
+ 010A A02E              jz L13
+ 010C 5D04              mov A,REG[0x4]
+ 010E 5300              mov [__r0],A
+ 0110 470002            tst [__r0],2
+ 0113 A025              jz L13
+ 0115 5D04              mov A,REG[0x4]
+ 0117 5300              mov [__r0],A
+ 0119 470004            tst [__r0],4
+ 011C B01C              jnz L13
+ 011E                   .dbline 37
+ 011E           ;                               (PORT & PIN2) &&
+ 011E           ;                               !(PORT & PIN3) )
+ 011E           ;       { csprintf(&secondLine[13], "SE");
+ 011E                   .dbline 37
+ 011E 500C              mov A,>L15
+ 0120 08                push A
+ 0121 500C              mov A,<L15
+ 0123 08                push A
+ 0124 52FA              mov A,[X-6]
+ 0126 010D              add A,13
+ 0128 5300              mov [__r1],A
+ 012A 52F9              mov A,[X-7]
+ 012C 0900              adc A,0
+ 012E 08                push A
+ 012F 5100              mov A,[__r1]
+ 0131 08                push A
+ 0132 7C0000            xcall _csprintf
+ 0135 38FC              add SP,-4
+ 0137                   .dbline 38
+ 0137           ;       }else if(  (PORT & PIN1) &&
+ 0137 80D7              xjmp L14
+ 0139           L13:
+ 0139                   .dbline 38
+ 0139 5D04              mov A,REG[0x4]
+ 013B 5300              mov [__r0],A
+ 013D 470001            tst [__r0],1
+ 0140 A02E              jz L16
+ 0142 5D04              mov A,REG[0x4]
+ 0144 5300              mov [__r0],A
+ 0146 470002            tst [__r0],2
+ 0149 B025              jnz L16
+ 014B 5D04              mov A,REG[0x4]
+ 014D 5300              mov [__r0],A
+ 014F 470004            tst [__r0],4
+ 0152 B01C              jnz L16
+ 0154                   .dbline 41
+ 0154           ;                               !(PORT & PIN2) &&
+ 0154           ;                               !(PORT & PIN3) )
+ 0154           ;       { csprintf(&secondLine[13], "SO");
+ 0154                   .dbline 41
+ 0154 5009              mov A,>L18
+ 0156 08                push A
+ 0157 5009              mov A,<L18
+ 0159 08                push A
+ 015A 52FA              mov A,[X-6]
+ 015C 010D              add A,13
+ 015E 5300              mov [__r1],A
+ 0160 52F9              mov A,[X-7]
+ 0162 0900              adc A,0
+ 0164 08                push A
+ 0165 5100              mov A,[__r1]
+ 0167 08                push A
+ 0168 7C0000            xcall _csprintf
+ 016B 38FC              add SP,-4
+ 016D                   .dbline 42
+ 016D           ;       }else if( !(PORT & PIN1) &&
+ 016D 80A1              xjmp L17
+ 016F           L16:
+ 016F                   .dbline 42
+ 016F 5D04              mov A,REG[0x4]
+ 0171 5300              mov [__r0],A
+ 0173 470001            tst [__r0],1
+ 0176 B02E              jnz L19
+ 0178 5D04              mov A,REG[0x4]
+ 017A 5300              mov [__r0],A
+ 017C 470002            tst [__r0],2
+ 017F B025              jnz L19
+ 0181 5D04              mov A,REG[0x4]
+ 0183 5300              mov [__r0],A
+ 0185 470004            tst [__r0],4
+ 0188 B01C              jnz L19
+ 018A                   .dbline 45
+ 018A           ;                               !(PORT & PIN2) &&
+ 018A           ;                               !(PORT & PIN3) )
+ 018A           ;       { csprintf(&secondLine[13], "SW");
+ 018A                   .dbline 45
+ 018A 5006              mov A,>L21
+ 018C 08                push A
+ 018D 5006              mov A,<L21
+ 018F 08                push A
+ 0190 52FA              mov A,[X-6]
+ 0192 010D              add A,13
+ 0194 5300              mov [__r1],A
+ 0196 52F9              mov A,[X-7]
+ 0198 0900              adc A,0
+ 019A 08                push A
+ 019B 5100              mov A,[__r1]
+ 019D 08                push A
+ 019E 7C0000            xcall _csprintf
+ 01A1 38FC              add SP,-4
+ 01A3                   .dbline 46
+ 01A3           ;       }else if( !(PORT & PIN1) &&
+ 01A3 806B              xjmp L20
+ 01A5           L19:
+ 01A5                   .dbline 46
+ 01A5 5D04              mov A,REG[0x4]
+ 01A7 5300              mov [__r0],A
+ 01A9 470001            tst [__r0],1
+ 01AC B02E              jnz L22
+ 01AE 5D04              mov A,REG[0x4]
+ 01B0 5300              mov [__r0],A
+ 01B2 470002            tst [__r0],2
+ 01B5 B025              jnz L22
+ 01B7 5D04              mov A,REG[0x4]
+ 01B9 5300              mov [__r0],A
+ 01BB 470004            tst [__r0],4
+ 01BE A01C              jz L22
+ 01C0                   .dbline 49
+ 01C0           ;                               !(PORT & PIN2) &&
+ 01C0           ;                               (PORT & PIN3) )
+ 01C0           ;       { csprintf(&secondLine[13], "WE");
+ 01C0                   .dbline 49
+ 01C0 5003              mov A,>L24
+ 01C2 08                push A
+ 01C3 5003              mov A,<L24
+ 01C5 08                push A
+ 01C6 52FA              mov A,[X-6]
+ 01C8 010D              add A,13
+ 01CA 5300              mov [__r1],A
+ 01CC 52F9              mov A,[X-7]
+ 01CE 0900              adc A,0
+ 01D0 08                push A
+ 01D1 5100              mov A,[__r1]
+ 01D3 08                push A
+ 01D4 7C0000            xcall _csprintf
+ 01D7 38FC              add SP,-4
+ 01D9                   .dbline 50
+ 01D9           ;       }else if(  (PORT & PIN1) &&
+ 01D9 8035              xjmp L23
+ 01DB           L22:
+ 01DB                   .dbline 50
+ 01DB 5D04              mov A,REG[0x4]
+ 01DD 5300              mov [__r0],A
+ 01DF 470001            tst [__r0],1
+ 01E2 A02C              jz L25
+ 01E4 5D04              mov A,REG[0x4]
+ 01E6 5300              mov [__r0],A
+ 01E8 470002            tst [__r0],2
+ 01EB B023              jnz L25
+ 01ED 5D04              mov A,REG[0x4]
+ 01EF 5300              mov [__r0],A
+ 01F1 470004            tst [__r0],4
+ 01F4 A01A              jz L25
+ 01F6                   .dbline 53
+ 01F6           ;                               !(PORT & PIN2) &&
+ 01F6           ;                               (PORT & PIN3) )
+ 01F6           ;       { csprintf(&secondLine[13], "NW");
+ 01F6                   .dbline 53
+ 01F6 5000              mov A,>L27
+ 01F8 08                push A
+ 01F9 5000              mov A,<L27
+ 01FB 08                push A
+ 01FC 52FA              mov A,[X-6]
+ 01FE 010D              add A,13
+ 0200 5300              mov [__r1],A
+ 0202 52F9              mov A,[X-7]
+ 0204 0900              adc A,0
+ 0206 08                push A
+ 0207 5100              mov A,[__r1]
+ 0209 08                push A
+ 020A 7C0000            xcall _csprintf
+ 020D 38FC              add SP,-4
+ 020F                   .dbline 54
+ 020F           ;       }
+ 020F           L25:
+ 020F           L23:
+ 020F           L20:
+ 020F           L17:
+ 020F           L14:
+ 020F           L11:
+ 020F           L8:
+ 020F           L5:
+ 020F                   .dbline -2
+ 020F           L1:
+ 020F 38FE              add SP,-2
+ 0211 20                pop X
+ 0212                   .dbline 0 ; func end
+ 0212 7F                ret
+ 0213                   .dbsym l windSample 0 I
+ 0213                   .dbsym l secondLine -7 pc
+ 0213                   .dbsym l firstLine -5 pc
+ 0213                   .dbend
                         .area lit(rom, con, rel, lit)
- 0000           L3:
- 0000 2569206B6D2F68202020202020202000  .byte 37,'i,32,'k,'m,47,'h,32,32,32,32,32,32,32,32,0
- 0010           L2:
- 0010 57696E64737065656420262044697265  .byte 'W,'i,'n,'d,'s,'p,'e,'e,'d,32,38,32,'D,'i,'r,'e
- 0020 00                .byte 0
+ 0000           L27:
+ 0000 4E5700            .byte 'N,'W,0
+ 0003           L24:
+ 0003 574500            .byte 'W,'E,0
+ 0006           L21:
+ 0006 535700            .byte 'S,'W,0
+ 0009           L18:
+ 0009 534F00            .byte 'S,'O,0
+ 000C           L15:
+ 000C 534500            .byte 'S,'E,0
+ 000F           L12:
+ 000F 454100            .byte 'E,'A,0
+ 0012           L9:
+ 0012 4E4500            .byte 'N,'E,0
+ 0015           L6:
+ 0015 4E4F00            .byte 'N,'O,0
+ 0018           L3:
+ 0018 2569206B6D2F68202020202020202000  .byte 37,'i,32,'k,'m,47,'h,32,32,32,32,32,32,32,32,0
+ 0028           L2:
+ 0028 57696E64737065656420262044697265  .byte 'W,'i,'n,'d,'s,'p,'e,'e,'d,32,38,32,'D,'i,'r,'e
+ 0038 00                .byte 0
