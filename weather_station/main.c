@@ -23,14 +23,7 @@
 #include "HYT271.h"
 #include "sunsensor.h"
 #include "windspeed.h"
-/*
-typedef enum {
-	overview = 0,
-	temp = 1,
-	humidity = 2,
-	rain = 3,
-	wind = 4,
-} MODE;*/
+#include "overview.h"
 
 void main(void)
 {
@@ -82,27 +75,27 @@ void main(void)
 		// get temp and humidity here
 		I2Cm_Start();				//Initialize I2C
 		I2Cm_fSendStart( 0x28, 0);	//Send Measuring Request	
-		//measuring(temperature, humidity);
+		measuring(temperature, humidity); //measure temperature and humidity
 		
 		switch(displaymode) {
 			case 0:
-				// overview();
+				overview(lcdFirstLine, lcdSecondLine, temperature, humidity);
 				break;
 				
 			case 1:
-				printtemp(lcdFirstLine, lcdSecondLine, temperature);
+				printtemp(lcdFirstLine, lcdSecondLine, temperature);  //write temp in the variable for the lcd
 				break;
 				
 			case 2:
-				printhum(lcdFirstLine, lcdSecondLine, humidity);
+				printhum(lcdFirstLine, lcdSecondLine, humidity);  //wirte humidity in the variable for the lcd
 				break;
 				
 			case 3:
-				sunsensor(lcdFirstLine, lcdSecondLine);
+				sunsensor(lcdFirstLine, lcdSecondLine); // is it day or night and is it rainy?
 				break;
 				
 			case 4:
-				windsensor(lcdFirstLine, lcdSecondLine);
+				windsensor(lcdFirstLine, lcdSecondLine); // write windspeed here
 				break;
 		
 			default:
@@ -119,6 +112,5 @@ void main(void)
 		
 		// lets sleep for a while
 		SleepTimer_SyncWait(8, SleepTimer_WAIT_RELOAD);
-		measuring(temperature, humidity);
 	}
 }

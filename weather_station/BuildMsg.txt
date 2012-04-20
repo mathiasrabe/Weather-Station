@@ -1,24 +1,10 @@
 Starting MAKE...
-creating project.mk 
-lib/i2cm.asm
-lib/lcd.asm
-lib/pga_sun.asm
-lib/pga_wind.asm
-lib/psocconfig.asm
-lib/psocconfigtbl.asm
-lib/sar6_sun.asm
-lib/sar6_wind.asm
-lib/sleeptimer.asm
-lib/sleeptimerint.asm
-./boot.asm
+creating project.mk -- no changes
 ./hyt271.c
-./main.c
-./sunsensor.c
-./windspeed.c
 Linking..
-  ROM 48% full. 7815 out of 16384 bytes used (does not include absolute areas).
+  ROM 46% full. 7523 out of 16384 bytes used (does not include absolute areas).
   RAM 21% full. 53 bytes used (does not include stack usage).
 Built with ICCM8C STD V7.05.00
  
-weather_station - 0 error(s) 0 warning(s) 15:26:21
+weather_station - 0 error(s) 0 warning(s) 10:50:18
 

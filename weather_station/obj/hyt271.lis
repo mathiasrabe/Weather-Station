@@ -15,84 +15,80 @@
  0000 10                push X
  0001 4F                mov X,SP
  0002 380A              add SP,10
- 0004                   .dbline 10
- 0004           ; 
- 0004           ; 
- 0004           ; 
+ 0004                   .dbline 7
  0004           ; #include <m8c.h>                      // part specific constants and macros
  0004           ; #include "PSoCAPI.h"                  // PSoC API definitions for all User Modules
  0004           ; 
  0004           ; #include <stdio.h>
  0004           ; #include <stdlib.h>
  0004           ; 
- 0004           ;       void measuring (int*temperature, int*humidity) {
- 0004                   .dbline 21
- 0004           ;       
- 0004           ;       
- 0004           ;               //get temp and humidity here
- 0004           ;               
+ 0004           ; void measuring (int*temperature, int*humidity) {
+ 0004                   .dbline 15
  0004           ; 
- 0004           ;               int capdata07, capdata813, tempdata, humdata;
- 0004           ;               int i;
- 0004           ;               
- 0004           ;               //I2Cm_Start();                         //Initialize I2C
- 0004           ;               //I2Cm_fSendStart( 0x28, 0);    //Send Measuring Request
- 0004           ;               I2Cm_fSendStart( 0x28, 1);      //Send Data Fetch
+ 0004           ; 
+ 0004           ;       //get temp and humidity here            
+ 0004           ; 
+ 0004           ;       int capdata07, capdata813, tempdata, humdata;
+ 0004           ;       int i;
+ 0004           ;       
+ 0004           ;       I2Cm_fSendStart( 0x28, 1);      //Send Data Fetch
  0004 10                push X
  0005 5701              mov X,1
  0007 5028              mov A,40
  0009 7C0000            xcall _I2Cm_fSendStart
- 000C                   .dbline 23
- 000C           ;               
- 000C           ;               capdata813=I2Cm_bRead (I2Cm_ACKslave);
+ 000C                   .dbline 18
+ 000C           ;       
+ 000C           ;       // receive data
+ 000C           ;       capdata813=I2Cm_bRead (I2Cm_ACKslave);
  000C 5001              mov A,1
  000E 7C0000            xcall _I2Cm_bRead
  0011 20                pop X
  0012 5405              mov [X+5],A
  0014 560400            mov [X+4],0
- 0017                   .dbline 24
- 0017           ;               capdata07 =I2Cm_bRead (I2Cm_ACKslave);
+ 0017                   .dbline 19
+ 0017           ;       capdata07 =I2Cm_bRead (I2Cm_ACKslave);
  0017 10                push X
  0018 5001              mov A,1
  001A 7C0000            xcall _I2Cm_bRead
  001D 20                pop X
  001E 5409              mov [X+9],A
  0020 560800            mov [X+8],0
- 0023                   .dbline 25
- 0023           ;               tempdata  =I2Cm_bRead (I2Cm_NAKslave);
+ 0023                   .dbline 20
+ 0023           ;       tempdata  =I2Cm_bRead (I2Cm_NAKslave);
  0023 10                push X
  0024 5000              mov A,0
  0026 7C0000            xcall _I2Cm_bRead
  0029 20                pop X
  002A 5407              mov [X+7],A
  002C 560600            mov [X+6],0
- 002F                   .dbline 27
- 002F           ;               
- 002F           ;               I2Cm_SendStop();                        //Stop I2C      
+ 002F                   .dbline 22
+ 002F           ;       
+ 002F           ;       I2Cm_SendStop();                        //Stop I2C      
  002F 10                push X
  0030 7C0000            xcall _I2Cm_SendStop
  0033 20                pop X
- 0034                   .dbline 30
- 0034           ;               
- 0034           ;               // calculating temp and humidity
- 0034           ;               capdata813=capdata813<<8;
+ 0034                   .dbline 26
+ 0034           ;       
+ 0034           ;       
+ 0034           ;       // calculating temp and humidity
+ 0034           ;       capdata813=capdata813<<8;
  0034 5205              mov A,[X+5]
  0036 5404              mov [X+4],A
  0038 560500            mov [X+5],0
- 003B                   .dbline 31
- 003B           ;               humdata=capdata813|capdata07;
+ 003B                   .dbline 27
+ 003B           ;       humdata=capdata813|capdata07;
  003B 5205              mov A,[X+5]
  003D 2B09              or A,[X+9]
  003F 5403              mov [X+3],A
  0041 5204              mov A,[X+4]
  0043 2B08              or A,[X+8]
  0045 5402              mov [X+2],A
- 0047                   .dbline 32
- 0047           ;               humdata=humdata&0x3FFF;
+ 0047                   .dbline 28
+ 0047           ;       humdata=humdata&0x3FFF;
  0047 27023F            and [X+2],63
- 004A                   .dbline 34
- 004A           ;               
- 004A           ;               humdata=( humdata / 163.83 ) - 48;
+ 004A                   .dbline 30
+ 004A           ;       
+ 004A           ;       humdata=( humdata / 163.83 ) - 48;
  004A 5203              mov A,[X+3]
  004C 5300              mov [__r3],A
  004E 5202              mov A,[X+2]
@@ -186,8 +182,8 @@
  00DE 18                pop A
  00DF 5402              mov [X+2],A
  00E1 38FE              add SP,-2
- 00E3                   .dbline 35
- 00E3           ;               tempdata=-((tempdata / 99.2909 ) -28);
+ 00E3                   .dbline 31
+ 00E3           ;       tempdata=-((tempdata / 99.2909 ) -28);
  00E3 5207              mov A,[X+7]
  00E5 5300              mov [__r3],A
  00E7 5206              mov A,[X+6]
@@ -284,17 +280,14 @@
  017E 18                pop A
  017F 5406              mov [X+6],A
  0181 38FE              add SP,-2
- 0183                   .dbline 41
- 0183           ;               
- 0183           ;               
- 0183           ;               
- 0183           ;               
- 0183           ;               //FIR filter
- 0183           ;               for(i=0; i<4; i++) temperature[i] = temperature[i+1];
+ 0183                   .dbline 34
+ 0183           ;       
+ 0183           ;       //FIR filter for temperature  (not in funktion now)
+ 0183           ;       for(i=0; i<4; i++) temperature[i] = temperature[i+1];
  0183 560100            mov [X+1],0
  0186 560000            mov [X+0],0
  0189           L2:
- 0189                   .dbline 41
+ 0189                   .dbline 34
  0189 5201              mov A,[X+1]
  018B 0101              add A,1
  018D 64                asl A
@@ -315,10 +308,10 @@
  01A9 5100              mov A,[__r1]
  01AB 3F00              mvi [__r3],A
  01AD           L3:
- 01AD                   .dbline 41
+ 01AD                   .dbline 34
  01AD 7701              inc [X+1]
  01AF 0F0000            adc [X+0],0
- 01B2                   .dbline 41
+ 01B2                   .dbline 34
  01B2 5201              mov A,[X+1]
  01B4 1104              sub A,4
  01B6 5200              mov A,[X+0]
@@ -326,8 +319,8 @@
  01BA 1980              sbb A,(0 ^ 0x80)
  01BC CFCC              jc L2
  01BE           X4:
- 01BE                   .dbline 42
- 01BE           ;               temperature[4] = tempdata;
+ 01BE                   .dbline 35
+ 01BE           ;       temperature[4] = tempdata;
  01BE 52FC              mov A,[X-4]
  01C0 0108              add A,8
  01C2 5300              mov [__r1],A
@@ -335,14 +328,14 @@
  01C6 3F00              mvi [__r1],A
  01C8 5207              mov A,[X+7]
  01CA 3F00              mvi [__r1],A
- 01CC                   .dbline 45
- 01CC           ;               
- 01CC           ;               
- 01CC           ;               for(i=0; i<4; i++) humidity[i] = humidity[i+1];
+ 01CC                   .dbline 38
+ 01CC           ;       
+ 01CC           ;       //FIR filter for temperature (not in funktion now)
+ 01CC           ;       for(i=0; i<4; i++) humidity[i] = humidity[i+1];
  01CC 560100            mov [X+1],0
  01CF 560000            mov [X+0],0
  01D2           L6:
- 01D2                   .dbline 45
+ 01D2                   .dbline 38
  01D2 5201              mov A,[X+1]
  01D4 0101              add A,1
  01D6 64                asl A
@@ -363,10 +356,10 @@
  01F2 5100              mov A,[__r1]
  01F4 3F00              mvi [__r3],A
  01F6           L7:
- 01F6                   .dbline 45
+ 01F6                   .dbline 38
  01F6 7701              inc [X+1]
  01F8 0F0000            adc [X+0],0
- 01FB                   .dbline 45
+ 01FB                   .dbline 38
  01FB 5201              mov A,[X+1]
  01FD 1104              sub A,4
  01FF 5200              mov A,[X+0]
@@ -374,8 +367,8 @@
  0203 1980              sbb A,(0 ^ 0x80)
  0205 CFCC              jc L6
  0207           X5:
- 0207                   .dbline 46
- 0207           ;               humidity[4] = humdata;
+ 0207                   .dbline 39
+ 0207           ;       humidity[4] = humdata;
  0207 52FA              mov A,[X-6]
  0209 0108              add A,8
  020B 5300              mov [__r1],A
@@ -408,20 +401,20 @@
  0219 10                push X
  021A 4F                mov X,SP
  021B 3804              add SP,4
- 021D                   .dbline 52
- 021D           ;               
- 021D           ;               }
- 021D           ;               
- 021D           ;               
- 021D           ;               
- 021D           ;               void printtemp (char *firstLine, char *secondLine, int*temperature) {
- 021D                   .dbline 58
- 021D           ;                                       //calculate the average of temperature
- 021D           ;                                       int result, i;
- 021D           ;                                       //result = 0;
- 021D           ;                                       //for(i=0; i<5; i++) result = result + temperature [i]; 
- 021D           ;                                       //result = result/5;
- 021D           ;                                       result=temperature[4];
+ 021D                   .dbline 45
+ 021D           ;       
+ 021D           ; }
+ 021D           ; 
+ 021D           ; 
+ 021D           ; 
+ 021D           ; void printtemp (char *firstLine, char *secondLine, int*temperature) {
+ 021D                   .dbline 51
+ 021D           ;       //calculate the average of temperature (not in function nwo because to slow)
+ 021D           ;       int result, i;
+ 021D           ;       //result = 0;
+ 021D           ;       //for(i=0; i<5; i++) result = result + temperature [i]; 
+ 021D           ;       //result = result/5;
+ 021D           ;       result=temperature[4];
  021D 52F8              mov A,[X-8]
  021F 0108              add A,8
  0221 5300              mov [__r1],A
@@ -429,10 +422,10 @@
  0225 5400              mov [X+0],A
  0227 3E00              mvi A,[__r1]
  0229 5401              mov [X+1],A
- 022B                   .dbline 61
- 022B           ;                                       
- 022B           ;                                       //send to LCD
- 022B           ;                                       csprintf(firstLine, "Temperature:    ");
+ 022B                   .dbline 54
+ 022B           ;       
+ 022B           ;       //send to LCD
+ 022B           ;       csprintf(firstLine, "Temperature:    ");
  022B 5033              mov A,>L11
  022D 08                push A
  022E 5033              mov A,<L11
@@ -442,8 +435,8 @@
  0234 52FC              mov A,[X-4]
  0236 08                push A
  0237 7C0000            xcall _csprintf
- 023A                   .dbline 62
- 023A           ;                                       csprintf(secondLine,"%i C            ",result);
+ 023A                   .dbline 55
+ 023A           ;       csprintf(secondLine,"%i C            ",result);
  023A 5200              mov A,[X+0]
  023C 08                push A
  023D 5201              mov A,[X+1]
@@ -481,20 +474,20 @@
  0255 10                push X
  0256 4F                mov X,SP
  0257 3804              add SP,4
- 0259                   .dbline 68
- 0259           ;                                       }
- 0259           ;                                       
- 0259           ;                                       
- 0259           ;                                       
- 0259           ;                                       
- 0259           ;               void printhum (char *firstLine, char *secondLine, int*humidity) {
- 0259                   .dbline 74
- 0259           ;                                       //calculate the average of humidity
- 0259           ;                                       int result, i;
- 0259           ;                                       //result = 0;
- 0259           ;                                       //for(i=0; i<5; i++) result = result + humidity [i];
- 0259           ;                                       //result = result/5;
- 0259           ;                                       result =humidity[4];
+ 0259                   .dbline 61
+ 0259           ; }
+ 0259           ;                       
+ 0259           ;                       
+ 0259           ;                       
+ 0259           ;                       
+ 0259           ; void printhum (char *firstLine, char *secondLine, int*humidity) {
+ 0259                   .dbline 67
+ 0259           ;       //calculate the average of humidity (not in function nwo because to slow)
+ 0259           ;       int result, i;
+ 0259           ;       //result = 0;
+ 0259           ;       //for(i=0; i<5; i++) result = result + humidity [i];
+ 0259           ;       //result = result/5;
+ 0259           ;       result =humidity[4];
  0259 52F8              mov A,[X-8]
  025B 0108              add A,8
  025D 5300              mov [__r1],A
@@ -502,9 +495,10 @@
  0261 5400              mov [X+0],A
  0263 3E00              mvi A,[__r1]
  0265 5401              mov [X+1],A
- 0267                   .dbline 76
- 0267           ;                                       //send to LCD
- 0267           ;                                       csprintf(firstLine, "Humidity:       ");
+ 0267                   .dbline 70
+ 0267           ;       
+ 0267           ;       //send to LCD
+ 0267           ;       csprintf(firstLine, "Humidity:       ");
  0267 5011              mov A,>L14
  0269 08                push A
  026A 5011              mov A,<L14
@@ -514,8 +508,8 @@
  0270 52FC              mov A,[X-4]
  0272 08                push A
  0273 7C0000            xcall _csprintf
- 0276                   .dbline 77
- 0276           ;                                       csprintf(secondLine,"%i %%           ",result);
+ 0276                   .dbline 71
+ 0276           ;       csprintf(secondLine,"%i %%           ",result);
  0276 5200              mov A,[X+0]
  0278 08                push A
  0279 5201              mov A,[X+1]

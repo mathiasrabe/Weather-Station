@@ -25,27 +25,27 @@ dbsym l i 0 I
 dbsym l humidity FFFFFFF9 pI
 dbsym l temperature FFFFFFFB pI
 dbline FFFFFFFF 0
-dbline A 4
-dbline 15 4
-dbline 17 C
-dbline 18 17
-dbline 19 23
-dbline 1B 2F
-dbline 1E 34
-dbline 1F 3B
-dbline 20 47
-dbline 22 4A
-dbline 23 E3
-dbline 29 183
-dbline 29 189
-dbline 29 1AD
-dbline 29 1B2
-dbline 2A 1BE
-dbline 2D 1CC
-dbline 2D 1D2
-dbline 2D 1F6
-dbline 2D 1FB
-dbline 2E 207
+dbline 7 4
+dbline F 4
+dbline 12 C
+dbline 13 17
+dbline 14 23
+dbline 16 2F
+dbline 1A 34
+dbline 1B 3B
+dbline 1C 47
+dbline 1E 4A
+dbline 1F E3
+dbline 22 183
+dbline 22 189
+dbline 22 1AD
+dbline 22 1B2
+dbline 23 1BE
+dbline 26 1CC
+dbline 26 1D2
+dbline 26 1F6
+dbline 26 1FB
+dbline 27 207
 dbline FFFFFFFE 215
 dbline 0 218
 dbfunc e printtemp 219 fV
@@ -55,10 +55,10 @@ dbsym l temperature FFFFFFF7 pI
 dbsym l secondLine FFFFFFF9 pc
 dbsym l firstLine FFFFFFFB pc
 dbline FFFFFFFF 219
-dbline 34 21D
-dbline 3A 21D
-dbline 3D 22B
-dbline 3E 23A
+dbline 2D 21D
+dbline 33 21D
+dbline 36 22B
+dbline 37 23A
 dbline FFFFFFFE 251
 dbline 0 254
 dbfunc e printhum 255 fV
@@ -68,10 +68,10 @@ dbsym l humidity FFFFFFF7 pI
 dbsym l secondLine FFFFFFF9 pc
 dbsym l firstLine FFFFFFFB pc
 dbline FFFFFFFF 255
-dbline 44 259
-dbline 4A 259
-dbline 4C 267
-dbline 4D 276
+dbline 3D 259
+dbline 43 259
+dbline 46 267
+dbline 47 276
 dbline FFFFFFFE 28D
 dbline 0 290
 S _measuring Def0000
