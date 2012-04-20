@@ -71,7 +71,7 @@ void main(void)
 			if(displaymode>4)
 			displaymode = 0;
 		}
-			
+		
 		// get temp and humidity here
 		I2Cm_Start();				//Initialize I2C
 		I2Cm_fSendStart( 0x28, 0);	//Send Measuring Request	

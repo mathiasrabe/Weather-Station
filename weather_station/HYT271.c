@@ -28,7 +28,7 @@ void measuring (int*temperature, int*humidity) {
 	humdata=humdata&0x3FFF;
 	
 	humdata=( humdata / 163.83 ) - 48;
-	tempdata=-((tempdata / 99.2909 ) -28);
+	tempdata=-((tempdata / 99.2909 ) -24);
 	
 	//FIR filter for temperature  (not in funktion now)
 	for(i=0; i<4; i++) temperature[i] = temperature[i+1];

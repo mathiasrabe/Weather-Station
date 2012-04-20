@@ -183,7 +183,7 @@
  00DF 5402              mov [X+2],A
  00E1 38FE              add SP,-2
  00E3                   .dbline 31
- 00E3           ;       tempdata=-((tempdata / 99.2909 ) -28);
+ 00E3           ;       tempdata=-((tempdata / 99.2909 ) -24);
  00E3 5207              mov A,[X+7]
  00E5 5300              mov [__r3],A
  00E7 5206              mov A,[X+6]
@@ -242,7 +242,7 @@
  0140 38FC              add SP,-4
  0142 5041              mov A,65
  0144 08                push A
- 0145 50E0              mov A,-32
+ 0145 50C0              mov A,-64
  0147 08                push A
  0148 5000              mov A,0
  014A 08                push A

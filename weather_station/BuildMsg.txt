@@ -1,10 +1,10 @@
 Starting MAKE...
 creating project.mk -- no changes
-./hyt271.c
+./main.c
 Linking..
-  ROM 46% full. 7523 out of 16384 bytes used (does not include absolute areas).
+  ROM 46% full. 7530 out of 16384 bytes used (does not include absolute areas).
   RAM 21% full. 53 bytes used (does not include stack usage).
 Built with ICCM8C STD V7.05.00
  
-weather_station - 0 error(s) 0 warning(s) 10:50:18
+weather_station - 0 error(s) 0 warning(s) 13:38:17
 
