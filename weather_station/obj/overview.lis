@@ -1,0 +1,81 @@
+                        .module overview.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./overview.c
+ 0000                   .dbfile C:\Users\MATHIA~1\DOCUME~1\PSOCDE~1.2PR\WEATHE~1\WEATHE~1\overview.c
+ 0000                   .dbfunc e overview _overview fV
+ 0000           ;          humid -> X-11
+ 0000           ;           temp -> X-9
+ 0000           ;     secondLine -> X-7
+ 0000           ;      firstLine -> X-5
+ 0000           _overview::
+ 0000                   .dbline -1
+ 0000 10                push X
+ 0001 4F                mov X,SP
+ 0002                   .dbline 4
+ 0002           ; 
+ 0002           ; #include <stdio.h>
+ 0002           ; 
+ 0002           ; void overview(char *firstLine, char *secondLine, int *temp, int *humid) {
+ 0002                   .dbline 6
+ 0002           ; 
+ 0002           ;       csprintf(firstLine,"Temp & Humidity ");
+ 0002 5012              mov A,>L2
+ 0004 08                push A
+ 0005 5012              mov A,<L2
+ 0007 08                push A
+ 0008 52FB              mov A,[X-5]
+ 000A 08                push A
+ 000B 52FC              mov A,[X-4]
+ 000D 08                push A
+ 000E 7C0000            xcall _csprintf
+ 0011                   .dbline 7
+ 0011           ;       csprintf(secondLine,"%i C      %i %%  ", temp[4], humid[4]);
+ 0011 52F6              mov A,[X-10]
+ 0013 0108              add A,8
+ 0015 5300              mov [__r1],A
+ 0017 3E00              mvi A,[__r1]
+ 0019 5300              mov [__r0],A
+ 001B 3E00              mvi A,[__r1]
+ 001D 5300              mov [__r1],A
+ 001F 5100              mov A,[__r0]
+ 0021 08                push A
+ 0022 5100              mov A,[__r1]
+ 0024 08                push A
+ 0025 52F8              mov A,[X-8]
+ 0027 0108              add A,8
+ 0029 5300              mov [__r1],A
+ 002B 3E00              mvi A,[__r1]
+ 002D 5300              mov [__r0],A
+ 002F 3E00              mvi A,[__r1]
+ 0031 5300              mov [__r1],A
+ 0033 5100              mov A,[__r0]
+ 0035 08                push A
+ 0036 5100              mov A,[__r1]
+ 0038 08                push A
+ 0039 5000              mov A,>L3
+ 003B 08                push A
+ 003C 5000              mov A,<L3
+ 003E 08                push A
+ 003F 52F9              mov A,[X-7]
+ 0041 08                push A
+ 0042 52FA              mov A,[X-6]
+ 0044 08                push A
+ 0045 7C0000            xcall _csprintf
+ 0048 38F4              add SP,-12
+ 004A                   .dbline -2
+ 004A           L1:
+ 004A 20                pop X
+ 004B                   .dbline 0 ; func end
+ 004B 7F                ret
+ 004C                   .dbsym l humid -11 pI
+ 004C                   .dbsym l temp -9 pI
+ 004C                   .dbsym l secondLine -7 pc
+ 004C                   .dbsym l firstLine -5 pc
+ 004C                   .dbend
+                        .area lit(rom, con, rel, lit)
+ 0000           L3:
+ 0000 25692043202020202020256920252520  .byte 37,'i,32,'C,32,32,32,32,32,32,37,'i,32,37,37,32
+ 0010 2000              .byte 32,0
+ 0012           L2:
+ 0012 54656D7020262048756D696469747920  .byte 'T,'e,'m,'p,32,38,32,'H,'u,'m,'i,'d,'i,'t,'y,32
+ 0022 00                .byte 0

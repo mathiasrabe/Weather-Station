@@ -1,0 +1,1 @@
+void overview(char *firstLine, char *secondLine, int *temp, int *humid);
